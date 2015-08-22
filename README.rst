@@ -41,7 +41,7 @@ Creating a CLI with Cliar is as simple as::
 
     class MyCLI(CLI):
         '''This is my own command-line interface built with Cliar'''
-        
+
         def start(self, awesome=False):
             '''This is a command in my CLI. Apparently, it starts something.'''
 

@@ -20,7 +20,7 @@ from collections import OrderedDict
 
 def set_name(name):
     '''Set function's ``__name__`` attribute.
-    
+
     Used as ``@set_name('new_name')`` to name a CLI command differently then its corresponding method.
 
     :param name: new value for the ``__name__`` attribute
@@ -40,7 +40,7 @@ def set_name(name):
 
 class _Arg:
     '''CLI command argument.
-    
+
     Its attributes correspond to the homonymous params of the ``add_argument`` function.
     '''
 
@@ -52,7 +52,7 @@ class _Arg:
 
 class _Command:
     '''CLI command.
-    
+
     Basically, a wrapper around a method. Command's args correspond to method's params.
     '''
 
@@ -69,7 +69,7 @@ class _Command:
 
         for param_name, param_data in list(handler_signature.parameters.items())[1:]:
             arg = _Arg()
-            
+
             if param_data.annotation is not param_data.empty:
                 arg.type = param_data.annotation
 
@@ -82,7 +82,7 @@ class _Command:
             if arg.type == bool:
                 if arg.default == True:
                     arg.action = 'store_false'
-                
+
                 elif arg.default == False:
                     arg.action = 'store_true'
 
@@ -129,7 +129,7 @@ class CLI:
 
         else:
             arg_prefix = '-'
-        
+
         if arg_data.action:
             command_parser.add_argument(
                 arg_prefix + arg_name,
