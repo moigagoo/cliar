@@ -19,21 +19,21 @@ from collections import OrderedDict
 
 
 def set_name(name):
-    '''Set function's ``__name__`` attribute.
+    '''Set method's ``__name__`` attribute.
 
     Used as ``@set_name('new_name')`` to name a CLI command differently then its corresponding method.
 
     :param name: new value for the ``__name__`` attribute
 
-    :returns: a decorator that returns a function with the new ``__name__`` attribute value
+    :returns: a decorator that returns a method with the new ``__name__`` attribute value
     '''
 
     if not name:
         raise NameError('Command name cannot be empty')
 
-    def decorator(func):
-        func.__name__ = name
-        return func
+    def decorator(method):
+        method.__name__ = name
+        return method
 
     return decorator
 
