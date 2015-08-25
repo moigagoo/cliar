@@ -14,7 +14,6 @@ Cliar: Create CLIs Quickly and Clearly
 Cliar (pronounced as "clear") helps you create command-line interfaces quickly and with minimum code:
 
 .. code-block:: python
-    :caption: git.py
 
     from cliar import CLI
 
