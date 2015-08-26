@@ -45,7 +45,7 @@ Cliar runs with Python 3.3+ on Windows, Linux, and Mac with not third party depe
 Install
 =======
 
-Install Sloth from `PyPI <https://pypi.python.org/pypi/cliar>`__ with pip:
+Install Cliar from `PyPI <https://pypi.python.org/pypi/cliar>`__ with pip:
 
 .. code-block:: bash
 
