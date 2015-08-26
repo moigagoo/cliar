@@ -4,7 +4,7 @@
 
 __title__ = 'cliar'
 __description__ = 'Build command-line interfaces quickly and clearly'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 __author__ = 'Konstantin Molchanov'
 __author_email__ = 'moigagoo@live.com'
 __license__ = 'MIT'
@@ -38,6 +38,14 @@ def set_name(name):
     return decorator
 
 
+def add_aliases(aliases):
+    def decorator(method):
+        method._command_aliases = aliases
+        return method
+
+    return decorator
+
+
 class _Arg:
     '''CLI command argument.
 
@@ -61,6 +69,12 @@ class _Command:
 
         self.args = OrderedDict()
         self._add_args()
+
+        if hasattr(handler, '_command_aliases'):
+            self.aliases = handler._command_aliases
+
+        else:
+            self.aliases = []
 
     def _add_args(self):
         '''Parse method's signature to add CLI command's arguments.'''
@@ -157,12 +171,15 @@ class CLI:
             for handler in handlers:
                 command = _Command(handler)
 
-                command_parser = self._command_parsers.add_parser(handler.__name__, help=handler.__doc__)
+                command_parser = self._command_parsers.add_parser(handler.__name__, help=handler.__doc__, aliases=command.aliases)
 
                 for arg_name, arg_data in command.args.items():
                     self._register_arg(command_parser, arg_name, arg_data)
 
                 self._commands[handler.__name__] = command
+
+                for alias in command.aliases:
+                    self._commands[alias] = command
 
     def _parse(self):
         '''Parse command line args, i.e. launch the CLI.'''
