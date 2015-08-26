@@ -1,6 +1,6 @@
-**************************************
-Cliar: Create CLIs Quickly and Clearly
-**************************************
+**************************
+Cliar: Create CLIs Clearly
+**************************
 
 .. image:: https://img.shields.io/pypi/v/cliar.svg?style=flat-squar 
     :alt: Latest Version
@@ -11,7 +11,7 @@ Cliar: Create CLIs Quickly and Clearly
 .. image:: https://img.shields.io/pypi/l/cliar.svg?style=flat-square
     :alt: License
 
-Cliar (pronounced as "clear") helps you create command-line interfaces quickly and with minimum code:
+Cliar (pronounced as "clear") helps you create command-line interfaces with minimum code:
 
 .. code-block:: python
 
