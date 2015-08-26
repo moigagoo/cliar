@@ -57,9 +57,9 @@ Why another CLI tool?
 
 I know there're great projects like `docopt <http://docopt.org/>`_ and `click <http://click.pocoo.org/5/>`_ out there. Before creating Cliar, I tried them both.
 
-Long story sort, **neither click, not docopt allow for easily extendible CLIs. On the other hand, Cliar lets you extend your CLI with simple subclassing.**
+Long story short, **neither click, not docopt allow for easily extendible CLIs**. Cliar lets you extend your CLI with simple subclassing.
 
-By extendability I mean the ability to extend CLI described in one module with commands from another module.
+By extendability I mean the ability to extend CLI defined in one module with commands from another module.
 
 In docopt, this would mean overriding the entire help string or inserting a line into it, which is neither elegant, nor flexible, nor stable.
 
