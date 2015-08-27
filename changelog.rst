@@ -7,3 +7,9 @@
 =====
 
 -   Alias support added with the "add_aliases" decorator.
+
+1.0.2
+=====
+
+-   Docstring added to the add_aliases function.
+-   The set_name function is now less hacky.

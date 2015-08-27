@@ -1,10 +1,9 @@
-﻿'''Cliar (read as "clear") is a thin wrapper around argparse that lets you create extendable command-line interfaces in a quick and clear way.
-'''
+﻿'''Cliar (pronounced as "clear") helps you create command-line interfaces with minimum code.'''
 
 
 __title__ = 'cliar'
-__description__ = 'Build command-line interfaces quickly and clearly'
-__version__ = '1.0.1'
+__description__ = 'Cliar (pronounced as "clear") helps you create command-line interfaces with minimum code:'
+__version__ = '1.0.2'
 __author__ = 'Konstantin Molchanov'
 __author_email__ = 'moigagoo@live.com'
 __license__ = 'MIT'
@@ -19,26 +18,35 @@ from collections import OrderedDict
 
 
 def set_name(name):
-    '''Set method's ``__name__`` attribute.
+    '''Set the ``_command_name`` attribute for a method.
 
     Used as ``@set_name('new_name')`` to name a CLI command differently then its corresponding method.
 
-    :param name: new value for the ``__name__`` attribute
+    :param name: new value for the ``_command_name`` attribute
 
-    :returns: a decorator that returns a method with the new ``__name__`` attribute value
+    :returns: a decorator that returns a method with the new ``_command_name`` attribute value
     '''
 
     if not name:
         raise NameError('Command name cannot be empty')
 
     def decorator(method):
-        method.__name__ = name
+        method._command_name = name
         return method
 
     return decorator
 
 
 def add_aliases(aliases):
+    '''Set the ``_command_aliases`` attribute for a method.
+
+    Used as ``@add_aliases(['alias1', 'alias2'])`` to add aliases to the CLI command created from the given method.
+
+    :param aliases: list of aliases
+
+    :returns: a decorator that returns a method with the new ``_command_aliases`` value
+    '''
+
     def decorator(method):
         method._command_aliases = aliases
         return method
@@ -70,9 +78,13 @@ class _Command:
         self.args = OrderedDict()
         self._add_args()
 
+        if hasattr(handler, '_command_name'):
+            self.name = handler._command_name
+        else:
+            self.name = handler.__name__
+
         if hasattr(handler, '_command_aliases'):
             self.aliases = handler._command_aliases
-
         else:
             self.aliases = []
 
@@ -171,12 +183,16 @@ class CLI:
             for handler in handlers:
                 command = _Command(handler)
 
-                command_parser = self._command_parsers.add_parser(handler.__name__, help=handler.__doc__, aliases=command.aliases)
+                command_parser = self._command_parsers.add_parser(
+                    command.name,
+                    help=handler.__doc__,
+                    aliases=command.aliases
+                )
 
                 for arg_name, arg_data in command.args.items():
                     self._register_arg(command_parser, arg_name, arg_data)
 
-                self._commands[handler.__name__] = command
+                self._commands[command.name] = command
 
                 for alias in command.aliases:
                     self._commands[alias] = command
