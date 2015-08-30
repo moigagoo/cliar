@@ -1,6 +1,12 @@
 ﻿from setuptools import setup
 
-import cliar
+from sys import version_info
+
+if version_info.major == 3:
+    from py3 import cliar
+
+elif version_info.major == 2:
+    from py2 import cliar
 
 
 try:
