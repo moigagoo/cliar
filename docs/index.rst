@@ -15,7 +15,8 @@ Cliar: Create CLIs Clearly
 .. toctree::
     :hidden:
 
-    cliar
+    api
+    click
 
 
 Cliar (pronounced as "clear") helps you create command-line interfaces with minimum code:
@@ -46,7 +47,7 @@ Run the script:
 Requirements
 ============
 
-Cliar runs with Python 3.3+ on Windows, Linux, and Mac with not third party dependencies.
+Cliar runs with Python 2.6, 2.7, and 3.3+ on Windows, Linux, and Mac. There are no dependencies.
 
 
 Install
