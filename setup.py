@@ -2,39 +2,39 @@
 
 from sys import version_info
 
+
 if version_info.major == 3:
-    from py3 import cliar
-
+    package_dir = 'py3'
 elif version_info.major == 2:
-    from py2 import cliar
-
+    package_dir = 'py2'
 
 try:
     long_description = open('README.rst').read()
-
 except:
-    long_description = cliar.__long_description__
+    long_description = 'Cliar (pronounced as "clear") helps you create command-line interfaces with minimum code.'
 
 
 setup(
-    name=cliar.__title__,
-    version=cliar.__version__,
-    author=cliar.__author__,
-    description=cliar.__description__,
+    name='cliar',
+    version='1.0.3',
+    author='Konstantin Molchanov',
+    description='Cliar (pronounced as "clear") helps you create command-line interfaces with minimum code.',
     long_description=long_description,
-    author_email=cliar.__author_email__,
+    author_email='moigagoo@live.com',
     url='https://bitbucket.org/moigagoo/cliar',
-    py_modules = ['cliar'],
+    package_dir={'': package_dir},
+    py_modules=['cliar'],
     license='MIT',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Natural Language :: English',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3 :: Only',
         'Operating System :: Microsoft :: Windows',
         'Operating System :: Unix']
 )

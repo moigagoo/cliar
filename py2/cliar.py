@@ -1,15 +1,4 @@
-﻿'''Cliar (pronounced as "clear") helps you create command-line interfaces with minimum code.'''
-
-
-__title__ = 'cliar'
-__description__ = 'Cliar (pronounced as "clear") helps you create command-line interfaces with minimum code:'
-__version__ = '1.0.2'
-__author__ = 'Konstantin Molchanov'
-__author_email__ = 'moigagoo@live.com'
-__license__ = 'MIT'
-
-
-from sys import exit
+﻿from sys import exit
 
 from argparse import ArgumentParser
 from inspect import getargspec
