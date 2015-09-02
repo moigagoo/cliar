@@ -39,7 +39,7 @@ Run the script:
 Requirements
 ============
 
-Cliar runs with Python 3.3+ on Windows, Linux, and Mac with not third party dependencies.
+Cliar runs with Python 2.6, 2.7, and 3.3+ on Windows, Linux, and Mac with not third party dependencies.
 
 
 Install
