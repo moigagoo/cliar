@@ -13,3 +13,8 @@
 
 -   Docstring added to the add_aliases function.
 -   The set_name function is now less hacky.
+
+1.0.3
+=====
+
+-   Python 2 support added.
