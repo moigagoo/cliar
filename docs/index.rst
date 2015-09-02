@@ -16,7 +16,8 @@ Cliar: Create CLIs Clearly
     :hidden:
 
     api
-    click
+    examples
+    python2
 
 
 Cliar (pronounced as "clear") helps you create command-line interfaces with minimum code:

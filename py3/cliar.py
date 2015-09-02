@@ -7,13 +7,11 @@ from collections import OrderedDict
 
 
 def set_name(name):
-    '''Set the ``_command_name`` attribute for a method.
+    '''Set the name of the CLI command if you don't like it being the same as the corresponding method.
 
-    Used as ``@set_name('new_name')`` to name a CLI command differently then its corresponding method.
+    :param name: new command name
 
-    :param name: new value for the ``_command_name`` attribute
-
-    :returns: a decorator that returns a method with the new ``_command_name`` attribute value
+    :returns: a decorator that returns a method with the updated name
     '''
 
     if not name:
@@ -27,13 +25,11 @@ def set_name(name):
 
 
 def add_aliases(aliases):
-    '''Set the ``_command_aliases`` attribute for a method.
-
-    Used as ``@add_aliases(['alias1', 'alias2'])`` to add aliases to the CLI command created from the given method.
+    '''Add command aliases.
 
     :param aliases: list of aliases
 
-    :returns: a decorator that returns a method with the new ``_command_aliases`` value
+    :returns: a decorator that returns a method with the new aliases list
     '''
 
     def decorator(method):
@@ -105,7 +101,12 @@ class _Command:
 
 
 class CLI:
-    '''Cliar command line interface.'''
+    '''Subclass from this class to create your own CLI.
+    
+    Every method without an underscore is mapped to a CLI command.
+
+    The params of the special ``_root`` method correspond to the global script args.
+    '''
 
     def __init__(self):
         self._parser = ArgumentParser(description=self.__doc__)

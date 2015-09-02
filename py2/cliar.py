@@ -88,7 +88,12 @@ class _Command(object):
 
 
 class CLI(object):
-    '''Cliar command line interface.'''
+    '''Subclass from this class to create your own CLI.
+    
+    Every method without an underscore is mapped to a CLI command.
+
+    The params of the special ``_root`` method correspond to the global script args.
+    '''
 
     def __init__(self):
         self._parser = ArgumentParser(description=self.__doc__)
