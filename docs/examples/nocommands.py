@@ -4,7 +4,9 @@
 class NoCommands(CLI):
     '''This is a CLI without commands; the script itself is a command.
     
-    Calling the script will print this important message. Add "-c" for more dramatism.
+    Calling the script will print this important message.
+
+    Add "-c" for more dramatism.
     '''
 
     def _root(self, capitalize=False):
