@@ -15,9 +15,9 @@ Cliar: Create CLIs Clearly
 .. toctree::
     :hidden:
 
-    api
     examples/index
     python2
+    api
 
 
 Cliar (pronounced as "clear") helps you create command-line interfaces with minimum code:
