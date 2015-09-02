@@ -16,7 +16,7 @@ Cliar: Create CLIs Clearly
     :hidden:
 
     api
-    examples
+    examples/index
     python2
 
 
