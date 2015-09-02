@@ -105,7 +105,7 @@ class CLI:
     
     Every method without an underscore is mapped to a CLI command.
 
-    The params of the special ``_root`` method correspond to the global script args.
+    The special ``_root`` method corresponds to the script itself.
     '''
 
     def __init__(self):
