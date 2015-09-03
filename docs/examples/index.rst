@@ -11,3 +11,4 @@ Examples
     setname
     aliases
     openfile
+    git
