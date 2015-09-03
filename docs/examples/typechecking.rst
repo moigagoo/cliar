@@ -2,7 +2,7 @@
 Arg Type Checking
 *****************
 
-.. note:: This examples works in Python 3 only.
+.. note:: This example works in Python 3 only.
 
 :download:`Download source <typechecking.py>`
 

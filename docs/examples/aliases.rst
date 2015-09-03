@@ -2,7 +2,7 @@
 Add Command Aliases
 *******************
 
-.. note:: This examples works in Python 3 only.
+.. note:: This example works in Python 3 only.
 
 
 :download:`Download source <aliases.py>`
@@ -26,7 +26,7 @@ Usage:
       {get-random,gr,randint}
                             available commands
         get-random (gr, randint)
-
+                            Get a random number between FROM_NUMBER and TO_NUMBER
     $ python aliases.py gr -h
     usage: aliases.py get-random [-h] from_number to_number
 

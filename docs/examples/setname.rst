@@ -2,7 +2,7 @@
 Set Command Name
 ****************
 
-.. note:: This examples works in Python 3 only. To make it work in Python 2, remove ``:int``.
+.. note:: This example works in Python 3 only. To make it work in Python 2, remove ``:int``.
 
 
 :download:`Download source <setname.py>`
@@ -23,7 +23,7 @@ Usage:
 
     commands:
       {get-random}  available commands
-        get-random
+        get-random  Get a random number between FROM_NUMBER and TO_NUMBER
 
     $ python setname.py get-random -h
     usage: setname.py get-random [-h] from_number to_number

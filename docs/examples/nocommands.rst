@@ -1,6 +1,6 @@
-***********
-No Commands
-***********
+*************************************************
+No Commands (i.e. the Script is the Only Command)
+*************************************************
 
 :download:`Download source <nocommands.py>`
 

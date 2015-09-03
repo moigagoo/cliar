@@ -3,6 +3,10 @@ Examples
 ********
 
 .. toctree::
-    :glob:
 
-    *
+    positional
+    optional
+    nocommands
+    typechecking
+    setname
+    aliases

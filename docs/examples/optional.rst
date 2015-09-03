@@ -1,6 +1,6 @@
-*****************
-Optional Argument
-*****************
+************
+Optional Arg
+************
 
 :download:`Download source <optional.py>`
 

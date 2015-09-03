@@ -1,7 +1,7 @@
 ﻿from cliar import CLI
 
 
-class SimpleCLI(CLI):
+class Positional(CLI):
     '''This is a CLI with one command that has one positional arg.'''
 
     def hello(self, name):
@@ -11,4 +11,4 @@ class SimpleCLI(CLI):
 
 
 if __name__ == '__main__':
-    SimpleCLI()
+    Positional()
