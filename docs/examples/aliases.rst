@@ -27,6 +27,7 @@ Usage:
                             available commands
         get-random (gr, randint)
                             Get a random number between FROM_NUMBER and TO_NUMBER
+
     $ python aliases.py gr -h
     usage: aliases.py get-random [-h] from_number to_number
 

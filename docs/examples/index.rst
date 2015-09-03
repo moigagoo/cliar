@@ -10,3 +10,4 @@ Examples
     typechecking
     setname
     aliases
+    openfile
