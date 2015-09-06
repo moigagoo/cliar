@@ -4,7 +4,7 @@
 class Git(CLI):
     '''This is a Git CLI clone.
     
-    It doesn't acutally do stuff, just it imitates 2 git commands.
+    It doesn't actually do stuff, just it imitates 2 git commands.
     '''
 
     def _root(self, config='~/.gitconfig'):

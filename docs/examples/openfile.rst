@@ -6,7 +6,7 @@ The ``open`` Arg Type
 
 If you set arg type to ``open``, Cliar will attempt to locate and read from the filepath passed to this arg.
 
-In fact, arg type can be any Python callable that takes a string. `Read more <https://docs.python.org/3/library/argparse.html#type>`__ in the argparse docs.
+In fact, arg type can be any Python callable that accepts a string, including custom functions. `Read more <https://docs.python.org/3/library/argparse.html#type>`__ in the argparse docs.
 
 :download:`Download source <openfile.py>`
 
