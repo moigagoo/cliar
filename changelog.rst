@@ -18,3 +18,8 @@
 =====
 
 -   Python 2 support added.
+
+1.0.4
+=====
+
+-   Nested CLI methods would not override parent methods. Fixed.

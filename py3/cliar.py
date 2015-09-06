@@ -1,7 +1,7 @@
 ﻿from sys import exit
 
 from argparse import ArgumentParser
-from inspect import signature
+from inspect import signature, getmembers, ismethod
 
 from collections import OrderedDict
 
@@ -54,7 +54,9 @@ class _Arg:
 class _Command:
     '''CLI command.
 
-    Basically, a wrapper around a method. Command's args correspond to method's params.
+    A wrapper around a method that adds a few hidden attributes.
+    
+    Command args correspond to method params.
     '''
 
     def __init__(self, handler):
@@ -78,7 +80,7 @@ class _Command:
 
         handler_signature = signature(self.handler)
 
-        for param_name, param_data in list(handler_signature.parameters.items())[1:]:
+        for param_name, param_data in list(handler_signature.parameters.items()):
             arg = _Arg()
 
             if param_data.annotation is not param_data.empty:
@@ -127,7 +129,7 @@ class CLI:
     def _register_root_args(self):
         '''Register root args (i.e. params of ``self._root``) in the global argparser.'''
 
-        self.root_command = _Command(self.__class__._root)
+        self.root_command = _Command(self._root)
 
         for arg_name, arg_data in self.root_command.args.items():
             self._register_arg(self._parser, arg_name, arg_data)
@@ -163,29 +165,28 @@ class CLI:
     def _register_commands(self):
         '''Create parsers for all non-root commands.'''
 
-        for parent in self.__class__.mro():
-            handlers = (
-                method 
-                for method_name, method in parent.__dict__.items()
-                if not method_name.startswith('_')
+        handlers = (
+            method 
+            for method_name, method in getmembers(self, predicate=ismethod)
+            if not method_name.startswith('_')
+        )
+
+        for handler in handlers:
+            command = _Command(handler)
+
+            command_parser = self._command_parsers.add_parser(
+                command.name,
+                help=handler.__doc__,
+                aliases=command.aliases
             )
 
-            for handler in handlers:
-                command = _Command(handler)
+            for arg_name, arg_data in command.args.items():
+                self._register_arg(command_parser, arg_name, arg_data)
 
-                command_parser = self._command_parsers.add_parser(
-                    command.name,
-                    help=handler.__doc__,
-                    aliases=command.aliases
-                )
+            self._commands[command.name] = command
 
-                for arg_name, arg_data in command.args.items():
-                    self._register_arg(command_parser, arg_name, arg_data)
-
-                self._commands[command.name] = command
-
-                for alias in command.aliases:
-                    self._commands[alias] = command
+            for alias in command.aliases:
+                self._commands[alias] = command
 
     def _parse(self):
         '''Parse command line args, i.e. launch the CLI.'''
@@ -193,13 +194,13 @@ class CLI:
         args = self._parser.parse_args()
 
         root_args = {root_arg: vars(args)[root_arg] for root_arg in self.root_command.args}
-        self.root_command.handler(self, **root_args)
+        self.root_command.handler(**root_args)
 
         command = self._commands.get(args.command)
 
         if command and self._commands:
             command_args = {command_arg: vars(args)[command_arg] for command_arg in command.args}
-            command.handler(self, **command_args)
+            command.handler(**command_args)
 
         elif self._commands:
             self._parser.print_help()
