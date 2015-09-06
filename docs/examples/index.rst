@@ -12,3 +12,4 @@ Examples
     aliases
     openfile
     git
+    extend
