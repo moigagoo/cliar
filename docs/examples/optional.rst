@@ -20,7 +20,7 @@ Usage:
 
     commands:
       {hello}     available commands
-        hello     Say hello to NAME; if no name is give, say hello to Guido
+        hello     Say hello to NAME; if no name is given, say hello to Guido
 
     $ python optional.py hello -h
     usage: optional.py hello [-h] [-name NAME]
