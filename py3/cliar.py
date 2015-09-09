@@ -39,6 +39,22 @@ def add_aliases(aliases):
     return decorator
 
 
+def ignore(method):
+    '''Exclude a method from being converted into a CLI command.
+    
+    This decorator adds the ``_ignore`` attribute to the method.
+    
+    Methods with this attribute are skipped when commands are registered.
+
+    :param method: method to ignore
+
+    :returns: modified method
+    '''
+
+    method._ignore = True
+    return method
+
+
 class _Arg:
     '''CLI command argument.
 
@@ -168,7 +184,7 @@ class CLI:
         handlers = (
             method 
             for method_name, method in getmembers(self, predicate=ismethod)
-            if not method_name.startswith('_')
+            if not method_name.startswith('_') and not hasattr(method,'_ignore')
         )
 
         for handler in handlers:
