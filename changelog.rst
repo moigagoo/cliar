@@ -23,3 +23,8 @@
 =====
 
 -   Nested CLI methods would not override parent methods. Fixed.
+
+1.0.5
+=====
+
+-   The ``ignore`` decorator added to exclude a method from being converted into a command.
