@@ -13,3 +13,4 @@ Examples
     openfile
     git
     extend
+    ignore
