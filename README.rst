@@ -35,6 +35,7 @@ Run the script:
     $ python git.py clone http://foo.bar -d baz
     Cloning from http://foo.bar to baz
 
+Read the docs at `cliar.rtfd.org <http://cliar.rtfd.org>`__
 
 Requirements
 ============
