@@ -6,7 +6,7 @@ Annotate the param type as ``list`` or ``tuple`` to make it collect multiple val
 
 Since Python 2 doesn't have function annotations, use an empty list or tuple to define a required sequence of values::
 
-    def sum(self, numbers=(,)):
+    def sum(self, numbers=()):
         ...
 
 :download:`Download source <nargs.py>`
