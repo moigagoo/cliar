@@ -104,7 +104,7 @@ class _Command(object):
                     arg.action = 'store_true'
 
             elif arg.type in (list, tuple):
-                if arg.default:
+                if len(arg.default):
                     arg.nargs = '*'
 
                 else:
