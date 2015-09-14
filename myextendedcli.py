@@ -8,5 +8,9 @@ class MyExtendedCLI(MyCLI):
     def goodbye(self):
         print('Good bye, and happy hacking!')
 
+    def hello(self, names=('John', 'Mary')):
+        for name in names:
+            print('Hello, %s' % name)
+
 if __name__ == '__main__':
     MyExtendedCLI().parse()

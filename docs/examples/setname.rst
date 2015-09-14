@@ -4,7 +4,6 @@ Set Command Name
 
 .. note:: This example works in Python 3 only. To make it work in Python 2, remove ``:int``.
 
-
 :download:`Download source <setname.py>`
 
 .. literalinclude:: setname.py

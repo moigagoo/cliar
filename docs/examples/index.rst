@@ -7,10 +7,11 @@ Examples
     positional
     optional
     nocommands
-    typechecking
+    typecasting
     setname
     aliases
     openfile
     git
     extend
     ignore
+    nargs

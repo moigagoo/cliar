@@ -4,7 +4,6 @@ Add Command Aliases
 
 .. note:: This example works in Python 3 only.
 
-
 :download:`Download source <aliases.py>`
 
 .. literalinclude:: aliases.py
