@@ -53,6 +53,7 @@ class _Arg(object):
         self.type = None
         self.default = None
         self.action = None
+        self.nargs = None
 
 
 class _Command(object):
@@ -101,6 +102,13 @@ class _Command(object):
 
                 elif arg.default == False:
                     arg.action = 'store_true'
+
+            elif arg.type in (list, tuple):
+                if arg.default:
+                    arg.nargs = '*'
+
+                else:
+                    arg.nargs = '+'
 
             self.args[param] = arg
 
@@ -154,6 +162,13 @@ class CLI(object):
                 arg_prefix + arg_name,
                 default=arg_data.default,
                 action=arg_data.action
+            )
+
+        elif arg_data.nargs:
+            command_parser.add_argument(
+                arg_prefix + arg_name,
+                default=arg_data.default,
+                nargs=arg_data.nargs
             )
 
         else:
