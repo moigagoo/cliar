@@ -34,4 +34,4 @@ class Extended(Basic):
 
 
 if __name__ == '__main__':
-    Extended()
+    Extended().parse()

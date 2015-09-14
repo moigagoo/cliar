@@ -127,8 +127,6 @@ class CLI(object):
         self._commands = {}
         self._register_commands()
 
-        self._parse()
-
     def _register_root_args(self):
         '''Register root args (i.e. params of ``self._root``) in the global argparser.'''
 
@@ -187,7 +185,8 @@ class CLI(object):
 
             self._commands[command.name] = command
 
-    def _parse(self):
+    @ignore
+    def parse(self):
         '''Parse command line args, i.e. launch the CLI.'''
 
         args = self._parser.parse_args()

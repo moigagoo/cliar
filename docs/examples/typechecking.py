@@ -13,4 +13,4 @@ class TypeChecking(CLI):
 
 
 if __name__ == '__main__':
-    TypeChecking()
+    TypeChecking().parse()

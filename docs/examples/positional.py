@@ -11,4 +11,4 @@ class Positional(CLI):
 
 
 if __name__ == '__main__':
-    Positional()
+    Positional().parse()

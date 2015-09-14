@@ -21,4 +21,4 @@ class Aliases(CLI):
 
 
 if __name__ == '__main__':
-    Aliases()
+    Aliases().parse()

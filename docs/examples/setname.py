@@ -19,4 +19,4 @@ class SetName(CLI):
 
 
 if __name__ == '__main__':
-    SetName()
+    SetName().parse()

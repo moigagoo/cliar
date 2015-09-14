@@ -16,4 +16,4 @@ class Openfile(CLI):
 
 
 if __name__ == '__main__':
-    Openfile()
+    Openfile().parse()

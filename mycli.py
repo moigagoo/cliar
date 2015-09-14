@@ -30,4 +30,4 @@ class MyCLI(CLI):
             print('Everything you say will be in CAPS.')
 
 if __name__ == '__main__':
-    MyCLI()
+    MyCLI().parse()

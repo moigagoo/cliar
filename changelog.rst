@@ -28,3 +28,8 @@
 =====
 
 -   The ``ignore`` decorator added to exclude a method from being converted into a command.
+
+1.0.6
+=====
+
+-   Command-line args are now parsed by explicitly calling the ``.parse()`` method.

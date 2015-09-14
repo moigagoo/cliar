@@ -9,4 +9,4 @@ class MyExtendedCLI(MyCLI):
         print('Good bye, and happy hacking!')
 
 if __name__ == '__main__':
-    MyExtendedCLI()
+    MyExtendedCLI().parse()

@@ -11,4 +11,4 @@ class OptionalArg(CLI):
 
 
 if __name__ == '__main__':
-    OptionalArg()
+    OptionalArg().parse()

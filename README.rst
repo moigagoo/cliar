@@ -26,7 +26,7 @@ Cliar (pronounced as "clear") helps you create command-line interfaces with mini
             print('Cloning from %s to %s' % (repo, dir))
 
     if __name__ == '__main__':
-        Git()
+        Git().parse()
 
 Run the script:
 

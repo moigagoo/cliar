@@ -19,4 +19,4 @@ class Ignore(CLI):
 
 
 if __name__ == '__main__':
-    Ignore()
+    Ignore().parse()
