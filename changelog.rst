@@ -33,3 +33,8 @@
 =====
 
 -   Command-line args are now parsed by explicitly calling the ``.parse()`` method.
+
+1.0.7
+=====
+
+-   Support of multiple values for a single arg added.
