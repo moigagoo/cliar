@@ -13,7 +13,7 @@ Usage:
     $ python git.py -h
     usage: git.py [-h] [-config CONFIG] {clone,checkout} ...
 
-    This is a Git CLI clone. It doesn't actually do stuff, just it imitates 2 git
+    This is a Git CLI clone. It doesn't actually do stuff, just imitates 2 git
     commands.
 
     optional arguments:
