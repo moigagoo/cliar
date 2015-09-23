@@ -38,3 +38,8 @@
 =====
 
 -   Support of multiple values for a single arg added.
+
+1.0.8
+=====
+
+-   Description and help texts now preserve line breaks from docstrings.

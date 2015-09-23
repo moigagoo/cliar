@@ -1,6 +1,6 @@
 ﻿from sys import exit
 
-from argparse import ArgumentParser
+from argparse import ArgumentParser, RawTextHelpFormatter
 from inspect import signature, getmembers, ismethod
 
 from collections import OrderedDict
@@ -135,7 +135,10 @@ class CLI:
     '''
 
     def __init__(self):
-        self._parser = ArgumentParser(description=self.__doc__)
+        self._parser = ArgumentParser(
+            description=self.__doc__,
+            formatter_class=RawTextHelpFormatter
+        )
 
         self._register_root_args()
 

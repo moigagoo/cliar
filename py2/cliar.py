@@ -1,6 +1,6 @@
 ﻿from sys import exit
 
-from argparse import ArgumentParser
+from argparse import ArgumentParser, RawTextHelpFormatter
 from inspect import getargspec, getmembers, ismethod
 from itertools import izip_longest
 
@@ -122,14 +122,17 @@ class CLI(object):
     '''
 
     def __init__(self):
-        self._parser = ArgumentParser(description=self.__doc__)
+        self._parser = ArgumentParser(
+            description=self.__doc__,
+            formatter_class=RawTextHelpFormatter
+        )
 
         self._register_root_args()
 
         self._command_parsers = self._parser.add_subparsers(
             dest='command',
             title='commands',
-            help='available commands'
+            help='Available commands:'
         )
 
         self._commands = {}
