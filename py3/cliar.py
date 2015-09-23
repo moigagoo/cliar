@@ -210,6 +210,7 @@ class CLI:
                 command.name,
                 help=handler.__doc__.splitlines()[0] if handler.__doc__ else '',
                 description=handler.__doc__,
+                formatter_class=RawTextHelpFormatter,
                 aliases=command.aliases
             )
 
