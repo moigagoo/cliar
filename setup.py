@@ -16,7 +16,7 @@ except:
 
 setup(
     name='cliar',
-    version='1.0.9',
+    version='1.1.0',
     author='Konstantin Molchanov',
     description='Cliar (pronounced as "clear") helps you create command-line interfaces with minimum code.',
     long_description=long_description,
