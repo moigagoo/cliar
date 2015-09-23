@@ -43,3 +43,8 @@
 =====
 
 -   Description and help texts now preserve line breaks from docstrings.
+
+1.0.9
+=====
+
+-   Commands now use the first docstring line as help and the whole docstring as description.

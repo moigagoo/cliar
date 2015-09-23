@@ -145,7 +145,7 @@ class CLI:
         self._command_parsers = self._parser.add_subparsers(
             dest='command',
             title='commands',
-            help='available commands'
+            help='Available commands:'
         )
 
         self._commands = {}
@@ -208,7 +208,8 @@ class CLI:
 
             command_parser = self._command_parsers.add_parser(
                 command.name,
-                help=handler.__doc__,
+                help=handler.__doc__.splitlines()[0] if handler.__doc__ else '',
+                description=handler.__doc__,
                 aliases=command.aliases
             )
 

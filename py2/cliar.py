@@ -195,7 +195,8 @@ class CLI(object):
 
             command_parser = self._command_parsers.add_parser(
                 command.name,
-                help=handler.__doc__
+                help=handler.__doc__.splitlines()[0] if handler.__doc__ else '',
+                description=handler.__doc__
             )
 
             for arg_name, arg_data in command.args.items():
