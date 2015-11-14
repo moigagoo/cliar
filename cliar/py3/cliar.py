@@ -1,20 +1,17 @@
 ﻿from sys import exit
 
 from argparse import ArgumentParser, RawTextHelpFormatter
-from inspect import getargspec, getmembers, ismethod
-from itertools import izip_longest
+from inspect import signature, getmembers, ismethod
 
 from collections import OrderedDict
 
 
 def set_name(name):
-    '''Set the ``_command_name`` attribute for a method.
+    '''Set the name of the CLI command if you don't like it being the same as the corresponding method.
 
-    Used as ``@set_name('new_name')`` to name a CLI command differently then its corresponding method.
+    :param name: new command name
 
-    :param name: new value for the ``_command_name`` attribute
-
-    :returns: a decorator that returns a method with the new ``_command_name`` attribute value
+    :returns: a decorator that returns a method with the updated name
     '''
 
     if not name:
@@ -22,6 +19,21 @@ def set_name(name):
 
     def decorator(method):
         method._command_name = name
+        return method
+
+    return decorator
+
+
+def add_aliases(aliases):
+    '''Add command aliases.
+
+    :param aliases: list of aliases
+
+    :returns: a decorator that returns a method with the new aliases list
+    '''
+
+    def decorator(method):
+        method._command_aliases = aliases
         return method
 
     return decorator
@@ -43,7 +55,7 @@ def ignore(method):
     return method
 
 
-class _Arg(object):
+class _Arg:
     '''CLI command argument.
 
     Its attributes correspond to the homonymous params of the ``add_argument`` function.
@@ -56,7 +68,7 @@ class _Arg(object):
         self.nargs = None
 
 
-class _Command(object):
+class _Command:
     '''CLI command.
 
     A wrapper around a method that adds a few hidden attributes.
@@ -75,26 +87,27 @@ class _Command(object):
         else:
             self.name = handler.__name__
 
-    def _add_args(self):
-        '''Parse method's argspec to add CLI command's arguments.'''
-
-        handler_argspec = getargspec(self.handler)
-
-        params = handler_argspec.args[:0:-1]
-
-        if handler_argspec.defaults:
-            defaults = handler_argspec.defaults[::-1]
+        if hasattr(handler, '_command_aliases'):
+            self.aliases = handler._command_aliases
         else:
-            defaults = []
+            self.aliases = []
 
-        defaults_dict = dict(izip_longest(params, defaults))
+    def _add_args(self):
+        '''Parse method's signature to add CLI command's arguments.'''
 
-        for param, default in defaults_dict.items():
+        handler_signature = signature(self.handler)
+
+        for param_name, param_data in list(handler_signature.parameters.items()):
             arg = _Arg()
 
-            if default is not None:
-                arg.default = default
-                arg.type = type(default)
+            if param_data.annotation is not param_data.empty:
+                arg.type = param_data.annotation
+
+            if param_data.default is not param_data.empty:
+                arg.default = param_data.default
+
+                if not arg.type:
+                    arg.type = type(arg.default)
 
             if arg.type == bool:
                 if arg.default == True:
@@ -104,16 +117,16 @@ class _Command(object):
                     arg.action = 'store_true'
 
             elif arg.type in (list, tuple):
-                if len(arg.default):
+                if arg.default:
                     arg.nargs = '*'
 
                 else:
                     arg.nargs = '+'
 
-            self.args[param] = arg
+            self.args[param_name] = arg
 
 
-class CLI(object):
+class CLI:
     '''Subclass from this class to create your own CLI.
     
     Every method without an underscore is mapped to a CLI command.
@@ -129,14 +142,18 @@ class CLI(object):
 
         self._register_root_args()
 
-        self._command_parsers = self._parser.add_subparsers(
-            dest='command',
-            title='commands',
-            help='Available commands:'
-        )
-
         self._commands = {}
-        self._register_commands()
+
+        handlers = self._get_handlers()
+
+        if handlers:
+            self._command_parsers = self._parser.add_subparsers(
+                dest='command',
+                title='commands',
+                help='Available commands:'
+            )
+
+            self._register_commands(handlers)
 
     def _register_root_args(self):
         '''Register root args (i.e. params of ``self._root``) in the global argparser.'''
@@ -181,14 +198,17 @@ class CLI(object):
                 default=arg_data.default
             )
 
-    def _register_commands(self):
-        '''Create parsers for all non-root commands.'''
+    def _get_handlers(self):
+        '''Get the list of all non-root handlers'''
 
-        handlers = (
+        return [
             method 
             for method_name, method in getmembers(self, predicate=ismethod)
             if not method_name.startswith('_') and not hasattr(method,'_ignore')
-        )
+        ]
+
+    def _register_commands(self, handlers):
+        '''Create parsers for all non-root commands.'''
 
         for handler in handlers:
             command = _Command(handler)
@@ -197,13 +217,17 @@ class CLI(object):
                 command.name,
                 help=handler.__doc__.splitlines()[0] if handler.__doc__ else '',
                 description=handler.__doc__,
-                formatter_class=RawTextHelpFormatter
+                formatter_class=RawTextHelpFormatter,
+                aliases=command.aliases
             )
 
             for arg_name, arg_data in command.args.items():
                 self._register_arg(command_parser, arg_name, arg_data)
 
             self._commands[command.name] = command
+
+            for alias in command.aliases:
+                self._commands[alias] = command
 
     @ignore
     def parse(self):
@@ -214,14 +238,15 @@ class CLI(object):
         root_args = {root_arg: vars(args)[root_arg] for root_arg in self.root_command.args}
         self.root_command.handler(**root_args)
 
-        command = self._commands.get(args.command)
+        if self._commands:
+            command = self._commands.get(args.command)
 
-        if command and self._commands:
-            command_args = {command_arg: vars(args)[command_arg] for command_arg in command.args}
-            command.handler(**command_args)
+            if command and self._commands:
+                command_args = {command_arg: vars(args)[command_arg] for command_arg in command.args}
+                command.handler(**command_args)
 
-        elif self._commands:
-            self._parser.print_help()
+            elif self._commands:
+                self._parser.print_help()
 
 
     def _root(self):

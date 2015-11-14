@@ -50,5 +50,13 @@
 -   Commands now use the first docstring line as help and the whole docstring as description.
 
 1.1.0
+=====
 
 -   Command descriptions did not preserve line breaks from docstrings. Fixed.
+
+1.1.1
+=====
+
+-   Python 2: If only the _root handler was defined, a "too few agruments" error raised. Fixed.
+-   If only the _root handler is defined, the commands subparser is not added anymore.
+-   Packaging improved, the installation package now includes both Python 2 and 3 sources.
