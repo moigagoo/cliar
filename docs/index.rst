@@ -15,7 +15,7 @@ Cliar: Create CLIs Clearly
 .. toctree::
     :hidden:
 
-    examples/index
+    cookbook/index
     python2
     api
 
