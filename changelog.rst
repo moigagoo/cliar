@@ -60,3 +60,8 @@
 -   Python 2: If only the _root handler was defined, a "too few agruments" error raised. Fixed.
 -   If only the _root handler is defined, the commands subparser is not added anymore.
 -   Packaging improved, the installation package now includes both Python 2 and 3 sources.
+
+1.1.2
+=====
+
+-   Setup: Python version check improved.
