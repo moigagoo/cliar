@@ -1,5 +1,5 @@
 ********
-Examples
+Cookbook
 ********
 
 .. toctree::
