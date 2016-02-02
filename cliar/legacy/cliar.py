@@ -228,7 +228,7 @@ class CLI(object):
         if self._commands:
             command = self._commands.get(args.command)
 
-            if command and self._commands:
+            if command:
                 command_args = {command_arg: vars(args)[command_arg] for command_arg in command.args}
                 command.handler(**command_args)
 

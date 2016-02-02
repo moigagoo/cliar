@@ -202,9 +202,9 @@ class CLI:
         '''Get the list of all non-root handlers'''
 
         return [
-            method 
+            method
             for method_name, method in getmembers(self, predicate=ismethod)
-            if not method_name.startswith('_') and not hasattr(method,'_ignore')
+            if not method_name.startswith('_') and not hasattr(method, '_ignore')
         ]
 
     def _register_commands(self, handlers):
@@ -241,11 +241,12 @@ class CLI:
         if self._commands:
             command = self._commands.get(args.command)
 
-            if command and self._commands:
+            if command:
                 command_args = {command_arg: vars(args)[command_arg] for command_arg in command.args}
+
                 command.handler(**command_args)
 
-            elif self._commands:
+            else:
                 self._parser.print_help()
 
 
