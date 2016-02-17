@@ -18,29 +18,29 @@ Usage:
     usage: customparser.py [-h] {personify} ...
 
     This CLI demonstrates the usage
-        of a custom arg parser.
+    of a custom arg parser.
         
-
     optional arguments:
-    -h, --help   show this help message and exit
+      -h, --help   show this help message and exit
 
     commands:
-    {personify}  Available commands:
+      {personify}  Available commands:
         personify  This method uses a custom ``string_to_person``
+                    parser to convert input string into a ``Person`` instance
+                    *before* handling it.
 
     $ python customparser.py personify -h
     usage: customparser.py personify [-h] person
 
     This method uses a custom ``string_to_person``
-            parser to convert input string into a ``Person`` instance
-            *before* handling it.
-            
+    parser to convert input string into a ``Person`` instance
+    *before* handling it.        
 
     positional arguments:
-    person
+      person
 
     optional arguments:
-    -h, --help  show this help message and exit
+      -h, --help  show this help message and exit
 
     $ python customparser.py personify "Abe Lincoln"
     First name: Abe
