@@ -15,3 +15,4 @@ Cookbook
     extend
     ignore
     nargs
+    customparser
