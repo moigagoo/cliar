@@ -41,9 +41,9 @@ def add_aliases(aliases):
 
 def ignore(method):
     '''Exclude a method from being converted into a CLI command.
-    
+
     This decorator adds the ``_ignore`` attribute to the method.
-    
+
     Methods with this attribute are skipped when commands are registered.
 
     :param method: method to ignore
@@ -72,7 +72,7 @@ class _Command:
     '''CLI command.
 
     A wrapper around a method that adds a few hidden attributes.
-    
+
     Command args correspond to method params.
     '''
 
@@ -128,7 +128,7 @@ class _Command:
 
 class CLI:
     '''Subclass from this class to create your own CLI.
-    
+
     Every method without an underscore is mapped to a CLI command.
 
     The special ``_root`` method corresponds to the script itself.

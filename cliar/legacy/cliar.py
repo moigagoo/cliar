@@ -29,9 +29,9 @@ def set_name(name):
 
 def ignore(method):
     '''Exclude a method from being converted into a CLI command.
-    
+
     This decorator adds the ``_ignore`` attribute to the method.
-    
+
     Methods with this attribute are skipped when commands are registered.
 
     :param method: method to ignore
@@ -60,7 +60,7 @@ class _Command(object):
     '''CLI command.
 
     A wrapper around a method that adds a few hidden attributes.
-    
+
     Command args correspond to method params.
     '''
 
@@ -115,7 +115,7 @@ class _Command(object):
 
 class CLI(object):
     '''Subclass from this class to create your own CLI.
-    
+
     Every method without an underscore is mapped to a CLI command.
 
     The special ``_root`` method corresponds to the script itself.
@@ -130,7 +130,7 @@ class CLI(object):
         self._register_root_args()
 
         self._commands = {}
-        
+
         handlers = self._get_handlers()
 
         if handlers:
@@ -190,14 +190,14 @@ class CLI(object):
         '''Get the list of all non-root handlers'''
 
         return [
-            method 
+            method
             for method_name, method in getmembers(self, predicate=ismethod)
             if not method_name.startswith('_') and not hasattr(method,'_ignore')
         ]
 
     def _register_commands(self, handlers):
         '''Create parsers for all non-root commands.
-        
+
         :param handlers: command handlers
         '''
 
