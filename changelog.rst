@@ -65,3 +65,13 @@
 =====
 
 -   Setup: Python version check improved.
+
+1.1.3
+=====
+
+-   Code cleanup.
+
+1.1.4
+=====
+
+-   Code improvements for API documentation.
