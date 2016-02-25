@@ -2,7 +2,7 @@
 Cliar: Create CLIs Clearly
 **************************
 
-.. image:: https://img.shields.io/pypi/v/cliar.svg?style=flat-squar 
+.. image:: https://img.shields.io/pypi/v/cliar.svg?style=flat-squar
     :alt: Latest Version
 
 .. image:: https://img.shields.io/pypi/dm/cliar.svg?style=flat-square
@@ -20,9 +20,7 @@ Cliar: Create CLIs Clearly
     api
 
 
-Cliar (pronounced as "clear") helps you create command-line interfaces with minimum code:
-
-.. code-block:: python
+**Cliar** (pronounced as "clear") is a Python tool that helps you create command-line interfaces::
 
     from cliar import CLI
 
@@ -60,30 +58,30 @@ Install Cliar from `PyPI <https://pypi.python.org/pypi/cliar>`__ with pip:
 
     $ pip install cliar
 
+You can install Cliar on CentOS 6 with yum from `Gleb Goncharov's public repo <https://github.com/gongled/gongled-repo>`__:
+
+.. code-block:: bash
+
+    $ yum install -y python-cliar
+
 
 Why another CLI tool?
 =====================
 
-I know there're great projects like `docopt <http://docopt.org/>`_ and `click <http://click.pocoo.org/5/>`_ out there. Before creating Cliar, I tried them both.
+There're two major CLI tools for Python: `docopt <http://docopt.org/>`_ and `click <http://click.pocoo.org/5/>`_. Before creating Cliar, I tried them both.
 
-Long story short, **neither click, not docopt allow for easily extendible CLIs**. Cliar lets you extend your CLI with simple subclassing.
-
-By extendability I mean the ability to extend CLI defined in one module with commands from another module.
-
-In docopt, this would mean overriding the entire help string or inserting a line into it, which is neither elegant, nor flexible, nor stable.
-
-In click, commands are just functions in the global namespace, and nesting is done with the ``group`` decorator. Extending can be done with importing * from one module to another, which is bad practice. Putting the commands inside a class doesn't work as expected, which makes it impossible to extend CLI with subclassing.
+Neither click, not docopt allow for easily extensible CLIs. Cliar lets you extend your CLI with plain subclassing.
 
 
 Limitations
 ===========
 
-Cliar is designed to help you create CLIs quickly and with as little code as possible. For the sake of simplicity, some features are not available:
+Cliar is designed to help you create CLIs quickly. For the sake of simplicity, some features are not available:
 
-    -   You can't add help text for arguments. You can though add help text for commands via docstrings.
-    -   Optional arguments are given in the form "-name, " which is unconvential, however valid. You can abbreviate optional arguments until it's unambiguous.
-    -   No third level commands.
-    -   Generally speaking, Cliar can't do a lot of things argparse can, but the idea is that you probably don't need most of these things.
+    -   You can't add help text for arguments. You can add help text for commands via docstrings.
+    -   Optional arguments are given in the form "-name, " not "--name." This is unconvential yet totally valid.
+    -   You can't have 3rd-level commands.
+    -   Cliar can't do a lot of things argparse can, but the idea is that you probably don't need most of them.
 
 
 Contribute
