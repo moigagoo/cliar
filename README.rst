@@ -2,7 +2,7 @@
 Cliar
 *****
 
-Create CLIs from Python Classes. Make them powerful with type hints.
+Create CLIs from Python classes. Make them powerful with type hints.
 
 .. image:: https://img.shields.io/pypi/v/cliar.svg?style=flat-squar
     :alt: Latest Version
