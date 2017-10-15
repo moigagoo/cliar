@@ -1,8 +1,10 @@
-**************************
-Cliar: Create CLIs Clearly
-**************************
+*****
+Cliar
+*****
 
-.. image:: https://img.shields.io/pypi/v/cliar.svg?style=flat-squar 
+Create CLIs from Python Classes. Make them powerful with type hints.
+
+.. image:: https://img.shields.io/pypi/v/cliar.svg?style=flat-squar
     :alt: Latest Version
 
 .. image:: https://img.shields.io/pypi/dm/cliar.svg?style=flat-square
@@ -11,7 +13,8 @@ Cliar: Create CLIs Clearly
 .. image:: https://img.shields.io/pypi/l/cliar.svg?style=flat-square
     :alt: License
 
-Cliar (pronounced as "clear") helps you create command-line interfaces with minimum code:
+
+**Cliar** is a Python tool that helps you create commandline interfaces:
 
 .. code-block:: python
 
@@ -35,12 +38,11 @@ Run the script:
     $ python git.py clone http://foo.bar -d baz
     Cloning from http://foo.bar to baz
 
-Read the docs at `cliar.rtfd.org <http://cliar.rtfd.org>`__
 
 Requirements
 ============
 
-Cliar runs with Python 2.6, 2.7, and 3.3+ on Windows, Linux, and Mac with not third party dependencies.
+Cliar runs with Python 3.5+ on Windows, Linux, and Mac. There are no external dependencies.
 
 
 Install
@@ -52,30 +54,40 @@ Install Cliar from `PyPI <https://pypi.python.org/pypi/cliar>`__ with pip:
 
     $ pip install cliar
 
+You can install Cliar on CentOS 6 with yum from `Gleb Goncharov's public repo <https://github.com/gongled/gongled-repo>`__:
 
-Why another CLI tool?
-=====================
+.. code-block:: bash
 
-I know there're great projects like `docopt <http://docopt.org/>`_ and `click <http://click.pocoo.org/5/>`_ out there. Before creating Cliar, I tried them both.
+    $ yum install -y python-cliar
 
-Long story short, **neither click, not docopt allow for easily extendible CLIs**. Cliar lets you extend your CLI with simple subclassing.
 
-By extendability I mean the ability to extend CLI defined in one module with commands from another module.
+Hello World
+===========
 
-In docopt, this would mean overriding the entire help string or inserting a line into it, which is neither elegant, nor flexible, nor stable.
+.. code-block:: python
 
-In click, commands are just functions in the global namespace, and nesting is done with the ``group`` decorator. Extending can be done with importing * from one module to another, which is bad practice. Putting the commands inside a class doesn't work as expected, which makes it impossible to extend CLI with subclassing.
+    from cliar import CLI
 
+
+    class Hello(CLI):
+        def hello(self, name='world'):
+            print('Hello ' + name + '!')
+
+    if __name__ == '__main__':
+        Hello().parse()
+
+.. code-block:: bash
+
+    python hello.py hello --name Bob
+    Hello Bob!
 
 Limitations
 ===========
 
-Cliar is designed to help you create CLIs quickly and with as little code as possible. For the sake of simplicity, some features are not available:
+Cliar is designed to help you create CLIs quickly. For the sake of simplicity, some features are unavailable:
 
-    -   You can't add help text for arguments. You can though add help text for commands via docstrings.
-    -   Optional arguments are given in the form "-name, " which is unconvential, however valid. You can abbreviate optional arguments until it's unambiguous.
-    -   No third level commands.
-    -   Generally speaking, Cliar can't do a lot of things argparse can, but the idea is that you probably don't need most of these things.
+    -   You can't add help text for individual arguments. You can add help text for individual commands with docstrings though.
+    -   You can't have 3rd-level commands.
 
 
 Contribute
