@@ -75,3 +75,11 @@
 =====
 
 -   Code improvements for API documentation.
+
+1.1.5
+=====
+
+-   Optional arguments are now prepended with '--', not '-'.
+-   Short argument names are now generated from the long ones: ``name`` handler arg corresponds to ``-n`` and ``--name`` commandline args.
+-   Python 2 support dropped. Python 3.5+ required.
+-   Code refactored, type hints added.

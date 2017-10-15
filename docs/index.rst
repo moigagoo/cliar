@@ -1,6 +1,8 @@
-**************************
-Cliar: Create CLIs Clearly
-**************************
+*****
+Cliar
+*****
+
+Create CLIs from Python Classes. Make them powerful with type hints.
 
 .. image:: https://img.shields.io/pypi/v/cliar.svg?style=flat-squar
     :alt: Latest Version
@@ -20,7 +22,9 @@ Cliar: Create CLIs Clearly
     api
 
 
-**Cliar** (pronounced as "clear") is a Python tool that helps you create command-line interfaces::
+**Cliar** is a Python tool that helps you create commandline interfaces:
+
+.. code-block:: python
 
     from cliar import CLI
 
@@ -46,7 +50,7 @@ Run the script:
 Requirements
 ============
 
-Cliar runs with Python 2.6, 2.7, and 3.3+ on Windows, Linux, and Mac. There are no dependencies.
+Cliar runs with Python 3.5+ on Windows, Linux, and Mac. There are no external dependencies.
 
 
 Install
@@ -65,23 +69,33 @@ You can install Cliar on CentOS 6 with yum from `Gleb Goncharov's public repo <h
     $ yum install -y python-cliar
 
 
-Why another CLI tool?
-=====================
+Hello World
+===========
 
-There're two major CLI tools for Python: `docopt <http://docopt.org/>`_ and `click <http://click.pocoo.org/5/>`_. Before creating Cliar, I tried them both.
+.. code-block:: python
 
-Neither click, not docopt allow for easily extensible CLIs. Cliar lets you extend your CLI with plain subclassing.
+    from cliar import CLI
 
+
+    class Hello(CLI):
+        def hello(self, name='world'):
+            print('Hello ' + name + '!')
+
+    if __name__ == '__main__':
+        Hello().parse()
+
+.. code-block:: bash
+
+    python hello.py hello --name Bob
+    Hello Bob!
 
 Limitations
 ===========
 
-Cliar is designed to help you create CLIs quickly. For the sake of simplicity, some features are not available:
+Cliar is designed to help you create CLIs quickly. For the sake of simplicity, some features are unavailable:
 
-    -   You can't add help text for arguments. You can add help text for commands via docstrings.
-    -   Optional arguments are given in the form "-name, " not "--name." This is unconvential yet totally valid.
+    -   You can't add help text for individual arguments. You can add help text for individual commands with docstrings though.
     -   You can't have 3rd-level commands.
-    -   Cliar can't do a lot of things argparse can, but the idea is that you probably don't need most of them.
 
 
 Contribute
