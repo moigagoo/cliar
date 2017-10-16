@@ -7,9 +7,6 @@ Create CLIs from Python classes. Make them powerful with type hints.
 .. image:: https://img.shields.io/pypi/v/cliar.svg?style=flat-squar
     :alt: Latest Version
 
-.. image:: https://img.shields.io/pypi/dm/cliar.svg?style=flat-square
-    :alt: Downloads
-
 .. image:: https://img.shields.io/pypi/l/cliar.svg?style=flat-square
     :alt: License
 
