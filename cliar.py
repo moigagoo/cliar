@@ -16,13 +16,13 @@ def set_name(name: str) -> Callable:
     if name == '':
         raise NameError('Command name cannot be empty')
 
-    def decorated(handler):
-        '''Command handler with a custom command name.'''
+    def decorator(handler):
+        '''Decorator returning command handler with a custom command name.'''
 
         handler._command_name = name
         return handler
 
-    return decorated
+    return decorator
 
 
 def add_aliases(aliases: List[str]) -> Callable:
@@ -31,13 +31,13 @@ def add_aliases(aliases: List[str]) -> Callable:
     :param aliases: list of aliases
     '''
 
-    def decorated(handler):
-        '''Command handler with a list of aliases set for its command.'''
+    def decorator(handler):
+        '''Decorator returning command handler with a list of aliases set for its command.'''
 
         handler._command_aliases = aliases
         return handler
 
-    return decorated
+    return decorator
 
 
 def ignore(handler: Callable) -> Callable:
@@ -77,7 +77,7 @@ class _Command:
         if hasattr(handler, '_command_name'):
             self.name = handler._command_name
         else:
-            self.name = handler.__name__
+            self.name = handler.__name__.replace('_', '-')
 
         if hasattr(handler, '_command_aliases'):
             self.aliases = handler._command_aliases

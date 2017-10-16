@@ -83,3 +83,9 @@
 -   Short argument names are now generated from the long ones: ``name`` handler arg corresponds to ``-n`` and ``--name`` commandline args.
 -   Python 2 support dropped. Python 3.5+ required.
 -   Code refactored, type hints added.
+
+
+1.1.6
+=====
+
+-   Underscores in handler names are now replaced with dashes when the corresponding command name is generated.
