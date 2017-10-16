@@ -7,9 +7,6 @@ Create CLIs from Python classes. Make them powerful with type hints.
 .. image:: https://img.shields.io/pypi/v/cliar.svg?style=flat-squar
     :alt: Latest Version
 
-.. image:: https://img.shields.io/pypi/dm/cliar.svg?style=flat-square
-    :alt: Downloads
-
 .. image:: https://img.shields.io/pypi/l/cliar.svg?style=flat-square
     :alt: License
 
@@ -80,14 +77,6 @@ Hello World
 
     python hello.py hello --name Bob
     Hello Bob!
-
-Limitations
-===========
-
-Cliar is designed to help you create CLIs quickly. For the sake of simplicity, some features are unavailable:
-
-    -   You can't add help text for individual arguments. You can add help text for individual commands with docstrings though.
-    -   You can't have 3rd-level commands.
 
 
 Contribute
