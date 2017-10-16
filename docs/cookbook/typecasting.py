@@ -6,7 +6,7 @@ class TypeChecking(CLI):
     that has one positional arg of type int.
     '''
 
-    def square(self, n:int):
+    def square(self, n: int):
         '''Square a given number'''
 
         print('%d squared is %d' % (n, n**2))

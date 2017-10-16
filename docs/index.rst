@@ -18,7 +18,6 @@ Create CLIs from Python classes. Make them powerful with type hints.
     :hidden:
 
     cookbook/index
-    python2
     api
 
 
@@ -88,14 +87,6 @@ Hello World
 
     python hello.py hello --name Bob
     Hello Bob!
-
-Limitations
-===========
-
-Cliar is designed to help you create CLIs quickly. For the sake of simplicity, some features are unavailable:
-
-    -   You can't add help text for individual arguments. You can add help text for individual commands with docstrings though.
-    -   You can't have 3rd-level commands.
 
 
 Contribute

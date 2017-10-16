@@ -15,7 +15,7 @@ class Aliases(CLI):
         '''Get a random number between FROM_NUMBER and TO_NUMBER'''
 
         print(
-            'Here is a random number between %d and %d: %d' % 
+            'Here is a random number between %d and %d: %d' %
             (from_number, to_number, randint(from_number, to_number))
         )
 

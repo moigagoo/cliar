@@ -17,7 +17,7 @@ Usage:
 .. code-block:: bash
 
     $ python openfile.py -h
-    usage: openfile.py [-h] {find_word} ...
+    usage: openfile.py [-h] {find-word} ...
 
     This CLI has a command that takes a filepath and attempts to open it on
     the fly.
@@ -29,8 +29,8 @@ Usage:
       {find_word}  available commands
         find_word  Find WORD in FILE
 
-    $ python openfile.py find_word -h
-    usage: openfile.py find_word [-h] file word
+    $ python openfile.py find-word -h
+    usage: openfile.py find-word [-h] file word
 
     positional arguments:
       file
@@ -39,12 +39,12 @@ Usage:
     optional arguments:
       -h, --help  show this help message and exit
 
-    $ python openfile.py find_word openfile.rst python
+    $ python openfile.py find-word openfile.rst python
     Here it is!
 
-    $ python openfile.py find_word openfile.rst perl
+    $ python openfile.py find-word openfile.rst perl
     Nope, not here
 
-    $ python openfile.py find_word foo bar
+    $ python openfile.py find-word foo bar
     ...
     FileNotFoundError: [Errno 2] No such file or directory: 'foo'
