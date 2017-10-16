@@ -2,8 +2,6 @@
 The ``open`` Arg Type
 *********************
 
-.. note:: This example works in Python 3 only.
-
 If you set arg type to ``open``, Cliar will attempt to locate and read from the filepath passed to this arg.
 
 In fact, arg type can be any Python callable that accepts a string, including custom functions. `Read more <https://docs.python.org/3/library/argparse.html#type>`__ in the argparse docs.

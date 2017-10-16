@@ -2,8 +2,6 @@
 Arg Type Casting
 ****************
 
-.. note:: This example works in Python 3 only.
-
 :download:`Download source <typecasting.py>`
 
 .. literalinclude:: typecasting.py

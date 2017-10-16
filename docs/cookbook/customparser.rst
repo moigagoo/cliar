@@ -2,8 +2,6 @@
 Custom Arg Parsers
 ******************
 
-.. note:: This example works in Python 3 only.
-
 Arg type can be any Python callable that accepts a string, including custom functions. `Read more <https://docs.python.org/3/library/argparse.html#type>`__ in the argparse docs.
 
 :download:`Download source <customparser.py>`
@@ -14,12 +12,12 @@ Usage:
 
 .. code-block:: bash
 
-    $ python customparser.py 
+    $ python customparser.py
     usage: customparser.py [-h] {personify} ...
 
     This CLI demonstrates the usage
     of a custom arg parser.
-        
+
     optional arguments:
       -h, --help   show this help message and exit
 
@@ -34,7 +32,7 @@ Usage:
 
     This method uses a custom ``string_to_person``
     parser to convert input string into a ``Person`` instance
-    *before* handling it.        
+    *before* handling it.
 
     positional arguments:
       person
