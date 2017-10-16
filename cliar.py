@@ -16,7 +16,7 @@ def set_name(name: str) -> Callable:
     if name == '':
         raise NameError('Command name cannot be empty')
 
-    def decorator(handler):
+    def decorator(handler: Callable):
         '''Decorator returning command handler with a custom command name.'''
 
         handler._command_name = name
@@ -31,7 +31,7 @@ def add_aliases(aliases: List[str]) -> Callable:
     :param aliases: list of aliases
     '''
 
-    def decorator(handler):
+    def decorator(handler: Callable):
         '''Decorator returning command handler with a list of aliases set for its command.'''
 
         handler._command_aliases = aliases
