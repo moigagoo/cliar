@@ -31,11 +31,11 @@ Usage:
         sum        Sum all the given numbers
 
     $ python nargs.py hello -h
-    usage: nargs.py hello [-h] [-names [NAMES [NAMES ...]]]
+    usage: nargs.py hello [-h] [-n [NAMES [NAMES ...]]]
 
     optional arguments:
       -h, --help            show this help message and exit
-      -names [NAMES [NAMES ...]]
+      -n [NAMES [NAMES ...]], --names [NAMES [NAMES ...]]
 
     $ python nargs.py hello
     Hello, Mary!

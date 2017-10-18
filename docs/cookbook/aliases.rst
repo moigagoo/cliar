@@ -26,11 +26,11 @@ Usage:
                             Get a random number between FROM_NUMBER and TO_NUMBER
 
     $ python aliases.py gr -h
-    usage: aliases.py get-random [-h] from_number to_number
+    usage: aliases.py get-random [-h] from=number to-number
 
     positional arguments:
-      from_number
-      to_number
+      from-number
+      to-number
 
     optional arguments:
       -h, --help   show this help message and exit

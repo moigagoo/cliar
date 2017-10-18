@@ -18,7 +18,7 @@ Usage:
 
     optional arguments:
       -h, --help   show this help message and exit
-      -capitalize
+      -c, --capitalize
 
     commands:
       {}           available commands
