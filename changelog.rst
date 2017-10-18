@@ -89,3 +89,9 @@
 =====
 
 -   Underscores in handler names are now replaced with dashes when the corresponding command name is generated.
+
+
+1.1.7
+=====
+
+-   Add the ability to override mapping between commandline args and and handler params. By default,    handler params correspond to args of the same name with undersores replaced with dashes.
