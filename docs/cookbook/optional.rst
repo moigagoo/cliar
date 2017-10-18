@@ -27,7 +27,7 @@ Usage:
 
     optional arguments:
       -h, --help  show this help message and exit
-      -name NAME
+      -n NAME, --name NAME
 
     $ python optional.py hello
     Hello, Guido
