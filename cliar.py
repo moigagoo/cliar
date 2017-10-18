@@ -3,7 +3,22 @@ from inspect import signature, getmembers, ismethod
 
 from collections import OrderedDict
 
-from typing import Callable, List, Iterable
+from typing import Callable, List, Iterable, Dict
+
+
+def set_arg_map(arg_map: Dict[str, str]) -> Callable:
+    '''Override mapping from handler params to commandline args.
+
+    :param arg_map: mapping from handler param names to arg names
+    '''
+
+    def decorator(handler: Callable) -> Callable:
+        '''Decorator returning command handler with a custom arg map.'''
+
+        handler._arg_map = arg_map
+        return handler
+
+    return decorator
 
 
 def set_name(name: str) -> Callable:
@@ -16,7 +31,7 @@ def set_name(name: str) -> Callable:
     if name == '':
         raise NameError('Command name cannot be empty')
 
-    def decorator(handler: Callable):
+    def decorator(handler: Callable) -> Callable:
         '''Decorator returning command handler with a custom command name.'''
 
         handler._command_name = name
@@ -31,7 +46,7 @@ def add_aliases(aliases: List[str]) -> Callable:
     :param aliases: list of aliases
     '''
 
-    def decorator(handler: Callable):
+    def decorator(handler: Callable) -> Callable:
         '''Decorator returning command handler with a list of aliases set for its command.'''
 
         handler._command_aliases = aliases
@@ -72,7 +87,10 @@ class _Command:
     def __init__(self, handler: Callable):
         self.handler = handler
 
-        self.args = self._get_args()
+        if hasattr(handler, '_arg_map'):
+            self.arg_map = handler._arg_map
+        else:
+            self.arg_map = {}
 
         if hasattr(handler, '_command_name'):
             self.name = handler._command_name
@@ -84,6 +102,8 @@ class _Command:
         else:
             self.aliases = []
 
+        self.args = self._get_args()
+
     def _get_args(self) -> OrderedDict:
         '''Get command arguments from the parsed signature of its handler.'''
 
@@ -91,7 +111,7 @@ class _Command:
 
         handler_signature = signature(self.handler)
 
-        for param_name, param_data in list(handler_signature.parameters.items()):
+        for param_name, param_data in handler_signature.parameters.items():
             arg = _Arg()
 
             if param_data.annotation is not param_data.empty:
@@ -117,7 +137,10 @@ class _Command:
                 else:
                     arg.nargs = '+'
 
-            args[param_name] = arg
+            if param_name not in self.arg_map:
+                self.arg_map[param_name] = param_name.replace('_', '-')
+
+            args[self.arg_map[param_name]] = arg
 
         return args
 
@@ -168,7 +191,7 @@ class CLI:
         '''Register an arg in the specified argparser.
 
         :param command_parser: global argparser or a subparser corresponding to a CLI command
-        :param str arg_name: arg name without prefixing dashes
+        :param str arg_name: handler param name without prefixing dashes
         :param arg_data: arg type, default value, and action
         '''
 
@@ -236,16 +259,26 @@ class CLI:
 
         args = self._parser.parse_args()
 
-        root_args = {root_arg: vars(args)[root_arg] for root_arg in self.root_command.args}
-        self.root_command.handler(**root_args)
+        root_args = {arg: vars(args)[arg] for arg in self.root_command.args}
+
+        inverse_root_arg_map = {arg: param for param, arg in self.root_command.arg_map.items()}
+
+        self.root_command.handler(
+            **{inverse_root_arg_map[arg]: value for arg, value in root_args.items()}
+        )
 
         if self._commands:
             command = self._commands.get(args.command)
 
-            if command:
-                command_args = {command_arg: vars(args)[command_arg] for command_arg in command.args}
 
-                command.handler(**command_args)
+            if command:
+                command_args = {arg: vars(args)[arg] for arg in command.args}
+
+                inverse_arg_map = {arg: param for param, arg in command.arg_map.items()}
+
+                command.handler(
+                    **{inverse_arg_map[arg]: value for arg, value in command_args.items()}
+                )
 
             else:
                 self._parser.print_help()

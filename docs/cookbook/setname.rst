@@ -23,11 +23,11 @@ Usage:
         get-random  Get a random number between FROM_NUMBER and TO_NUMBER
 
     $ python setname.py get-random -h
-    usage: setname.py get-random [-h] from_number to_number
+    usage: setname.py get-random [-h] from-number to-number
 
     positional arguments:
-      from_number
-      to_number
+      from-number
+      to-number
 
     optional arguments:
       -h, --help   show this help message and exit
