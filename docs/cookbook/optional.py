@@ -1,7 +1,7 @@
-﻿from cliar import CLI
+﻿from cliar import Cliar
 
 
-class OptionalArg(CLI):
+class OptionalArg(Cliar):
     '''This is a CLI with one command that has an optional arg.'''
 
     def hello(self, name='Guido'):

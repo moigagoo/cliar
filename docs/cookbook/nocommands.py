@@ -1,9 +1,9 @@
-﻿from cliar import CLI
+﻿from cliar import Cliar
 
 
-class NoCommands(CLI):
+class NoCommands(Cliar):
     '''This is a CLI without commands; the script itself is a command.
-    
+
     Calling the script will print this important message.
 
     Add "-c" for more dramatism.

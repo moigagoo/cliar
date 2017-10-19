@@ -1,5 +1,5 @@
 from collections import namedtuple
-from cliar import CLI
+from cliar import Cliar
 
 
 Person = namedtuple('Person', ('firstname', 'lastname'))
@@ -7,9 +7,9 @@ Person = namedtuple('Person', ('firstname', 'lastname'))
 
 def string_to_person(string):
     """Create a ``Person`` from a string.
-    
+
     :param string: Space-separated string of first and last names, e.g. ``John Smith``
-    
+
     :returns: ``Person`` instance.
     """
 
@@ -20,7 +20,7 @@ def string_to_person(string):
         return None
 
 
-class CustomParser(CLI):
+class CustomParser(Cliar):
     """This CLI demonstrates the usage
     of a custom arg parser.
     """
