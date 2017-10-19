@@ -1,7 +1,7 @@
-﻿from cliar import CLI
+﻿from cliar import Cliar
 
 
-class Basic(CLI):
+class Basic(Cliar):
     '''Basic CLI with two commands.'''
 
     def start(self, server):

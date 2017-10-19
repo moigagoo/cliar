@@ -1,7 +1,7 @@
-﻿from cliar import CLI
+﻿from cliar import Cliar
 
 
-class TypeChecking(CLI):
+class TypeChecking(Cliar):
     '''This is a CLI with one command
     that has one positional arg of type int.
     '''

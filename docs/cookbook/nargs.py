@@ -1,7 +1,7 @@
-﻿from cliar import CLI
+﻿from cliar import Cliar
 
 
-class Nargs(CLI):
+class Nargs(Cliar):
     '''This is a CLI with commands
     that accept a sequence of values
     for a single arg.

@@ -145,7 +145,7 @@ class _Command:
         return args
 
 
-class CLI:
+class Cliar:
     '''Base CLI class.
 
     Subclass from it to create your own CLIs.
@@ -270,9 +270,8 @@ class CLI:
         if self._commands:
             command = self._commands.get(args.command)
 
-
             if command:
-                command_args = {arg: vars(args)[arg] for arg in command.args}
+                command_args = {arg: vars(args)[arg.replace('-', '_')] for arg in command.args}
 
                 inverse_arg_map = {arg: param for param, arg in command.arg_map.items()}
 
