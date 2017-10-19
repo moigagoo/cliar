@@ -94,4 +94,11 @@
 1.1.7
 =====
 
--   Add the ability to override mapping between commandline args and and handler params. By default,    handler params correspond to args of the same name with undersores replaced with dashes.
+-   Add the ability to override mapping between commandline args and and handler params. By default,    handler params correspond to args of the same name with underscores replaced with dashes.
+
+
+1.1.8
+=====
+
+-   **[Breaks backward compatibility]** Base CLI class renamed from ``CLI`` to ``Cliar``.
+-   Fixed a bug where commandline args with dashes weren't mapped to corresponding param names with underscores.

@@ -22,9 +22,9 @@ Create CLIs from Python classes. Make them powerful with type hints.
 
 .. code-block:: python
 
-    from cliar import CLI
+    from cliar import Cliar
 
-    class Git(CLI):
+    class Git(Cliar):
         '''Git clone created with Cliar'''
 
         def clone(self, repo, dir='.'):
@@ -70,10 +70,10 @@ Hello World
 
 .. code-block:: python
 
-    from cliar import CLI
+    from cliar import Cliar
 
 
-    class Hello(CLI):
+    class Hello(Cliar):
         def hello(self, name='world'):
             print('Hello ' + name + '!')
 

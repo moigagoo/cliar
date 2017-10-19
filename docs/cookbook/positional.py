@@ -1,7 +1,7 @@
-﻿from cliar import CLI
+﻿from cliar import Cliar
 
 
-class Positional(CLI):
+class Positional(Cliar):
     '''This is a CLI with one command that has one positional arg.'''
 
     def hello(self, name):

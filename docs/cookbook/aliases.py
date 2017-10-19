@@ -1,9 +1,9 @@
-﻿from cliar import CLI, set_name, add_aliases
+﻿from cliar import Cliar, set_name, add_aliases
 
 from random import randint
 
 
-class Aliases(CLI):
+class Aliases(Cliar):
     '''This CLI has a command that is called
     differently than its handler method
     and has aliases.

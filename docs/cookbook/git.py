@@ -1,9 +1,9 @@
-﻿from cliar import CLI
+﻿from cliar import Cliar
 
 
-class Git(CLI):
+class Git(Cliar):
     '''This is a Git CLI clone.
-    
+
     It doesn't actually do stuff, just imitates 2 git commands.
     '''
 
@@ -17,10 +17,10 @@ class Git(CLI):
 
     def checkout(self, branch, force=False, quiet=False):
         '''Checkout to BRANCH.
-        
+
         Use "-f" for force and "-q" for quiet.
         '''
-        
+
         print('Checking out to %s' % branch)
 
         if force:

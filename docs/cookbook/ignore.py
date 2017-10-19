@@ -1,16 +1,16 @@
-﻿from cliar import CLI, ignore
+﻿from cliar import Cliar, ignore
 
 from random import randint
 
 
-class Ignore(CLI):
-    '''This CLI has a method that is not 
+class Ignore(Cliar):
+    '''This CLI has a method that is not
     converted into a command.
     '''
 
     @ignore
     def sqr(self, x):
-        return x ** 2 
+        return x ** 2
 
     def square(self, num:int):
         '''Return a square of a number'''

@@ -1,7 +1,7 @@
-﻿from cliar import CLI
+﻿from cliar import Cliar
 
 
-class Openfile(CLI):
+class Openfile(Cliar):
     '''This CLI has a command that takes a filepath
     and attempts to open it on the fly.
     '''

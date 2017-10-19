@@ -1,17 +1,17 @@
-from cliar import CLI
+from cliar import Cliar
 
 
-class Base(CLI):
+class Base(Cliar):
     def hello(self, name: str):
         print(f'Hello, {name}!')
 
 
-class ExtensionA(CLI):
+class ExtensionA(Cliar):
     def say_a(self, number: int = 1):
         print('a' * number)
 
 
-class ExtensionB(CLI):
+class ExtensionB(Cliar):
     def say_b(self, capitalize: bool = False):
         if capitalize:
             print('B')
