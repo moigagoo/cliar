@@ -13,7 +13,7 @@ except:
 
 setup(
     name='cliar',
-    version='1.1.8',
+    version='1.1.9',
     author='Konstantin Molchanov',
     description=short_description,
     long_description=long_description,
