@@ -6,8 +6,28 @@ from collections import OrderedDict
 from typing import Callable, List, Iterable, Dict
 
 
-def set_metavars(metavar_map: Dict[str, str]) -> Callable:
+def set_help(help_map: Dict[str, str]) -> Callable:
+    '''Set help messages for arguments.
+
+    :param help_map: mapping from handler param names to help messages
+    '''
     def decorator(handler: Callable) -> Callable:
+        '''Decorator returning command handler with a help message map.'''
+        handler._help_map = help_map
+        return handler
+
+    return decorator
+
+
+def set_metavars(metavar_map: Dict[str, str]) -> Callable:
+    '''Override default metavars for arguments.
+
+    By default, metavars are generated from arg names: ``foo`` → ``FOO``, `--bar`` → ``BAR``.
+
+    :param metavar_map: mapping from handler param names to metavars
+    '''
+    def decorator(handler: Callable) -> Callable:
+        '''Decorator returning command handler with a custom metavar map.'''
         handler._metavar_map = metavar_map
         return handler
 
@@ -16,6 +36,8 @@ def set_metavars(metavar_map: Dict[str, str]) -> Callable:
 
 def set_arg_map(arg_map: Dict[str, str]) -> Callable:
     '''Override mapping from handler params to commandline args.
+
+    Be default, param names are used as arg names, only with underscores replaced with dashes.
 
     :param arg_map: mapping from handler param names to arg names
     '''
@@ -85,6 +107,7 @@ class _Arg:
         self.action = None
         self.nargs = None
         self.metavar = None
+        self.help = None
 
 
 class _Command:
@@ -116,6 +139,11 @@ class _Command:
         else:
             self.aliases = []
 
+        if hasattr(handler, '_help_map'):
+            self.help_map = handler._help_map
+        else:
+            self.help_map = {}
+
         self.args = self._get_args()
 
     def _get_args(self) -> OrderedDict:
@@ -127,6 +155,8 @@ class _Command:
 
         for param_name, param_data in handler_signature.parameters.items():
             arg = _Arg()
+
+            arg.help = self.help_map.get(param_name, '')
 
             if param_data.annotation is not param_data.empty:
                 arg.type = param_data.annotation
@@ -222,7 +252,8 @@ class Cliar:
             command_parser.add_argument(
                 *arg_prefixed_names,
                 default=arg_data.default,
-                action=arg_data.action
+                action=arg_data.action,
+                help=arg_data.help
             )
 
         elif arg_data.nargs:
@@ -230,7 +261,8 @@ class Cliar:
                 *arg_prefixed_names,
                 default=arg_data.default,
                 nargs=arg_data.nargs,
-                metavar=arg_data.metavar
+                metavar=arg_data.metavar,
+                help=arg_data.help
             )
 
         else:
@@ -238,7 +270,8 @@ class Cliar:
                 *arg_prefixed_names,
                 type=arg_data.type,
                 default=arg_data.default,
-                metavar=arg_data.metavar
+                metavar=arg_data.metavar,
+                help=arg_data.help
             )
 
     def _get_handlers(self) -> List[Callable]:
