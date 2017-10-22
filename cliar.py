@@ -6,6 +6,14 @@ from collections import OrderedDict
 from typing import Callable, List, Iterable, Dict
 
 
+def set_metavars(metavar_map: Dict[str, str]) -> Callable:
+    def decorator(handler: Callable) -> Callable:
+        handler._metavar_map = metavar_map
+        return handler
+
+    return decorator
+
+
 def set_arg_map(arg_map: Dict[str, str]) -> Callable:
     '''Override mapping from handler params to commandline args.
 
@@ -76,6 +84,7 @@ class _Arg:
         self.default = None
         self.action = None
         self.nargs = None
+        self.metavar = None
 
 
 class _Command:
@@ -91,6 +100,11 @@ class _Command:
             self.arg_map = handler._arg_map
         else:
             self.arg_map = {}
+
+        if hasattr(handler, '_metavar_map'):
+            self.metavar_map = handler._metavar_map
+        else:
+            self.metavar_map = {}
 
         if hasattr(handler, '_command_name'):
             self.name = handler._command_name
@@ -136,6 +150,9 @@ class _Command:
 
                 else:
                     arg.nargs = '+'
+
+            if not arg.action and param_name in self.metavar_map:
+                arg.metavar = self.metavar_map[param_name]
 
             if param_name not in self.arg_map:
                 self.arg_map[param_name] = param_name.replace('_', '-')
@@ -212,14 +229,16 @@ class Cliar:
             command_parser.add_argument(
                 *arg_prefixed_names,
                 default=arg_data.default,
-                nargs=arg_data.nargs
+                nargs=arg_data.nargs,
+                metavar=arg_data.metavar
             )
 
         else:
             command_parser.add_argument(
                 *arg_prefixed_names,
                 type=arg_data.type,
-                default=arg_data.default
+                default=arg_data.default,
+                metavar=arg_data.metavar
             )
 
     def _get_handlers(self) -> List[Callable]:
