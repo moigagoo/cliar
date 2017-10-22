@@ -102,3 +102,10 @@
 
 -   **[Breaks backward compatibility]** Base CLI class renamed from ``CLI`` to ``Cliar``.
 -   Fixed a bug where commandline args with dashes weren't mapped to corresponding param names with underscores.
+
+
+1.1.9
+=====
+
+-   Add the ability to set help messages for arguments.
+-   Add the ability to set metavars for arguments.
