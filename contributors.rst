@@ -1,1 +1,0 @@
--   Gleb Goncharov <inbox@gongled.ru>, RPM packages for CentOS 6

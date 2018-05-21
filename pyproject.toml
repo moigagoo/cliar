@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "cliar"
+version = "1.1.9"
+description = "Create CLIs with classes and type hints."
+license = "MIT"
+authors = ["Konstantin Molchanov <moigagoo@live.com>"]
+readme = "README.rst"
+homepage = "https://moigagoo.github.io/cliar/"
+repository = "https://github.com/moigagoo/cliar/"
+documentation = "https://moigagoo.github.io/cliar/"
+keywords = ["cli", "commandline"]
+
+[tool.poetry.dependencies]
+python = "^3.5"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.5"
+pylint = "^1.8"
+pytest-datadir = "^1.0"
