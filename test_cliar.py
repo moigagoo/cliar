@@ -1,4 +1,5 @@
 from subprocess import run
+from math import factorial, log
 
 
 def test_positional_args(capfd):
@@ -7,7 +8,7 @@ def test_positional_args(capfd):
     run(f'python math.py add {x} {y}')
     assert int(capfd.readouterr().out) == x + y
 
-def test_optional_arg(capfd):
+def test_optional_args(capfd):
     x, power = 12, 3
 
     run(f'python math.py power {x} --power {power}')
@@ -118,3 +119,65 @@ def test_open(capfd):
 
     run('python math.py sumfile numbers.txt')
     assert float(capfd.readouterr().out) == sum(numbers)
+
+
+def test_aliases(capfd):
+    x, y = 12, 34
+
+    run(f'python math.py sum {x} {y}')
+    assert int(capfd.readouterr().out) == x + y
+
+    run(f'python math.py plus {x} {y}')
+    assert int(capfd.readouterr().out) == x + y
+
+
+def test_help(capfd):
+    run('python math.py --help')
+    assert  'Basic math operations.' in capfd.readouterr().out
+
+    run('python math.py -h')
+    assert  'Basic math operations.' in capfd.readouterr().out
+
+    run('python math.py add --help')
+    help_message = capfd.readouterr().out
+    assert 'Add two numbers.' in help_message
+    assert 'First operand' in help_message
+    assert 'Second operand' in help_message
+
+    run('python math.py add -h')
+    help_message = capfd.readouterr().out
+    assert 'Add two numbers.' in help_message
+    assert 'First operand' in help_message
+    assert 'Second operand' in help_message
+
+
+def test_ignore(capfd):
+    n = 6
+
+    run(f'python math.py calculate-factorial {n}')
+    assert "invalid choice: 'calculate-factorial'" in capfd.readouterr().err.splitlines()[-1]
+
+
+def test_pseudonym(capfd):
+    n = 6
+
+    run(f'python math.py fac 6')
+    assert int(capfd.readouterr().out) == factorial(n)
+
+
+def test_arg_map(capfd):
+    x, base = 1000, 10
+
+    run(f'python math.py log {x} --to {base}')
+    assert float(capfd.readouterr().out) == log(x, base)
+
+    run(f'python math.py log {x} -t {base}')
+    assert float(capfd.readouterr().out) == log(x, base)
+
+
+def test_metavars(capfd):
+    run('python math.py log --help')
+    assert '-t BASE, --to BASE' in capfd.readouterr().out
+
+    run('python math.py log -h')
+    assert '-t BASE, --to BASE' in capfd.readouterr().out

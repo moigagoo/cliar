@@ -32,7 +32,7 @@ def set_metavars(metavar_map: Dict[str, str]) -> Callable:
 def set_arg_map(arg_map: Dict[str, str]) -> Callable:
     '''Override mapping from handler params to commandline args.
 
-    Be default, param names are used as arg names, only with underscores replaced with dashes.
+    Be default, param names are used as arg names, with underscores replaced with dashes.
 
     :param arg_map: mapping from handler param names to arg names
     '''
