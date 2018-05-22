@@ -1,0 +1,16 @@
+language: python
+python:
+  - 3.6
+
+install:
+  - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+  - poetry install
+
+script:
+  - poetry run pytest
+
+deploy:
+  provider: script
+  script: poetry publish --user="$PYPI_USERNAME" --password="$PYPI_PASSWORD"
+  on:
+    tags: true
