@@ -183,6 +183,15 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 platform = "unix"
 
 [[package]]
+name = "pygments"
+version = "2.2.0"
+description = "Pygments is a syntax highlighting package written in Python."
+category = "dev"
+optional = false
+python-versions = "*"
+platform = "any"
+
+[[package]]
 name = "pylint"
 version = "1.9.1"
 description = "python code static checker"
@@ -307,7 +316,7 @@ platform = "*"
 [metadata]
 python-versions = "^3.6"
 platform = "*"
-content-hash = "821a98866f2de49b1ec6c49a1f00976711520ed45feb55084529eab9deef011d"
+content-hash = "822dcd5d5d9f153398bb6fea46567867e96311999259a11da078826a8ae1e9b4"
 
 [metadata.hashes]
 astroid = [ "032f6e09161e96f417ea7fad46d3fac7a9019c775f202182c22df0e4f714cb1c", "dea42ae6e0b789b543f728ddae7ddb6740ba33a49fb52c4a4d9cb7bb4aa6ec09",]
@@ -328,6 +337,7 @@ more-itertools = [ "a18d870ef2ffca2b8463c0070ad17b5978056f403fb64e3f15fe62a52db2
 pbr = [ "680bf5ba9b28dd56e08eb7c267991a37c7a5f90a92c2e07108829931a50ff80a", "6874feb22334a1e9a515193cba797664e940b763440c88115009ec323a7f2df5",]
 pluggy = [ "d345c8fe681115900d6da8d048ba67c25df42973bda370783cd58826442dcd7c", "e160a7fcf25762bb60efc7e171d4497ff1d8d2d75a3d0df7a21b76821ecbf5c5", "7f8ae7f5bdf75671a718d2daf0a64b7885f74510bcd98b1a0bb420eb9a9d0cff",]
 py = [ "983f77f3331356039fdd792e9220b7b8ee1aa6bd2b25f567a963ff1de5a64f6a", "29c9fab495d7528e80ba1e343b958684f4ace687327e6f789a94bf3d1915f881",]
+pygments = [ "78f3f434bcc5d6ee09020f92ba487f95ba50f1e3ef83ae96b9d5ffa1bab25c5d", "dbae1046def0efb574852fab9e90209b23f556367b5a320c0bcb871c77c3e8cc",]
 pylint = [ "aa519865f8890a5905fa34924fed0f3bfc7d84fc9f9142c16dac52ffecd25a39", "c353d8225195b37cc3aef18248b8f3fe94c5a6a95affaf885ae21a24ca31d8eb",]
 pytest = [ "c76e93f3145a44812955e8d46cdd302d8a45fbfc7bf22be24fe231f9d8d8853a", "39555d023af3200d004d09e51b4dd9fdd828baa863cded3fd6ba2f29f757ae2d",]
 pytest-cov = [ "890fe5565400902b0c78b5357004aab1c814115894f4f21370e2433256a3eeec", "03aa752cf11db41d281ea1d807d954c4eda35cfa1b21d6971966cc041bbf6e2d",]

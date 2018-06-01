@@ -1,17 +1,15 @@
+.. image:: https://img.shields.io/pypi/v/cliar.svg?style=flat-squar
+    :alt: Latest Version
+.. image:: https://img.shields.io/pypi/l/cliar.svg?style=flat-square
+    :alt: License
+.. image:: https://codecov.io/gh/moigagoo/cliar/branch/develop/graph/badge.svg
+  :target: https://codecov.io/gh/moigagoo/cliar
+
 *****
 Cliar
 *****
 
 Create CLIs from Python classes. Make them powerful with type hints.
-
-.. image:: https://img.shields.io/pypi/v/cliar.svg?style=flat-squar
-    :alt: Latest Version
-
-.. image:: https://img.shields.io/pypi/l/cliar.svg?style=flat-square
-    :alt: License
-
-.. image:: https://codecov.io/gh/moigagoo/cliar/branch/develop/graph/badge.svg
-  :target: https://codecov.io/gh/moigagoo/cliar
 
 **Cliar** is a Python tool that helps you create commandline interfaces:
 
