@@ -8,7 +8,6 @@
 -   Add tests.
 -   Switch to Poetry.
 
-
 1.1.9
 =====
 
