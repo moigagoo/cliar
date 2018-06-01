@@ -7,7 +7,7 @@ install:
   - poetry install
 
 script:
-  - poetry run pytest
+  - poetry run pytest --cov=cliar
   - poetry run codecov
 
 deploy:
