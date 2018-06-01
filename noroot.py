@@ -4,7 +4,7 @@ from typing import List
 from cliar import Cliar, set_name
 
 
-class Math(Cliar):
+class NoRoot(Cliar):
     '''Basic math operations.'''
 
     def add(self, x: int, y: int):
@@ -12,4 +12,4 @@ class Math(Cliar):
 
 
 if __name__ == '__main__':
-    Math().parse()
+    NoRoot().parse()
