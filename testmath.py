@@ -4,7 +4,7 @@ from typing import List
 from cliar import Cliar, add_aliases, set_help, ignore, set_name, set_arg_map, set_metavars
 
 
-class Positional(Cliar):
+class Math(Cliar):
     '''Basic math operations.'''
 
     @set_help({'x': 'First operand', 'y': 'Second operand'})
@@ -59,4 +59,4 @@ class Positional(Cliar):
 
 
 if __name__ == '__main__':
-    Positional().parse()
+    Math().parse()

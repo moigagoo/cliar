@@ -1,12 +1,12 @@
 1.2.0 (under development)
 =========================
 
+-   Boolean handler params are converted into ``store_true`` arguments. Before that, params with default value of ``True`` were much confusingly converted into ``store_false`` arguments.
 -   Support ``List[int]`` and similar arg types. If the param type is a subclass of ``typing.Iterable`` and has a type specified in brackets, it's converted into multivalue arg of the type in the brackets.
 -   Do not print help whenever ``_root`` command is invoked.
 -   Convert the ``cliar`` module into a package.
 -   Add tests.
 -   Switch to Poetry.
-
 
 1.1.9
 =====

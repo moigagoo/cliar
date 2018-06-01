@@ -79,11 +79,7 @@ class _Command:
                     arg.type = type(arg.default)
 
             if arg.type == bool:
-                if arg.default is True:
-                    arg.action = 'store_false'
-
-                elif arg.default is False:
-                    arg.action = 'store_true'
+                arg.action = 'store_true'
 
             elif isclass(arg.type) and issubclass(arg.type, Iterable):
                 if arg.default:

@@ -136,10 +136,13 @@ def test_aliases(capfd):
 
 def test_help(capfd):
     run('python testmath.py --help', shell=True)
-    assert  'Basic math operations.' in capfd.readouterr().out
+    assert 'Basic math operations.' in capfd.readouterr().out
 
     run('python testmath.py -h', shell=True)
-    assert  'Basic math operations.' in capfd.readouterr().out
+    assert 'Basic math operations.' in capfd.readouterr().out
+
+    run('python testmath2.py', shell=True)
+    assert 'Basic math operations.' in capfd.readouterr().out
 
     run('python testmath.py add --help', shell=True)
     help_message = capfd.readouterr().out
@@ -184,3 +187,17 @@ def test_metavars(capfd):
 
     run('python testmath.py log -h', shell=True)
     assert '-t BASE, --to BASE' in capfd.readouterr().out
+
+
+def test_set_name():
+    from pytest import raises
+
+    from cliar import Cliar, set_name
+
+    with raises(NameError) as excinfo:
+        class _(Cliar):
+            @set_name('')
+            def _(self):
+                pass
+
+    assert 'Command name cannot be empty' in str(excinfo.value)
