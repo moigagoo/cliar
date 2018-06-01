@@ -1,5 +1,7 @@
 .. image:: https://img.shields.io/pypi/v/cliar.svg
   :target: https://pypi.org/project/cliar
+.. image:: https://travis-ci.org/moigagoo/cliar.svg?branch=develop
+  :target: https://travis-ci.org/moigagoo/cliar
 .. image:: https://codecov.io/gh/moigagoo/cliar/branch/develop/graph/badge.svg
   :target: https://codecov.io/gh/moigagoo/cliar
 
