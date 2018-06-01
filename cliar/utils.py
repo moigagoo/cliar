@@ -1,4 +1,7 @@
-from typing import Callable, List, Iterable, Dict
+from typing import Callable, List, Dict
+
+
+# pylint: disable=too-few-public-methods,protected-access
 
 
 def set_help(help_map: Dict[str, str]) -> Callable:

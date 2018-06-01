@@ -6,6 +6,9 @@ from typing import List, Iterable, Callable
 from .utils import ignore
 
 
+# pylint: disable=too-few-public-methods,protected-access
+
+
 class _Arg:
     '''CLI command argument.
 
@@ -143,7 +146,8 @@ class Cliar:
         for arg_name, arg_data in self.root_command.args.items():
             self._register_arg(self._parser, arg_name, arg_data)
 
-    def _register_arg(self, command_parser: ArgumentParser, arg_name: str, arg_data: _Arg):
+    @staticmethod
+    def _register_arg(command_parser: ArgumentParser, arg_name: str, arg_data: _Arg):
         '''Register an arg in the specified argparser.
 
         :param command_parser: global argparser or a subparser corresponding to a CLI command

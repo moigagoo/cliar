@@ -9,6 +9,7 @@ install:
 script:
   - poetry run pytest --cov=cliar
   - poetry run codecov
+  - poetry run pylint cliar
 
 deploy:
   provider: script
