@@ -1,98 +1,9 @@
 ﻿from argparse import ArgumentParser, RawTextHelpFormatter
-from inspect import signature, getmembers, ismethod
-
+from inspect import signature, getmembers, ismethod, isclass
 from collections import OrderedDict
+from typing import List, Iterable, Callable
 
-from typing import Callable, List, Iterable, Dict
-
-
-def set_help(help_map: Dict[str, str]) -> Callable:
-    '''Set help messages for arguments.
-
-    :param help_map: mapping from handler param names to help messages
-    '''
-    def decorator(handler: Callable) -> Callable:
-        '''Decorator returning command handler with a help message map.'''
-        handler._help_map = help_map
-        return handler
-
-    return decorator
-
-
-def set_metavars(metavar_map: Dict[str, str]) -> Callable:
-    '''Override default metavars for arguments.
-
-    By default, metavars are generated from arg names: ``foo`` → ``FOO``, `--bar`` → ``BAR``.
-
-    :param metavar_map: mapping from handler param names to metavars
-    '''
-    def decorator(handler: Callable) -> Callable:
-        '''Decorator returning command handler with a custom metavar map.'''
-        handler._metavar_map = metavar_map
-        return handler
-
-    return decorator
-
-
-def set_arg_map(arg_map: Dict[str, str]) -> Callable:
-    '''Override mapping from handler params to commandline args.
-
-    Be default, param names are used as arg names, only with underscores replaced with dashes.
-
-    :param arg_map: mapping from handler param names to arg names
-    '''
-
-    def decorator(handler: Callable) -> Callable:
-        '''Decorator returning command handler with a custom arg map.'''
-
-        handler._arg_map = arg_map
-        return handler
-
-    return decorator
-
-
-def set_name(name: str) -> Callable:
-    '''Override the name of the CLI command. By default, commands are called the same
-    as their corresponding handlers.
-
-    :param name: new command name
-    '''
-
-    if name == '':
-        raise NameError('Command name cannot be empty')
-
-    def decorator(handler: Callable) -> Callable:
-        '''Decorator returning command handler with a custom command name.'''
-
-        handler._command_name = name
-        return handler
-
-    return decorator
-
-
-def add_aliases(aliases: List[str]) -> Callable:
-    '''Add command aliases.
-
-    :param aliases: list of aliases
-    '''
-
-    def decorator(handler: Callable) -> Callable:
-        '''Decorator returning command handler with a list of aliases set for its command.'''
-
-        handler._command_aliases = aliases
-        return handler
-
-    return decorator
-
-
-def ignore(handler: Callable) -> Callable:
-    '''Exclude a method from being converted into a command.
-
-    :param method: method to ignore
-    '''
-
-    handler._ignore = True
-    return handler
+from .utils import ignore
 
 
 class _Arg:
@@ -168,18 +79,16 @@ class _Command:
                     arg.type = type(arg.default)
 
             if arg.type == bool:
-                if arg.default is True:
-                    arg.action = 'store_false'
+                arg.action = 'store_true'
 
-                elif arg.default is False:
-                    arg.action = 'store_true'
-
-            elif arg.type in (list, tuple):
+            elif isclass(arg.type) and issubclass(arg.type, Iterable):
                 if arg.default:
                     arg.nargs = '*'
-
                 else:
                     arg.nargs = '+'
+
+                if arg.type.__args__:
+                    arg.type = arg.type.__args__[0]
 
             if not arg.action and param_name in self.metavar_map:
                 arg.metavar = self.metavar_map[param_name]
@@ -259,6 +168,7 @@ class Cliar:
         elif arg_data.nargs:
             command_parser.add_argument(
                 *arg_prefixed_names,
+                type=arg_data.type,
                 default=arg_data.default,
                 nargs=arg_data.nargs,
                 metavar=arg_data.metavar,
@@ -311,14 +221,6 @@ class Cliar:
 
         args = self._parser.parse_args()
 
-        root_args = {arg: vars(args)[arg] for arg in self.root_command.args}
-
-        inverse_root_arg_map = {arg: param for param, arg in self.root_command.arg_map.items()}
-
-        self.root_command.handler(
-            **{inverse_root_arg_map[arg]: value for arg, value in root_args.items()}
-        )
-
         if self._commands:
             command = self._commands.get(args.command)
 
@@ -332,13 +234,22 @@ class Cliar:
                 )
 
             else:
-                self._parser.print_help()
+                root_args = {arg: vars(args)[arg] for arg in self.root_command.args}
+
+                inverse_root_arg_map = {
+                    arg: param for param, arg in self.root_command.arg_map.items()
+                }
+
+                try:
+                    self.root_command.handler(
+                        **{inverse_root_arg_map[arg]: value for arg, value in root_args.items()}
+                    )
+
+                except NotImplementedError:
+                    self._parser.print_help()
 
 
     def _root(self):
-        '''The root command, which corresponds to the class itself.
+        '''The root command, which corresponds to the script being called without any command.'''
 
-        Use it to define global args.
-        '''
-
-        pass
+        raise NotImplementedError
