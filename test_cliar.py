@@ -8,6 +8,7 @@ def test_positional_args(capfd):
     run(f'python basicmath.py add {x} {y}', shell=True)
     assert int(capfd.readouterr().out) == x + y
 
+
 def test_optional_args(capfd):
     x, power = 12, 3
 
@@ -29,6 +30,7 @@ def test_no_args(capfd):
 
     run('python basicmath.py avg', shell=True)
     assert float(capfd.readouterr().out) == sum((1, 2, 3))/3
+
 
 def test_root_command(capfd):
     version = '0.1.0'
@@ -201,3 +203,9 @@ def test_set_name():
                 pass
 
     assert 'Command name cannot be empty' in str(excinfo.value)
+
+
+def test_str_arg(capfd):
+    message = 'Hello Cliar'
+    run(f'python basicmath.py echo "{message}"', shell=True)
+    assert capfd.readouterr().out.strip() == message

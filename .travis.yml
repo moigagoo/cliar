@@ -9,9 +9,10 @@ install:
 script:
   - poetry run pytest --cov=cliar
   - poetry run codecov
+  - poetry run pylint cliar
 
 deploy:
   provider: script
-  script: poetry publish --build --user="$PYPI_USERNAME" --password="$PYPI_PASSWORD"
+  script: poetry publish --build --username="$PYPI_USERNAME" --password="$PYPI_PASSWORD"
   on:
     tags: true
