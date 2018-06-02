@@ -208,4 +208,4 @@ def test_set_name():
 def test_str_arg(capfd):
     message = 'Hello Cliar'
     run(f'python basicmath.py echo {message}', shell=True)
-    assert capfd.readouterr().out.strip == message
+    assert capfd.readouterr().out.strip() == message
