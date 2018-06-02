@@ -19,6 +19,9 @@ class Math(Cliar):
     def pi(self):
         print(pi)
 
+    def echo(self, message: str):
+        print(message)
+
     @add_aliases(['sum', 'plus'])
     def summ(self, numbers: List[int]):
         print(sum(numbers))

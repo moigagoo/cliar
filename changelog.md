@@ -1,3 +1,7 @@
+# 1.2.1
+
+-   Fix critical bug that disallowed string params.
+
 # 1.2.0
 
 -   Boolean handler params are converted into `store_true` arguments. Before that, params with default value of `True` were much confusingly converted into `store_false` arguments.

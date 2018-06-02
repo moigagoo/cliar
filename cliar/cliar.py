@@ -1,7 +1,7 @@
 ﻿from argparse import ArgumentParser, RawTextHelpFormatter
 from inspect import signature, getmembers, ismethod, isclass
 from collections import OrderedDict
-from typing import List, Iterable, Callable
+from typing import List, Tuple, Iterable, Callable
 
 from .utils import ignore
 
@@ -84,7 +84,7 @@ class _Command:
             if arg.type == bool:
                 arg.action = 'store_true'
 
-            elif isclass(arg.type) and issubclass(arg.type, Iterable):
+            elif isclass(arg.type) and (issubclass(arg.type, List) or issubclass(arg.type, Tuple)):
                 if arg.default:
                     arg.nargs = '*'
                 else:
