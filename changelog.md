@@ -1,3 +1,7 @@
+# 1.2.2
+
+-   Make `_root` not an abstract method.
+
 # 1.2.1
 
 -   Fix critical bug that disallowed string params.
