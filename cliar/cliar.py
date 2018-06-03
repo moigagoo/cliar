@@ -244,16 +244,15 @@ class Cliar:
                     arg: param for param, arg in self.root_command.arg_map.items()
                 }
 
-                try:
-                    self.root_command.handler(
+                if self.root_command.handler(
                         **{inverse_root_arg_map[arg]: value for arg, value in root_args.items()}
-                    )
-
-                except NotImplementedError:
+                    ) == NotImplemented:
                     self._parser.print_help()
 
 
     def _root(self):
         '''The root command, which corresponds to the script being called without any command.'''
 
-        raise NotImplementedError
+        # pylint: disable=no-self-use
+
+        return NotImplemented
