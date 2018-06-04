@@ -12,7 +12,7 @@ Cliar is yet another Python package to create commandline interfaces. It focuses
 
 Cliar's mission is to let the programmer focus on the business logic instead of building an interface for it. At the same time, Cliar doesn't want to stand in the programmer's way, so it provides means to customize the generated CLI.
 
-# Installation
+## Installation
 
 ```shell
 pip install cliar
@@ -20,7 +20,7 @@ pip install cliar
 
 Cliar runs with Python 3.6+ on Windows, Linux, and Mac. There are no dependencies outside Python's standard library.
 
-# Basic Usage
+## Basic Usage
 
 Let's create a calculator app. Version 1.0.0 will implement only addition of two real numbers.
 
