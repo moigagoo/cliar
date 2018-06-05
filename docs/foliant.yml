@@ -1,7 +1,0 @@
-title: Cliar Docs
-
-preprocessors:
-  - includes
-
-chapters:
-  - index.md
