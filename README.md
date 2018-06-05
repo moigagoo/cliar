@@ -95,6 +95,6 @@ optional arguments:
 There are a few things to note in the code above:
 
 -   It's a regular Python class with a regular Python method. You don't need to learn any new syntax to use Cliar.
--   The `add` method was converted into `add` command, and its positional params were converted into positional commandline args.
+-   The `add` method is converted into `add` command, and its positional params are converted into positional commandline args.
 -   We don't convert `x` or `y` to `float` or handle any potential conversion errors in the `add` body. Instead, we treat `x` and `y` as if they were already guaranteed to be floats. That's because Cliar does the validation and conversion for us, using the information from `add`'s type hints. Note how invalid input doesn't even reach your code.
--   The `--help` and `-h` flags are added automatically and the help messages were generated from the docstrings.
+-   The `--help` and `-h` flags are added automatically and the help messages are generated from the docstrings.
