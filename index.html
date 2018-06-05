@@ -57,12 +57,14 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
     
+      <link rel="stylesheet" href="./stylesheets/extra.css">
+    
     
   </head>
   
     
     
-    <body dir="ltr" data-md-color-primary="pink" data-md-color-accent="pink">
+    <body dir="ltr" data-md-color-primary="rgba(0,-0,-0,-0.87)" data-md-color-accent="pink">
   
     <svg class="md-svg">
       <defs>
@@ -700,7 +702,7 @@
 </ul>
 <p>Cliar's mission is to let the programmer focus on the business logic instead of building an interface for it. At the same time, Cliar doesn't want to stand in the programmer's way, so it provides the means to customize the generated CLI.</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>pip install cliar
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>pip install cliar
 </pre></div>
 
 
@@ -708,55 +710,55 @@
 <h2 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h2>
 <p>Let's create a simple commandline calculator that can add two real numbers.</p>
 <p>Here's how you do it with Cliar:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">cliar</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">Cliar</span>
 
 
-<span class="k">class</span> <span class="nc">Calculator</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Calculator app.&#39;&#39;&#39;</span>
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Calculator</span><span style="color: #f8f8f2">(Cliar):</span>
+    <span style="color: #e6db74">&#39;&#39;&#39;Calculator app.&#39;&#39;&#39;</span>
 
-    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Add two real numbers.&#39;&#39;&#39;</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">add</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">x:</span> <span style="color: #f8f8f2">float,</span> <span style="color: #f8f8f2">y:</span> <span style="color: #f8f8f2">float):</span>
+        <span style="color: #e6db74">&#39;&#39;&#39;Add two real numbers.&#39;&#39;&#39;</span>
 
-        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;The sum of {x} and {y} is {x+y}.&#39;</span><span class="p">)</span>
+        <span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(f</span><span style="color: #e6db74">&#39;The sum of {x} and {y} is {x+y}.&#39;</span><span style="color: #f8f8f2">)</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">Calculator</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">__name__</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;__main__&#39;</span><span style="color: #f8f8f2">:</span>
+    <span style="color: #f8f8f2">Calculator()</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">parse()</span>
 </pre></div>
 
 
 <p>Save this code as <code>calc.py</code> and try running it with different inputs.</p>
 <p>Valid input:</p>
-<div class="codehilite"><pre><span></span>$ python run calc.py add <span class="m">12</span> <span class="m">34</span>
-The sum of <span class="m">12</span>.0 and <span class="m">34</span>.0 is <span class="m">46</span>.0.
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>$ python run calc.py add <span style="color: #ae81ff">12</span> <span style="color: #ae81ff">34</span>
+The sum of <span style="color: #ae81ff">12</span>.0 and <span style="color: #ae81ff">34</span>.0 is <span style="color: #ae81ff">46</span>.0.
 </pre></div>
 
 
 <p>Invalid input:</p>
-<div class="codehilite"><pre><span></span>$ python run calc.py foo bar
-usage: calc.py add <span class="o">[</span>-h<span class="o">]</span> x y
-calc.py add: error: argument x: invalid float value: <span class="s1">&#39;foo&#39;</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>$ python run calc.py foo bar
+usage: calc.py add <span style="color: #f92672">[</span>-h<span style="color: #f92672">]</span> x y
+calc.py add: error: argument x: invalid float value: <span style="color: #e6db74">&#39;foo&#39;</span>
 </pre></div>
 
 
 <p>Getting help:</p>
-<div class="codehilite"><pre><span></span>$ python run calc.py -h
-usage: calc.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">{</span>add<span class="o">}</span> ...
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>$ python run calc.py -h
+usage: calc.py <span style="color: #f92672">[</span>-h<span style="color: #f92672">]</span> <span style="color: #f92672">{</span>add<span style="color: #f92672">}</span> ...
 
 Calculator app.
 
 optional arguments:
-  -h, --help  show this <span class="nb">help</span> message and <span class="nb">exit</span>
+  -h, --help  show this <span style="color: #f8f8f2">help</span> message and <span style="color: #f8f8f2">exit</span>
 
 commands:
-  <span class="o">{</span>add<span class="o">}</span>       Available commands:
+  <span style="color: #f92672">{</span>add<span style="color: #f92672">}</span>       Available commands:
     add       Add two real numbers.
 </pre></div>
 
 
 <p>Getting help for a specific command:</p>
-<div class="codehilite"><pre><span></span>$ python calc.py add -h
-usage: calc.py add <span class="o">[</span>-h<span class="o">]</span> x y
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>$ python calc.py add -h
+usage: calc.py add <span style="color: #f92672">[</span>-h<span style="color: #f92672">]</span> x y
 
 Add two real numbers.
 
@@ -765,7 +767,7 @@ positional arguments:
   y
 
 optional arguments:
-  -h, --help  show this <span class="nb">help</span> message and <span class="nb">exit</span>
+  -h, --help  show this <span style="color: #f8f8f2">help</span> message and <span style="color: #f8f8f2">exit</span>
 </pre></div>
 
 
