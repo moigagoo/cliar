@@ -1,0 +1,14 @@
+title: Cliar Docs
+slug: cliar-docs
+
+preprocessors:
+  - includes:
+      aliases:
+        cliar: https://github.com/moigagoo/cliar.git
+
+chapters:
+  - index.md
+
+backend_config:
+  mkdocs:
+    mkdocs.yml: !include mkdocs.yml

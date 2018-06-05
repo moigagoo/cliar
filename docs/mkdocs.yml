@@ -1,0 +1,21 @@
+repo_name: moigagoo/cliar
+repo_url: https://github.com/moigagoo/cliar
+edit_uri: edit/develop/docs/src/
+theme:
+  name: material
+  palette:
+    primary: grey
+    accent: light blue
+  font:
+    text: PT Sans
+    code: PT Mono
+  logo:
+    icon: computer
+extra:
+  social:
+    - type: github
+      link: https://github.com/moigagoo/cliar
+markdown_extensions:
+  - codehilite
+  - toc:
+      permalink: true
