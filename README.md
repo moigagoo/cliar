@@ -6,11 +6,11 @@
 
 Cliar is yet another Python package to create commandline interfaces. It focuses on simplicity, extensibility, and testability:
 
--   Creating a CLI is as simple as creating subclassing `cliar.Cliar`.
--   Extending a CLI is as simple as subclassing from the base CLI class.
--   Testing a CLI is as simple as unittesting a class.
+-   Creating a CLI is as simple as subclassing `cliar.Cliar`.
+-   Extending a CLI is as simple as extending a class via inheritance.
+-   Testing a CLI is as simple as unittesting a class methods.
 
-Cliar's mission is to let the programmer focus on the business logic instead of building an interface for it. At the same time, Cliar doesn't want to stand in the programmer's way, so it provides means to customize the generated CLI.
+Cliar's mission is to let the programmer focus on the business logic instead of building an interface for it. At the same time, Cliar doesn't want to stand in the programmer's way, so it provides the means to customize the generated CLI.
 
 ## Installation
 
@@ -18,11 +18,11 @@ Cliar's mission is to let the programmer focus on the business logic instead of 
 pip install cliar
 ```
 
-Cliar runs with Python 3.6+ on Windows, Linux, and Mac. There are no dependencies outside Python's standard library.
+Cliar runs on Python 3.6+ on Windows, Linux, and Mac. There are no dependencies outside Python's standard library.
 
 ## Basic Usage
 
-Let's create a calculator app. Version 1.0.0 will implement only addition of two real numbers.
+Let's create a simple commandline calculator that can add two real numbers.
 
 Here's how you do it with Cliar:
 
@@ -43,16 +43,26 @@ if __name__ == '__main__':
     Calculator().parse()
 ```
 
-Save this code as `calc.py` and run it with different inputs:
+Save this code as `calc.py` and try running it with different inputs.
+
+Valid input:
 
 ```shell
 $ python run calc.py add 12 34
 The sum of 12.0 and 34.0 is 46.0.
+```
 
+Invalid input:
+
+```shell
 $ python run calc.py foo bar
 usage: calc.py add [-h] x y
 calc.py add: error: argument x: invalid float value: 'foo'
+```
 
+Getting help:
+
+```shell
 $ python run calc.py -h
 usage: calc.py [-h] {add} ...
 
@@ -64,7 +74,11 @@ optional arguments:
 commands:
   {add}       Available commands:
     add       Add two real numbers.
+```
 
+Getting help for a specific command:
+
+```shell
 $ python calc.py add -h
 usage: calc.py add [-h] x y
 
