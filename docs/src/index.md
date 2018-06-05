@@ -1,6 +1,6 @@
 <include>$cliar$README.md</include>
 
->   Logo made by [Roundicons](https://www.flaticon.com/authors/roundicons) from www.flaticon.com.
+>   Logo made by [Eucalyp](https://www.flaticon.com/authors/eucalyp) from www.flaticon.com.
 
 ## Changelog
 
