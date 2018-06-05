@@ -208,6 +208,18 @@ platform = "*"
 coverage = ">=3.7.1"
 pytest = ">=2.6.0"
 [[package]]
+name = "pytest-datadir"
+version = "1.0.1"
+description = "pytest plugin for test data directories and files"
+category = "dev"
+optional = false
+python-versions = "*"
+platform = "*"
+
+[package.dependencies]
+pytest = ">=2.7.0"
+pathlib = "*"
+[[package]]
 name = "requests"
 version = "2.18.4"
 description = "Python HTTP for Humans."
@@ -260,7 +272,7 @@ platform = "*"
 [metadata]
 python-versions = "^3.6"
 platform = "*"
-content-hash = "7ce2c03447eb45ba59dcdf80124b6e5462a7d84d881a638ce132cfb1662b1f2d"
+content-hash = "523ec577d845a8cb3ea985f5d255ebed924269e3b0eeda7fb6cef8fc3ba00b6c"
 
 [metadata.hashes]
 astroid = [ "032f6e09161e96f417ea7fad46d3fac7a9019c775f202182c22df0e4f714cb1c", "dea42ae6e0b789b543f728ddae7ddb6740ba33a49fb52c4a4d9cb7bb4aa6ec09",]
@@ -282,6 +294,7 @@ pygments = [ "78f3f434bcc5d6ee09020f92ba487f95ba50f1e3ef83ae96b9d5ffa1bab25c5d",
 pylint = [ "aa519865f8890a5905fa34924fed0f3bfc7d84fc9f9142c16dac52ffecd25a39", "c353d8225195b37cc3aef18248b8f3fe94c5a6a95affaf885ae21a24ca31d8eb",]
 pytest = [ "c76e93f3145a44812955e8d46cdd302d8a45fbfc7bf22be24fe231f9d8d8853a", "39555d023af3200d004d09e51b4dd9fdd828baa863cded3fd6ba2f29f757ae2d",]
 pytest-cov = [ "890fe5565400902b0c78b5357004aab1c814115894f4f21370e2433256a3eeec", "03aa752cf11db41d281ea1d807d954c4eda35cfa1b21d6971966cc041bbf6e2d",]
+pytest-datadir = [ "68226fbb6780366950a9409bb705cd4d05b11bff07a4569d4cc589c69c259def", "3e5d1892c68d0dfb6863e87d6a1f683e67be60802fee798a3ccae5dbda1ab378",]
 requests = [ "6a1b267aa90cac58ac3a765d067950e7dbbf75b1da07e895d1f594193a40a38b", "9c443e7324ba5b85070c4a818ade28bfabedf16ea10206da1132edaa6dda237e",]
 rope = [ "a09edfd2034fd50099a67822f9bd851fbd0f4e98d3b87519f6267b60e50d80d1",]
 six = [ "832dc0e10feb1aa2c68dcc57dbb658f1c7e65b9b61af69048abc87a2db00a0eb", "70e8a77beed4562e7f14fe23a786b54f6296e34344c23bc42f07b15018ff98e9",]
