@@ -4,7 +4,7 @@ edit_uri: edit/develop/docs/src/
 theme:
   name: material
   palette:
-    primary: pink
+    primary: 'rgba(0, 0, 0, 0.87)'
     accent: pink
   font:
     text: PT Sans
@@ -16,6 +16,12 @@ extra:
     - type: github
       link: https://github.com/moigagoo/cliar
 markdown_extensions:
-  - codehilite
+  - codehilite:
+      guess_lang: false
+      use_pygments: true
+      noclasses: true
+      pygments_style: monokai
   - toc:
       permalink: true
+extra_css:
+  - 'stylesheets/extra.css'
