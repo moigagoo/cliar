@@ -4,13 +4,13 @@ edit_uri: edit/develop/docs/src/
 theme:
   name: material
   palette:
-    primary: grey
-    accent: light blue
+    primary: pink
+    accent: pink
   font:
     text: PT Sans
     code: PT Mono
-  logo:
-    icon: computer
+  logo: assets/spray.svg
+  favicon: assets/spray.ico
 extra:
   social:
     - type: github
