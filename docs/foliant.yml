@@ -8,6 +8,8 @@ preprocessors:
 
 chapters:
   - index.md
+  - learn.md
+  - changelog.md
 
 backend_config:
   mkdocs:

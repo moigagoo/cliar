@@ -4,24 +4,18 @@ edit_uri: edit/develop/docs/src/
 theme:
   name: material
   palette:
-    primary: 'rgba(0, 0, 0, 0.87)'
+    primary: pink
     accent: pink
   font:
     text: PT Sans
     code: PT Mono
-  logo: assets/spray.svg
-  favicon: assets/spray.ico
+  logo: assets/window-cleaner.svg
+  favicon: assets/window-cleaner.ico
 extra:
   social:
     - type: github
       link: https://github.com/moigagoo/cliar
 markdown_extensions:
-  - codehilite:
-      guess_lang: false
-      use_pygments: true
-      noclasses: true
-      pygments_style: monokai
+  - codehilite
   - toc:
       permalink: true
-extra_css:
-  - 'stylesheets/extra.css'
