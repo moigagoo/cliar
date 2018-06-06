@@ -1,3 +1,4 @@
 # Changelog
 
-<include sethead="2">$cliar$changelog.md</include>
+<include sethead="2">../../changelog.md</include>
+
