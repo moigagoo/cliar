@@ -4,8 +4,8 @@ edit_uri: edit/develop/docs/src/
 theme:
   name: material
   palette:
-    primary: pink
-    accent: pink
+    primary: red
+    accent: red
   font:
     text: PT Sans
     code: PT Mono
