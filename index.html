@@ -276,6 +276,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#but-wait-theres-more" title="But wait! There's more!" class="md-nav__link">
+    But wait! There's more!
+  </a>
+  
+</li>
+      
       
       
       
@@ -293,8 +300,8 @@
 
 
   <li class="md-nav__item">
-    <a href="learn/" title="Learn Cliar" class="md-nav__link">
-      Learn Cliar
+    <a href="tutorial/" title="Tutorial" class="md-nav__link">
+      Tutorial
     </a>
   </li>
 
@@ -345,6 +352,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#but-wait-theres-more" title="But wait! There's more!" class="md-nav__link">
+    But wait! There's more!
+  </a>
+  
+</li>
+      
       
       
       
@@ -382,8 +396,7 @@
 
 <p>Cliar runs on Python 3.6+ on Windows, Linux, and Mac. There are no dependencies outside Python's standard library.</p>
 <h2 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h2>
-<p>Let's create a simple commandline calculator that can add two real numbers.</p>
-<p>Here's how you do it with Cliar:</p>
+<p>Let's create a commandline calculator that adds two real numbers with Cliar:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span>
 
 
@@ -401,13 +414,17 @@
 </pre></div>
 
 
-<p>Save this code as <code>calc.py</code> and try running it with different inputs.</p>
+<p>Save this code to <code>calc.py</code> and run it with different inputs:</p>
+<ul>
+<li>
 <p>Valid input:</p>
 <div class="codehilite"><pre><span></span>$ python run calc.py add <span class="m">12</span> <span class="m">34</span>
 The sum of <span class="m">12</span>.0 and <span class="m">34</span>.0 is <span class="m">46</span>.0.
 </pre></div>
 
 
+</li>
+<li>
 <p>Invalid input:</p>
 <div class="codehilite"><pre><span></span>$ python run calc.py foo bar
 usage: calc.py add <span class="o">[</span>-h<span class="o">]</span> x y
@@ -415,43 +432,60 @@ calc.py add: error: argument x: invalid float value: <span class="s1">&#39;foo&#
 </pre></div>
 
 
-<p>Getting help:</p>
+</li>
+<li>
+<p>Get help:</p>
 <div class="codehilite"><pre><span></span>$ python run calc.py -h
 usage: calc.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">{</span>add<span class="o">}</span> ...
 
 Calculator app.
 
 optional arguments:
-  -h, --help  show this <span class="nb">help</span> message and <span class="nb">exit</span>
+-h, --help  show this <span class="nb">help</span> message and <span class="nb">exit</span>
 
 commands:
-  <span class="o">{</span>add<span class="o">}</span>       Available commands:
+<span class="o">{</span>add<span class="o">}</span>       Available commands:
     add       Add two real numbers.
 </pre></div>
 
 
-<p>Getting help for a specific command:</p>
+</li>
+<li>
+<p>Get help for a specific command:</p>
 <div class="codehilite"><pre><span></span>$ python calc.py add -h
 usage: calc.py add <span class="o">[</span>-h<span class="o">]</span> x y
 
 Add two real numbers.
 
 positional arguments:
-  x
-  y
+x
+y
 
 optional arguments:
-  -h, --help  show this <span class="nb">help</span> message and <span class="nb">exit</span>
+-h, --help  show this <span class="nb">help</span> message and <span class="nb">exit</span>
 </pre></div>
 
 
-<p>There are a few things to note in the code above:</p>
-<ul>
-<li>It's a regular Python class with a regular Python method. You don't need to learn any new syntax to use Cliar.</li>
-<li>The <code>add</code> method is converted into <code>add</code> command, and its positional params are converted into positional commandline args.</li>
-<li>We don't convert <code>x</code> or <code>y</code> to <code>float</code> or handle any potential conversion errors in the <code>add</code> body. Instead, we treat <code>x</code> and <code>y</code> as if they were already guaranteed to be floats. That's because Cliar does the validation and conversion for us, using the information from <code>add</code>'s type hints. Note how invalid input doesn't even reach your code.</li>
-<li>The <code>--help</code> and <code>-h</code> flags are added automatically and the help messages are generated from the docstrings.</li>
+</li>
 </ul>
+<p>There are a few things to note here:</p>
+<ul>
+<li>
+<p>It's a regular Python class with a regular Python method. You don't need to learn any new syntax to use Cliar.</p>
+</li>
+<li>
+<p>The <code>add</code> method is converted into <code>add</code> command, and its positional params are converted into positional commandline args.</p>
+</li>
+<li>
+<p>We don't convert <code>x</code> or <code>y</code> to <code>float</code> or handle any potential conversion errors in the <code>add</code> body. Instead, we treat <code>x</code> and <code>y</code> as if they were already guaranteed to be floats. That's because Cliar does the validation and conversion for us, using the information from <code>add</code>'s type hints. Note how invalid input doesn't even reach your code.</p>
+</li>
+<li>
+<p>The <code>--help</code> and <code>-h</code> flags are added automatically and the help messages are generated from the docstrings.</p>
+</li>
+</ul>
+<h2 id="but-wait-theres-more">But wait! There's more!<a class="headerlink" href="#but-wait-theres-more" title="Permanent link">&para;</a></h2>
+<p>Cliar lets you customize your CLI in many ways! <a href="https://moigagoo.github.io/cliar/tutorial/">Read the tutorial</a> to learn all Cliar's powers.</p>
+<p>Happy hacking!</p>
 <blockquote>
 <p>Icons made by <a href="https://www.flaticon.com/authors/those-icons">Those Icons</a> from <a href="https://www.flaticon.com/">Flaticon</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons BY 3.0</a></p>
 </blockquote>
@@ -476,13 +510,13 @@ optional arguments:
       <nav class="md-footer-nav__inner md-grid">
         
         
-          <a href="learn/" title="Learn Cliar" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="tutorial/" title="Tutorial" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Learn Cliar
+                Tutorial
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
