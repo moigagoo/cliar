@@ -8,7 +8,7 @@ preprocessors:
 
 chapters:
   - index.md
-  - learn.md
+  - tutorial.md
   - changelog.md
 
 backend_config:
