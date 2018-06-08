@@ -23,4 +23,8 @@ markdown_extensions:
   - toc:
       permalink: true
 
-copyright: '<p>Created by <a href="https://github.com/moigagoo/">Konstantin Molchanov</a> using <a href="https://foliant-docs.github.io/docs/">Foliant</a>.</p><p>Icons made by <a href="https://www.flaticon.com/authors/those-icons">Those Icons</a> from <a href="https://www.flaticon.com">Flaticon</a>.</p>'
+copyright: >
+  <p>Created by <a href="https://github.com/moigagoo/">Konstantin Molchanov</a>
+  using <a href="https://foliant-docs.github.io/docs/">Foliant</a>.</p>
+  <p>Icons made by <a href="https://www.flaticon.com/authors/those-icons">Those Icons</a>
+  from <a href="https://www.flaticon.com">Flaticon</a>.</p>
