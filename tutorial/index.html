@@ -256,9 +256,38 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Tutorial
+      </label>
+    
     <a href="./" title="Tutorial" class="md-nav__link md-nav__link--active">
       Tutorial
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#greeter-app" title="Greeter App" class="md-nav__link">
+    Greeter App
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -292,6 +321,22 @@
     
   
   
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#greeter-app" title="Greeter App" class="md-nav__link">
+    Greeter App
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -306,7 +351,76 @@
                 
                 
                 <h1 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h1>
-<p>In this tutorial, we'll extend the simple calculator app we created in <a href="..#basic-usage">Basic Usage</a> with optional arguments, more commands, argument annotations. We'll also look at how Cliar lets you customize your CLI by simply decorating methods. Finally, we'll learn how to test CLIs written with Cliar.</p>
+<h2 id="greeter-app">Greeter App<a class="headerlink" href="#greeter-app" title="Permanent link">&para;</a></h2>
+<p>In Cliar, commandline interface, or CLI, is represented with a Python class subclassed from <code>cliar.Cliar</code>. Cliar turns the class methods into commands and their params into args.</p>
+<p>Let's create the simplest CLI that says "Hello World!" when you call "hello" command:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span>
+
+
+<span class="k">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>           <span class="c1"># Define a regular Python class</span>
+    <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>            <span class="c1"># and a regular method,</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>   <span class="c1"># which implements the business logic.</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">greeter</span> <span class="o">=</span> <span class="n">Greeter</span><span class="p">()</span>         <span class="c1"># Create an instance of the class</span>
+    <span class="n">greeter</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>             <span class="c1"># and run its `parse` method.</span>
+</pre></div>
+
+
+<p>Save this code into <code>greeter.py</code> and run it with Python:</p>
+<div class="codehilite"><pre><span></span>$ python greeter.py hello
+Hello World!
+</pre></div>
+
+
+<p>And here it is: your first CLI created with Cliar! That was easy, wasn't it?</p>
+<p>Let's extend <code>hello</code> method to shout the greeting if <code>--shout</code> flag is passed:</p>
+<div class="codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="n">greeting</span> <span class="o">=</span> <span class="s1">&#39;Hello World!&#39;</span>
+
+        <span class="k">if</span> <span class="n">shout</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">greeting</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Try running <code>greeter.py</code> with and without the newly defined flag:</p>
+<div class="codehilite"><pre><span></span>$ python greeter.py hello --shout
+HELLO WORLD!
+$ python greeter.py hello -s    <span class="c1"># Short version works, too!</span>
+HELLO WORLD!
+$ python greeter.py hello
+Hello World!
+</pre></div>
+
+
+<p>Cliar did a few things for us here:</p>
+<ul>
+<li><code>shout</code> is an optional param, so it was converted into an optional flag</li>
+<li>since <code>shout</code> default value is <code>False</code>, Cliar inferred its type as <code>bool</code>, so we can use it as such inside <code>hello</code> body</li>
+<li>not only was <code>--shout</code> flag generated from the eponymous <code>shout</code> param, but a short version <code>-s</code> was also generated</li>
+</ul>
+<p>Ok, but what if we want our app to be able to greet anyone, not just the world? Just add a positional param to <code>hello</code>:</p>
+<div class="codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="n">greeting</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;Hello {name}!&#39;</span>
+
+        <span class="k">if</span> <span class="n">shout</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">greeting</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Try it:</p>
+<div class="codehilite"><pre><span></span>$ python greeter.py hello John
+Hello John!
+$ python greeter.py hello John --shout
+HELLO JOHN!
+$ python greeter.py hello -s John
+HELLO JOHN!
+</pre></div>
                 
                   
                 
