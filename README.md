@@ -15,7 +15,7 @@ Cliar's mission is to let the programmer focus on the business logic instead of 
 ## Installation
 
 ```shell
-pip install cliar
+$ pip install cliar
 ```
 
 Cliar runs on Python 3.6+ on Windows, Linux, and Mac. There are no dependencies outside Python's standard library.
@@ -24,20 +24,22 @@ Cliar runs on Python 3.6+ on Windows, Linux, and Mac. There are no dependencies 
 
 Let's create a commandline calculator that adds two real numbers with Cliar:
 
-    from cliar import Cliar
+```python
+from cliar import Cliar
 
 
-    class Calculator(Cliar):
-        '''Calculator app.'''
+class Calculator(Cliar):
+'''Calculator app.'''
 
-        def add(self, x: float, y: float):
-            '''Add two real numbers.'''
+def add(self, x: float, y: float):
+        '''Add two real numbers.'''
 
-            print(f'The sum of {x} and {y} is {x+y}.')
+        print(f'The sum of {x} and {y} is {x+y}.')
 
 
-    if __name__ == '__main__':
-        Calculator().parse()
+if __name__ == '__main__':
+Calculator().parse()
+```
 
 Save this code to `calc.py` and run it with different inputs:
 

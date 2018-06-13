@@ -11,6 +11,7 @@ def set_help(help_map: Dict[str, str]) -> Callable:
     '''
     def decorator(handler: Callable) -> Callable:
         '''Decorator returning command handler with a help message map.'''
+
         handler._help_map = help_map
         return handler
 
@@ -26,6 +27,7 @@ def set_metavars(metavar_map: Dict[str, str]) -> Callable:
     '''
     def decorator(handler: Callable) -> Callable:
         '''Decorator returning command handler with a custom metavar map.'''
+
         handler._metavar_map = metavar_map
         return handler
 
