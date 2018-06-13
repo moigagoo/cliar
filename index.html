@@ -270,6 +270,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#comparison-of-python-cli-packages" title="Comparison of Python CLI Packages" class="md-nav__link">
+    Comparison of Python CLI Packages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#basic-usage" title="Basic Usage" class="md-nav__link">
     Basic Usage
   </a>
@@ -346,6 +353,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#comparison-of-python-cli-packages" title="Comparison of Python CLI Packages" class="md-nav__link">
+    Comparison of Python CLI Packages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#basic-usage" title="Basic Usage" class="md-nav__link">
     Basic Usage
   </a>
@@ -395,6 +409,53 @@
 
 
 <p>Cliar runs on Python 3.6+ on Windows, Linux, and Mac. There are no dependencies outside Python's standard library.</p>
+<h2 id="comparison-of-python-cli-packages">Comparison of Python CLI Packages<a class="headerlink" href="#comparison-of-python-cli-packages" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>DSL-based</th>
+<th>Uses type hints</th>
+<th>Extensible</th>
+<th>Testable with unit tests</th>
+<th>Has pun in name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Click</td>
+<td>❌</td>
+<td>❌</td>
+<td>✔, in third-party modules</td>
+<td>✔</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>docopt</td>
+<td>✔</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>argparse</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Cliar</td>
+<td>❌</td>
+<td>✔</td>
+<td>✔, in third-party modules <em>and</em> with third-party modules</td>
+<td>✔</td>
+<td>✔</td>
+</tr>
+</tbody>
+</table>
 <h2 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h2>
 <p>Let's create a commandline calculator that adds two real numbers with Cliar:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span>
