@@ -26,10 +26,10 @@ Cliar runs on Python 3.6+ on Windows, Linux, and Mac. There are no dependencies 
 
 Name | DSL-based | Uses type hints | Extensible | Testable with unit tests | Has pun in name
 ---- | --------- | --------------- | ---------- | ------------------------ | ---------------
-Click | ❌ | ❌ | ✔, in third-party modules | ✔ | ✔
-docopt | ✔  | ❌ | ❌ | ❌ | ❌
-argparse | ❌ | ❌ | ❌ | ❌ | ❌
-Cliar | ❌ | ✔ | ✔, in third-party modules *and* with third-party modules | ✔ | ✔
+[Click](http://click.pocoo.org/) | ❌ | ❌ | ✔, in third-party modules | ✔ | ✔
+[docopt](http://docopt.org/) | ✔  | ❌ | ❌ | ❌ | ❌
+[argparse](https://docs.python.org/3/library/argparse.html) | ❌ | ❌ | ❌ | ❌ | ❌
+[Cliar](https://moigagoo.github.io/cliar/) | ❌ | ✔ | ✔, in third-party modules *and* with third-party modules | ✔ | ✔
 
 
 ## Basic Usage
@@ -44,13 +44,13 @@ class Calculator(Cliar):
 '''Calculator app.'''
 
 def add(self, x: float, y: float):
-        '''Add two real numbers.'''
+    '''Add two real numbers.'''
 
-        print(f'The sum of {x} and {y} is {x+y}.')
+    print(f'The sum of {x} and {y} is {x+y}.')
 
 
 if __name__ == '__main__':
-Calculator().parse()
+    Calculator().parse()
 ```
 
 Save this code to `calc.py` and run it with different inputs:
