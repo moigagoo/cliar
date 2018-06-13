@@ -2,9 +2,9 @@
 
 ## Hello World
 
-In Cliar, commandline interface is represented with a Python class subclassed from `Cliar`. Cliar turns the class methods into commands and their params into args.
+In Cliar, commandline interfaces are represented by Python classes subclassed from `Cliar`. Cliar turns the class methods into commands and their params into args.
 
-Let's create the simplest CLI that says "Hello World!" when you call "hello" command:
+Let's create a simple CLI that says "Hello World!" when you call `hello` command:
 
 ```python
 from cliar import Cliar
@@ -29,7 +29,7 @@ Hello World!
 
 And here it is: your first CLI created with Cliar! That was easy, wasn't it?
 
-Let's extend `hello` method to shout the greeting if `--shout` flag is passed:
+Let's enhance `hello` method to shout the greeting loud if `--shout` flag is passed:
 
 ```python
     def hello(self, shout=False):
