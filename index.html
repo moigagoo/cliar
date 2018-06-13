@@ -390,7 +390,7 @@
 </ul>
 <p>Cliar's mission is to let the programmer focus on the business logic instead of building an interface for it. At the same time, Cliar doesn't want to stand in the programmer's way, so it provides the means to customize the generated CLI.</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>pip install cliar
+<div class="codehilite"><pre><span></span>$ pip install cliar
 </pre></div>
 
 
@@ -401,16 +401,16 @@
 
 
 <span class="k">class</span> <span class="nc">Calculator</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Calculator app.&#39;&#39;&#39;</span>
+<span class="sd">&#39;&#39;&#39;Calculator app.&#39;&#39;&#39;</span>
 
-    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Add two real numbers.&#39;&#39;&#39;</span>
 
         <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;The sum of {x} and {y} is {x+y}.&#39;</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">Calculator</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+<span class="n">Calculator</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
 </pre></div>
 
 
