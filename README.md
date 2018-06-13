@@ -43,10 +43,10 @@ from cliar import Cliar
 class Calculator(Cliar):
 '''Calculator app.'''
 
-def add(self, x: float, y: float):
+    def add(self, x: float, y: float):
     '''Add two real numbers.'''
 
-    print(f'The sum of {x} and {y} is {x+y}.')
+        print(f'The sum of {x} and {y} is {x+y}.')
 
 
 if __name__ == '__main__':
