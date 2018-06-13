@@ -12,6 +12,7 @@ Cliar is yet another Python package to create commandline interfaces. It focuses
 
 Cliar's mission is to let the programmer focus on the business logic instead of building an interface for it. At the same time, Cliar doesn't want to stand in the programmer's way, so it provides the means to customize the generated CLI.
 
+
 ## Installation
 
 ```shell
@@ -19,6 +20,17 @@ $ pip install cliar
 ```
 
 Cliar runs on Python 3.6+ on Windows, Linux, and Mac. There are no dependencies outside Python's standard library.
+
+
+## Comparison of Python CLI Packages
+
+Name | DSL-based | Uses type hints | Extensible | Testable with unit tests | Has pun in name
+---- | --------- | --------------- | ---------- | ------------------------ | ---------------
+Click | ❌ | ❌ | ✔, in third-party modules | ✔ | ✔
+docopt | ✔  | ❌ | ❌ | ❌ | ❌
+argparse | ❌ | ❌ | ❌ | ❌ | ❌
+Cliar | ❌ | ✔ | ✔, in third-party modules *and* with third-party modules | ✔ | ✔
+
 
 ## Basic Usage
 
@@ -91,6 +103,7 @@ There are a few things to note here:
 -   We don't convert `x` or `y` to `float` or handle any potential conversion errors in the `add` body. Instead, we treat `x` and `y` as if they were already guaranteed to be floats. That's because Cliar does the validation and conversion for us, using the information from `add`'s type hints. Note how invalid input doesn't even reach your code.
 
 -   The `--help` and `-h` flags are added automatically and the help messages are generated from the docstrings.
+
 
 ## But wait! There's more!
 
