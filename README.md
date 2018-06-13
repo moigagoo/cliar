@@ -24,12 +24,12 @@ Cliar runs on Python 3.6+ on Windows, Linux, and Mac. There are no dependencies 
 
 ## Comparison of Python CLI Packages
 
-Name | DSL-based | Uses type hints | Extensible | Testable with unit tests | Has pun in name
----- | --------- | --------------- | ---------- | ------------------------ | ---------------
-[Click](http://click.pocoo.org/) | ❌ | ❌ | ✔, in third-party modules | ✔ | ✔
+Name | DSL-based | Casts arg types | Extensible | Testable without shell exec | Has pun in name
+---- | --------- | --------------- | ---------- | --------------------------- | ---------------
+[Click](http://click.pocoo.org/) | ❌ | ❌ | ✔, in third-party modules | ❌ | ✔
 [docopt](http://docopt.org/) | ✔  | ❌ | ❌ | ❌ | ❌
 [argparse](https://docs.python.org/3/library/argparse.html) | ❌ | ❌ | ❌ | ❌ | ❌
-[Cliar](https://moigagoo.github.io/cliar/) | ❌ | ✔ | ✔, in third-party modules *and* with third-party modules | ✔ | ✔
+[Cliar](https://moigagoo.github.io/cliar/) | ❌ | ✔ | ✔, *in* third-party modules and *with* third-party modules | ✔ | ✔
 
 
 ## Basic Usage
