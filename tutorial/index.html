@@ -408,8 +408,8 @@
                 
                 <h1 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h1>
 <h2 id="hello-world">Hello World<a class="headerlink" href="#hello-world" title="Permanent link">&para;</a></h2>
-<p>In Cliar, commandline interface is represented with a Python class subclassed from <code>Cliar</code>. Cliar turns the class methods into commands and their params into args.</p>
-<p>Let's create the simplest CLI that says "Hello World!" when you call "hello" command:</p>
+<p>In Cliar, commandline interfaces are represented by Python classes subclassed from <code>Cliar</code>. Cliar turns the class methods into commands and their params into args.</p>
+<p>Let's create a simple CLI that says "Hello World!" when you call <code>hello</code> command:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span>
 
 
@@ -431,7 +431,7 @@ Hello World!
 
 
 <p>And here it is: your first CLI created with Cliar! That was easy, wasn't it?</p>
-<p>Let's extend <code>hello</code> method to shout the greeting if <code>--shout</code> flag is passed:</p>
+<p>Let's enhance <code>hello</code> method to shout the greeting loud if <code>--shout</code> flag is passed:</p>
 <div class="codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="n">greeting</span> <span class="o">=</span> <span class="s1">&#39;Hello World!&#39;</span>
 
