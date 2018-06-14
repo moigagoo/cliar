@@ -46,8 +46,10 @@ Try running `greeter.py` with and without the newly defined flag:
 ```shell
 $ python greeter.py hello --shout
 HELLO WORLD!
+
 $ python greeter.py hello -s    # Short version works, too!
 HELLO WORLD!
+
 $ python greeter.py hello
 Hello World!
 ```
@@ -78,10 +80,13 @@ Try it:
 ```shell
 $ python greeter.py hello John
 Hello John!
+
 $ python greeter.py hello John --shout
 HELLO JOHN!
+
 $ python greeter.py hello -s John
 HELLO JOHN!
+
 $ python greeter.py hello
 usage: greeter.py hello [-h] [-s] name
 greeter.py hello: error: the following arguments are required: name
@@ -258,3 +263,107 @@ optional arguments:
   -h, --help   show this help message and exit
   -s, --shout  Set to shout the greeting
 ```
+
+
+## Type Casting
+
+Cliar can cast the types of args on the fly. To enable type casting, add a type hint to the param or set a default value for it.
+
+To showcase this feature, let's add a flag `-n` that will tell how many times we want the greeting to appear on the screen:
+
+```python
+    @set_metavars({'name': 'NAME'})
+    @set_help({'name': 'The greetee', 'shout': 'Set to shout the greeting'})
+    def hello(self, name, n=1, shout=False):
+        '''Say hello.'''
+
+        greeting = f'Hello {name}!'
+
+        for _ in range(n):  # Cliar guarantees `n` is an integer
+            if shout:
+                print(greeting.upper())
+            else:
+                print(greeting)
+```
+
+Note that inside `hello` code, we never convert `n` to integer or wrap anything in `try` blocks. Cliar cares about all that, allowing the programmer to focus on the business logic.
+
+Let's call `hello` with the new flag:
+
+```shell
+$ python greeter.py hello John -n 2
+Hello John!
+Hello John!
+```
+
+Let's see what happens if we pass a non-integer value to `-n`:
+
+```shell
+$ python greeter.py hello John -n foo
+usage: greeter.py hello [-h] [-n N] [-s] NAME
+greeter.py hello: error: argument -n/--n: invalid int value: 'foo'
+```
+
+Because the passed value is invalid, Cliar stopped the execution before it even reached `hello`. This behavior guarantees that your code is always executed with valid input.
+
+!!! hint
+
+    You can use any callable as a param type, and it will be called to cast the param type during parsing. One useful example is using `open` as the param type:
+
+    ```python
+    def read_from_file(input_file: open):
+        lines = input_file.readlines()
+    ```
+
+    If you pass a path to such a param, Cliar will open it and pass the resulting file-like object to the handler body. And when the handler returns, Cliar will make sure the file gets closed.
+
+!!! note
+
+    If no type is set for a param, `str` is implied by default.
+
+
+## Custom Arg Names
+
+In the previous example, `-n` is a rather poor name for a flag. Something more descriptive, like `--repeat` would be better.
+
+Cliar lets you set the names of the args without changing the handler code at all. Just use `set_arg_map` decorator:
+
+```python
+from cliar import Cliar, set_help, set_metavars, set_arg_map
+
+...
+
+    @set_arg_map({'n': 'repeat'})
+    @set_metavars({'name': 'NAME'})
+    @set_help({'name': 'The greetee', 'shout': 'Set to shout the greeting'})
+    def hello(self, name, n=1, shout=False):
+        '''Say hello.'''
+
+        greeting = f'Hello {name}!'
+
+        for _ in range(n):
+            if shout:
+                print(greeting.upper())
+            else:
+                print(greeting)
+```
+
+Now you can use `--repeat` or `-r` instead of `-n`:
+
+```shell
+$ python greeter.py hello John --repeat 2
+Hello John!
+Hello John!
+
+$ python greeter.py hello John -r 2
+Hello John!
+Hello John!
+```
+
+!!! hint
+
+    This decorator lets you use Python's reserved words as arg names: `for`, `with`, etc.
+
+!!! note
+
+    By default, Cliar takes the param name, replaces underscores with dashes, and uses that as the corresponding arg name: `name` is turned into `--name`, and `upper_limit` into `--upper-limit`; the first letter is used as a short option: `-n` for `--name`, `-u-` for `--upper-limit`.
