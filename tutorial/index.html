@@ -707,9 +707,11 @@ greeter.py hello: error: argument -n/--n: invalid int value: <span class="s1">&#
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>You can use any callable as a param type, and it will be called to cast the param type during parsing. One useful example is using <code>open</code> as the param type:</p>
-<p><code>python
-def read_from_file(input_file: open):
-    lines = input_file.readlines()</code></p>
+<div class="codehilite"><pre><span></span>def read_from_file(input_file: open):
+    lines = input_file.readlines()
+</pre></div>
+
+
 <p>If you pass a path to such a param, Cliar will open it and pass the resulting file-like object to the handler body. And when the handler returns, Cliar will make sure the file gets closed.</p>
 </div>
 <div class="admonition note">
