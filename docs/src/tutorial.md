@@ -320,7 +320,7 @@ Because the passed value is invalid, Cliar stopped the execution before it even 
     If no type is set for a param, `str` is implied by default.
 
 
-## Custom Arg Names
+## Argument Names
 
 In the previous example, `-n` is a rather poor name for a flag. Something more descriptive, like `--repeat` would be better.
 
