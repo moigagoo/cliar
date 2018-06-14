@@ -310,10 +310,8 @@ Because the passed value is invalid, Cliar stopped the execution before it even 
 
     You can use any callable as a param type, and it will be called to cast the param type during parsing. One useful example is using `open` as the param type:
 
-    ```python
-    def read_from_file(input_file: open):
-        lines = input_file.readlines()
-    ```
+        def read_from_file(input_file: open):
+            lines = input_file.readlines()
 
     If you pass a path to such a param, Cliar will open it and pass the resulting file-like object to the handler body. And when the handler returns, Cliar will make sure the file gets closed.
 
