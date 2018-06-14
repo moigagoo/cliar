@@ -309,6 +309,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#type-casting" title="Type Casting" class="md-nav__link">
+    Type Casting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-arg-names" title="Custom Arg Names" class="md-nav__link">
+    Custom Arg Names
+  </a>
+  
+</li>
+      
       
       
       
@@ -387,6 +401,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#type-casting" title="Type Casting" class="md-nav__link">
+    Type Casting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-arg-names" title="Custom Arg Names" class="md-nav__link">
+    Custom Arg Names
+  </a>
+  
+</li>
+      
       
       
       
@@ -445,8 +473,10 @@ Hello World!
 <p>Try running <code>greeter.py</code> with and without the newly defined flag:</p>
 <div class="codehilite"><pre><span></span>$ python greeter.py hello --shout
 HELLO WORLD!
+
 $ python greeter.py hello -s    <span class="c1"># Short version works, too!</span>
 HELLO WORLD!
+
 $ python greeter.py hello
 Hello World!
 </pre></div>
@@ -473,10 +503,13 @@ Hello World!
 <p>Try it:</p>
 <div class="codehilite"><pre><span></span>$ python greeter.py hello John
 Hello John!
+
 $ python greeter.py hello John --shout
 HELLO JOHN!
+
 $ python greeter.py hello -s John
 HELLO JOHN!
+
 $ python greeter.py hello
 usage: greeter.py hello <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-s<span class="o">]</span> name
 greeter.py hello: error: the following arguments are required: name
@@ -635,6 +668,96 @@ optional arguments:
   -h, --help   show this <span class="nb">help</span> message and <span class="nb">exit</span>
   -s, --shout  Set to shout the greeting
 </pre></div>
+
+
+<h2 id="type-casting">Type Casting<a class="headerlink" href="#type-casting" title="Permanent link">&para;</a></h2>
+<p>Cliar can cast the types of args on the fly. To enable type casting, add a type hint to the param or set a default value for it.</p>
+<p>To showcase this feature, let's add a flag <code>-n</code> that will tell how many times we want the greeting to appear on the screen:</p>
+<div class="codehilite"><pre><span></span>    <span class="nd">@set_metavars</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;NAME&#39;</span><span class="p">})</span>
+    <span class="nd">@set_help</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;The greetee&#39;</span><span class="p">,</span> <span class="s1">&#39;shout&#39;</span><span class="p">:</span> <span class="s1">&#39;Set to shout the greeting&#39;</span><span class="p">})</span>
+    <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Say hello.&#39;&#39;&#39;</span>
+
+        <span class="n">greeting</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;Hello {name}!&#39;</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>  <span class="c1"># Cliar guarantees `n` is an integer</span>
+            <span class="k">if</span> <span class="n">shout</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">greeting</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Note that inside <code>hello</code> code, we never convert <code>n</code> to integer or wrap anything in <code>try</code> blocks. Cliar cares about all that, allowing the programmer to focus on the business logic.</p>
+<p>Let's call <code>hello</code> with the new flag:</p>
+<div class="codehilite"><pre><span></span>$ python greeter.py hello John -n <span class="m">2</span>
+Hello John!
+Hello John!
+</pre></div>
+
+
+<p>Let's see what happens if we pass a non-integer value to <code>-n</code>:</p>
+<div class="codehilite"><pre><span></span>$ python greeter.py hello John -n foo
+usage: greeter.py hello <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-n N<span class="o">]</span> <span class="o">[</span>-s<span class="o">]</span> NAME
+greeter.py hello: error: argument -n/--n: invalid int value: <span class="s1">&#39;foo&#39;</span>
+</pre></div>
+
+
+<p>Because the passed value is invalid, Cliar stopped the execution before it even reached <code>hello</code>. This behavior guarantees that your code is always executed with valid input.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can use any callable as a param type, and it will be called to cast the param type during parsing. One useful example is using <code>open</code> as the param type:</p>
+<p><code>python
+def read_from_file(input_file: open):
+    lines = input_file.readlines()</code></p>
+<p>If you pass a path to such a param, Cliar will open it and pass the resulting file-like object to the handler body. And when the handler returns, Cliar will make sure the file gets closed.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If no type is set for a param, <code>str</code> is implied by default.</p>
+</div>
+<h2 id="custom-arg-names">Custom Arg Names<a class="headerlink" href="#custom-arg-names" title="Permanent link">&para;</a></h2>
+<p>In the previous example, <code>-n</code> is a rather poor name for a flag. Something more descriptive, like <code>--repeat</code> would be better.</p>
+<p>Cliar lets you set the names of the args without changing the handler code at all. Just use <code>set_arg_map</code> decorator:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span>
+
+<span class="o">...</span>
+
+    <span class="nd">@set_arg_map</span><span class="p">({</span><span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="s1">&#39;repeat&#39;</span><span class="p">})</span>
+    <span class="nd">@set_metavars</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;NAME&#39;</span><span class="p">})</span>
+    <span class="nd">@set_help</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;The greetee&#39;</span><span class="p">,</span> <span class="s1">&#39;shout&#39;</span><span class="p">:</span> <span class="s1">&#39;Set to shout the greeting&#39;</span><span class="p">})</span>
+    <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Say hello.&#39;&#39;&#39;</span>
+
+        <span class="n">greeting</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;Hello {name}!&#39;</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">shout</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">greeting</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Now you can use <code>--repeat</code> or <code>-r</code> instead of <code>-n</code>:</p>
+<div class="codehilite"><pre><span></span>$ python greeter.py hello John --repeat <span class="m">2</span>
+Hello John!
+Hello John!
+
+$ python greeter.py hello John -r <span class="m">2</span>
+Hello John!
+Hello John!
+</pre></div>
+
+
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>This decorator lets you use Python's reserved words as arg names: <code>for</code>, <code>with</code>, etc.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, Cliar takes the param name, replaces underscores with dashes, and uses that as the corresponding arg name: <code>name</code> is turned into <code>--name</code>, and <code>upper_limit</code> into <code>--upper-limit</code>; the first letter is used as a short option: <code>-n</code> for <code>--name</code>, <code>-u-</code> for <code>--upper-limit</code>.</p>
+</div>
                 
                   
                 
