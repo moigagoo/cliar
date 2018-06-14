@@ -317,8 +317,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#custom-arg-names" title="Custom Arg Names" class="md-nav__link">
-    Custom Arg Names
+  <a href="#argument-names" title="Argument Names" class="md-nav__link">
+    Argument Names
   </a>
   
 </li>
@@ -409,8 +409,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#custom-arg-names" title="Custom Arg Names" class="md-nav__link">
-    Custom Arg Names
+  <a href="#argument-names" title="Argument Names" class="md-nav__link">
+    Argument Names
   </a>
   
 </li>
@@ -718,7 +718,7 @@ greeter.py hello: error: argument -n/--n: invalid int value: <span class="s1">&#
 <p class="admonition-title">Note</p>
 <p>If no type is set for a param, <code>str</code> is implied by default.</p>
 </div>
-<h2 id="custom-arg-names">Custom Arg Names<a class="headerlink" href="#custom-arg-names" title="Permanent link">&para;</a></h2>
+<h2 id="argument-names">Argument Names<a class="headerlink" href="#argument-names" title="Permanent link">&para;</a></h2>
 <p>In the previous example, <code>-n</code> is a rather poor name for a flag. Something more descriptive, like <code>--repeat</code> would be better.</p>
 <p>Cliar lets you set the names of the args without changing the handler code at all. Just use <code>set_arg_map</code> decorator:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span>
