@@ -491,6 +491,7 @@
                 
                 
                 <h1 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h1>
+<p>Download the complete sample app: <a href="../assets/greeter.py">greeter.py</a></p>
 <h2 id="hello-world">Hello World<a class="headerlink" href="#hello-world" title="Permanent link">&para;</a></h2>
 <p>In Cliar, commandline interfaces are represented by Python classes subclassed from <code>Cliar</code>. Cliar turns the class methods into commands and their params into args.</p>
 <p>Let's create a simple CLI that says "Hello World!" when you call <code>hello</code> command:</p>
@@ -912,13 +913,13 @@ greeter.py: error: argument command: invalid choice: <span class="s1">&#39;calcu
 
 
 <p>Only <code>constants</code> method will be exposed as a CLI command:</p>
-<div class="codehilite"><pre><span></span><span class="err">$</span> <span class="n">poetry</span> <span class="n">run</span> <span class="n">python</span> <span class="n">greeter</span><span class="o">.</span><span class="n">py</span> <span class="n">constants</span>
-<span class="err">τ</span> <span class="o">=</span> <span class="mf">6.283185307179586</span>
-<span class="err">π</span> <span class="o">=</span> <span class="mf">3.141592653589793</span>
+<div class="codehilite"><pre><span></span>$ poetry run python greeter.py constants
+<span class="nv">τ</span> <span class="o">=</span> <span class="m">6</span>.283185307179586
+<span class="nv">π</span> <span class="o">=</span> <span class="m">3</span>.141592653589793
 
-<span class="err">$</span> <span class="n">poetry</span> <span class="n">run</span> <span class="n">python</span> <span class="n">greeter</span><span class="o">.</span><span class="n">py</span> <span class="n">get</span><span class="o">-</span><span class="n">pi</span><span class="o">-</span><span class="n">value</span>
-<span class="n">usage</span><span class="p">:</span> <span class="n">greeter</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">{</span><span class="n">factorial</span><span class="p">,</span><span class="n">constants</span><span class="p">,</span><span class="n">goodbye</span><span class="p">,</span><span class="n">mientras</span><span class="p">,</span><span class="err">пока</span><span class="p">,</span><span class="n">hello</span><span class="p">}</span> <span class="o">...</span>
-<span class="n">greeter</span><span class="o">.</span><span class="n">py</span><span class="p">:</span> <span class="n">error</span><span class="p">:</span> <span class="n">argument</span> <span class="n">command</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">choice</span><span class="p">:</span> <span class="s1">&#39;get-pi-value&#39;</span> <span class="p">(</span><span class="n">choose</span> <span class="kn">from</span> <span class="s1">&#39;factorial&#39;</span><span class="p">,</span> <span class="s1">&#39;constants&#39;</span><span class="p">,</span> <span class="s1">&#39;goodbye&#39;</span><span class="p">,</span> <span class="s1">&#39;mientras&#39;</span><span class="p">,</span> <span class="s1">&#39;пока&#39;</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+$ poetry run python greeter.py get-pi-value
+usage: greeter.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">{</span>factorial,constants,goodbye,mientras,пока,hello<span class="o">}</span> ...
+greeter.py: error: argument command: invalid choice: <span class="s1">&#39;get-pi-value&#39;</span> <span class="o">(</span>choose from <span class="s1">&#39;factorial&#39;</span>, <span class="s1">&#39;constants&#39;</span>, <span class="s1">&#39;goodbye&#39;</span>, <span class="s1">&#39;mientras&#39;</span>, <span class="s1">&#39;пока&#39;</span>, <span class="s1">&#39;hello&#39;</span><span class="o">)</span>
 </pre></div>
                 
                   
