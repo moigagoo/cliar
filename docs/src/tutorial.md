@@ -1,5 +1,7 @@
 # Tutorial
 
+Download the complete sample app: [greeter.py](assets/greeter.py)
+
 ## Hello World
 
 In Cliar, commandline interfaces are represented by Python classes subclassed from `Cliar`. Cliar turns the class methods into commands and their params into args.
@@ -481,7 +483,7 @@ class Greeter(Cliar):
 
 Only `constants` method will be exposed as a CLI command:
 
-```python
+```shell
 $ poetry run python greeter.py constants
 τ = 6.283185307179586
 π = 3.141592653589793

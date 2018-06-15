@@ -7,8 +7,8 @@
 Cliar is yet another Python package to create commandline interfaces. It focuses on simplicity, extensibility, and testability:
 
 -   Creating a CLI is as simple as subclassing `cliar.Cliar`.
--   Extending a CLI is as simple as extending a class via inheritance.
--   Testing a CLI is as simple as unittesting a class methods.
+-   Extending a CLI is as simple as extending the class via inheritance.
+-   Testing a CLI is as simple as unittesting the class's methods.
 
 Cliar's mission is to let the programmer focus on the business logic instead of building an interface for it. At the same time, Cliar doesn't want to stand in the programmer's way, so it provides the means to customize the generated CLI.
 
