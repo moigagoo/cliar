@@ -323,6 +323,34 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#more-commands" title="More Commands" class="md-nav__link">
+    More Commands
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#command-aliases" title="Command Aliases" class="md-nav__link">
+    Command Aliases
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#command-names" title="Command Names" class="md-nav__link">
+    Command Names
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ignore-methods" title="Ignore Methods" class="md-nav__link">
+    Ignore Methods
+  </a>
+  
+</li>
+      
       
       
       
@@ -411,6 +439,34 @@
         <li class="md-nav__item">
   <a href="#argument-names" title="Argument Names" class="md-nav__link">
     Argument Names
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#more-commands" title="More Commands" class="md-nav__link">
+    More Commands
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#command-aliases" title="Command Aliases" class="md-nav__link">
+    Command Aliases
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#command-names" title="Command Names" class="md-nav__link">
+    Command Names
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ignore-methods" title="Ignore Methods" class="md-nav__link">
+    Ignore Methods
   </a>
   
 </li>
@@ -716,9 +772,10 @@ greeter.py hello: error: argument -n/--n: invalid int value: <span class="s1">&#
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If no type is set for a param, <code>str</code> is implied by default.</p>
+<p>If no type is set for a param, <code>str</code> is implied by default. So, <code>name: str</code> is the same as just <code>name</code>.</p>
 </div>
 <h2 id="argument-names">Argument Names<a class="headerlink" href="#argument-names" title="Permanent link">&para;</a></h2>
+<p>By default, Cliar takes the param name, replaces underscores with dashes, and uses that as the corresponding arg name: <code>name</code> is turned into <code>--name</code>, and <code>upper_limit</code> into <code>--upper-limit</code>; the first letter is used as a short option: <code>-n</code> for <code>--name</code>, <code>-u-</code> for <code>--upper-limit</code>.</p>
 <p>In the previous example, <code>-n</code> is a rather poor name for a flag. Something more descriptive, like <code>--repeat</code> would be better.</p>
 <p>Cliar lets you set the names of the args without changing the handler code at all. Just use <code>set_arg_map</code> decorator:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span>
@@ -754,12 +811,115 @@ Hello John!
 
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>This decorator lets you use Python's reserved words as arg names: <code>for</code>, <code>with</code>, etc.</p>
+<p>This decorator lets you use Python's reserved words as arg names: <code>--for</code>, <code>--with</code>, etc.</p>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>By default, Cliar takes the param name, replaces underscores with dashes, and uses that as the corresponding arg name: <code>name</code> is turned into <code>--name</code>, and <code>upper_limit</code> into <code>--upper-limit</code>; the first letter is used as a short option: <code>-n</code> for <code>--name</code>, <code>-u-</code> for <code>--upper-limit</code>.</p>
-</div>
+<h2 id="more-commands">More Commands<a class="headerlink" href="#more-commands" title="Permanent link">&para;</a></h2>
+<p>Adding more commands to the CLI simply means adding more methods to the CLI class:</p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">goodbye</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>        <span class="c1"># Just define another method</span>
+        <span class="sd">&#39;&#39;&#39;Say goodbye&#39;&#39;&#39;</span>           <span class="c1"># to add another command to the CLI.</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Goodbye {name}!&#39;</span><span class="p">)</span>
+
+    <span class="nd">@set_arg_map</span><span class="p">({</span><span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="s1">&#39;repeat&#39;</span><span class="p">})</span>
+    <span class="o">...</span>
+</pre></div>
+
+
+<p>With this code addition, you can call <code>goodbye</code> command:</p>
+<div class="codehilite"><pre><span></span>$ python greeter.py goodbye Mary
+Goodbye Mary!
+</pre></div>
+
+
+<h2 id="command-aliases">Command Aliases<a class="headerlink" href="#command-aliases" title="Permanent link">&para;</a></h2>
+<p>Imagine you want to let user to call the same command with different keywords. For example, we want to ship our greeter app to Spain and let the users call <code>greeter.py mientras</code> as well as <code>greeter.py goodbye</code>.</p>
+<p>The keywords that point to the same command are called <em>aliases</em>. To add aliases to a command, use <code>add_aliases</code> decorator:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span><span class="p">,</span> <span class="n">add_aliases</span>
+
+<span class="o">...</span>
+
+    <span class="nd">@add_aliases</span><span class="p">([</span><span class="s1">&#39;mientras&#39;</span><span class="p">,</span> <span class="s1">&#39;пока&#39;</span><span class="p">])</span>  <span class="c1"># Yes you can use non-Latin characters!</span>
+    <span class="k">def</span> <span class="nf">goodbye</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Say goodbye&#39;&#39;&#39;</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Goodbye {name}!&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>And now you can call <code>goodbye</code> command with its aliases:</p>
+<div class="codehilite"><pre><span></span>$ python greeter.py mientras Maria
+Goodbye Maria!
+
+$ python greeter.py пока Маша
+Goodbye Маша!
+</pre></div>
+
+
+<h2 id="command-names">Command Names<a class="headerlink" href="#command-names" title="Permanent link">&para;</a></h2>
+<p>By default, Cliar names CLI commands after the handler methods on the CLI class. To override this behavior and set a custom command name, use <code>set_name</code> decorator:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span><span class="p">,</span> <span class="n">add_aliases</span><span class="p">,</span> <span class="n">set_name</span>
+
+
+<span class="k">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Greeter app created with in Cliar.&#39;&#39;&#39;</span>
+
+    <span class="nd">@set_name</span><span class="p">(</span><span class="s1">&#39;factorial&#39;</span><span class="p">)</span>                  <span class="c1"># Name the command `factorial`</span>
+    <span class="k">def</span> <span class="nf">calculate_factorial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>  <span class="c1"># because `calculate_factorial`</span>
+        <span class="sd">&#39;&#39;&#39;Calculate factorial&#39;&#39;&#39;</span>           <span class="c1"># is too long for CLI.</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;n! = {factorial(n)}&#39;</span><span class="p">)</span>
+
+    <span class="nd">@add_aliases</span><span class="p">([</span><span class="s1">&#39;mientras&#39;</span><span class="p">,</span> <span class="s1">&#39;пока&#39;</span><span class="p">])</span>
+    <span class="o">...</span>
+</pre></div>
+
+
+<p>Now <code>calculate_factorial</code> is associated with, and only with, <code>factorial</code> command:</p>
+<div class="codehilite"><pre><span></span>$ python greeter.py factorial <span class="m">4</span>
+n! <span class="o">=</span> <span class="m">24</span>
+
+$ poetry run python greeter.py calculate_factorial <span class="m">4</span>
+usage: greeter.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">{</span>factorial,goodbye,mientras,пока,hello<span class="o">}</span> ...
+greeter.py: error: argument command: invalid choice: <span class="s1">&#39;calculate_factorial&#39;</span> <span class="o">(</span>choose from <span class="s1">&#39;factorial&#39;</span>, <span class="s1">&#39;goodbye&#39;</span>, <span class="s1">&#39;mientras&#39;</span>, <span class="s1">&#39;пока&#39;</span>, <span class="s1">&#39;hello&#39;</span><span class="o">)</span>
+</pre></div>
+
+
+<h2 id="ignore-methods">Ignore Methods<a class="headerlink" href="#ignore-methods" title="Permanent link">&para;</a></h2>
+<p>By default, Cliar converts all non-static and non-class methods of the <code>Cliar</code> subclass into CLI commands.</p>
+<p>There are two ways to tell Cliar <em>not</em> to convert a method into a command: start its name with an underscore or use <code>ignore</code> decorator:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">pi</span>
+
+<span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span><span class="p">,</span> <span class="n">add_aliases</span><span class="p">,</span> <span class="n">set_name</span><span class="p">,</span> <span class="n">ignore</span>
+
+
+<span class="k">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Greeter app created with in Cliar.&#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">_get_tau_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tau</span>
+
+    <span class="nd">@ignore</span>
+    <span class="k">def</span> <span class="nf">get_pi_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pi</span>
+
+    <span class="k">def</span> <span class="nf">constants</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;τ = {self._get_tau_value()}&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;π = {self.get_pi_value()}&#39;</span><span class="p">)</span>
+
+    <span class="o">...</span>
+</pre></div>
+
+
+<p>Only <code>constants</code> method will be exposed as a CLI command:</p>
+<div class="codehilite"><pre><span></span><span class="err">$</span> <span class="n">poetry</span> <span class="n">run</span> <span class="n">python</span> <span class="n">greeter</span><span class="o">.</span><span class="n">py</span> <span class="n">constants</span>
+<span class="err">τ</span> <span class="o">=</span> <span class="mf">6.283185307179586</span>
+<span class="err">π</span> <span class="o">=</span> <span class="mf">3.141592653589793</span>
+
+<span class="err">$</span> <span class="n">poetry</span> <span class="n">run</span> <span class="n">python</span> <span class="n">greeter</span><span class="o">.</span><span class="n">py</span> <span class="n">get</span><span class="o">-</span><span class="n">pi</span><span class="o">-</span><span class="n">value</span>
+<span class="n">usage</span><span class="p">:</span> <span class="n">greeter</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">{</span><span class="n">factorial</span><span class="p">,</span><span class="n">constants</span><span class="p">,</span><span class="n">goodbye</span><span class="p">,</span><span class="n">mientras</span><span class="p">,</span><span class="err">пока</span><span class="p">,</span><span class="n">hello</span><span class="p">}</span> <span class="o">...</span>
+<span class="n">greeter</span><span class="o">.</span><span class="n">py</span><span class="p">:</span> <span class="n">error</span><span class="p">:</span> <span class="n">argument</span> <span class="n">command</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">choice</span><span class="p">:</span> <span class="s1">&#39;get-pi-value&#39;</span> <span class="p">(</span><span class="n">choose</span> <span class="kn">from</span> <span class="s1">&#39;factorial&#39;</span><span class="p">,</span> <span class="s1">&#39;constants&#39;</span><span class="p">,</span> <span class="s1">&#39;goodbye&#39;</span><span class="p">,</span> <span class="s1">&#39;mientras&#39;</span><span class="p">,</span> <span class="s1">&#39;пока&#39;</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+</pre></div>
                 
                   
                 
