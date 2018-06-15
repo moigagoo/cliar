@@ -317,10 +317,12 @@ Because the passed value is invalid, Cliar stopped the execution before it even 
 
 !!! note
 
-    If no type is set for a param, `str` is implied by default.
+    If no type is set for a param, `str` is implied by default. So, `name: str` is the same as just `name`.
 
 
 ## Argument Names
+
+By default, Cliar takes the param name, replaces underscores with dashes, and uses that as the corresponding arg name: `name` is turned into `--name`, and `upper_limit` into `--upper-limit`; the first letter is used as a short option: `-n` for `--name`, `-u-` for `--upper-limit`.
 
 In the previous example, `-n` is a rather poor name for a flag. Something more descriptive, like `--repeat` would be better.
 
@@ -360,8 +362,131 @@ Hello John!
 
 !!! hint
 
-    This decorator lets you use Python's reserved words as arg names: `for`, `with`, etc.
+    This decorator lets you use Python's reserved words as arg names: `--for`, `--with`, etc.
 
-!!! note
 
-    By default, Cliar takes the param name, replaces underscores with dashes, and uses that as the corresponding arg name: `name` is turned into `--name`, and `upper_limit` into `--upper-limit`; the first letter is used as a short option: `-n` for `--name`, `-u-` for `--upper-limit`.
+## More Commands
+
+Adding more commands to the CLI simply means adding more methods to the CLI class:
+
+```python
+class Greeter(Cliar):
+    def goodbye(self, name):        # Just define another method
+        '''Say goodbye'''           # to add another command to the CLI.
+
+        print(f'Goodbye {name}!')
+
+    @set_arg_map({'n': 'repeat'})
+    ...
+```
+
+With this code addition, you can call `goodbye` command:
+
+```shell
+$ python greeter.py goodbye Mary
+Goodbye Mary!
+```
+
+
+## Command Aliases
+
+Imagine you want to let user to call the same command with different keywords. For example, we want to ship our greeter app to Spain and let the users call `greeter.py mientras` as well as `greeter.py goodbye`.
+
+The keywords that point to the same command are called *aliases*. To add aliases to a command, use `add_aliases` decorator:
+
+```python
+from cliar import Cliar, set_help, set_metavars, set_arg_map, add_aliases
+
+...
+
+    @add_aliases(['mientras', 'пока'])  # Yes you can use non-Latin characters!
+    def goodbye(self, name):
+        '''Say goodbye'''
+
+        print(f'Goodbye {name}!')
+```
+
+And now you can call `goodbye` command with its aliases:
+
+```shell
+$ python greeter.py mientras Maria
+Goodbye Maria!
+
+$ python greeter.py пока Маша
+Goodbye Маша!
+```
+
+
+## Command Names
+
+By default, Cliar names CLI commands after the handler methods on the CLI class. To override this behavior and set a custom command name, use `set_name` decorator:
+
+```python
+from cliar import Cliar, set_help, set_metavars, set_arg_map, add_aliases, set_name
+
+
+class Greeter(Cliar):
+    '''Greeter app created with in Cliar.'''
+
+    @set_name('factorial')                  # Name the command `factorial`
+    def calculate_factorial(self, n: int):  # because `calculate_factorial`
+        '''Calculate factorial'''           # is too long for CLI.
+
+        print(f'n! = {factorial(n)}')
+
+    @add_aliases(['mientras', 'пока'])
+    ...
+```
+
+Now `calculate_factorial` is associated with, and only with, `factorial` command:
+
+```shell
+$ python greeter.py factorial 4
+n! = 24
+
+$ poetry run python greeter.py calculate_factorial 4
+usage: greeter.py [-h] {factorial,goodbye,mientras,пока,hello} ...
+greeter.py: error: argument command: invalid choice: 'calculate_factorial' (choose from 'factorial', 'goodbye', 'mientras', 'пока', 'hello')
+```
+
+
+## Ignore Methods
+
+By default, Cliar converts all non-static and non-class methods of the `Cliar` subclass into CLI commands.
+
+There are two ways to tell Cliar *not* to convert a method into a command: start its name with an underscore or use `ignore` decorator:
+
+```python
+from math import factorial, tau, pi
+
+from cliar import Cliar, set_help, set_metavars, set_arg_map, add_aliases, set_name, ignore
+
+
+class Greeter(Cliar):
+    '''Greeter app created with in Cliar.'''
+
+    def _get_tau_value(self):
+        return tau
+
+    @ignore
+    def get_pi_value(self):
+        return pi
+
+    def constants(self):
+        print(f'τ = {self._get_tau_value()}')
+        print(f'π = {self.get_pi_value()}')
+
+    ...
+```
+
+Only `constants` method will be exposed as a CLI command:
+
+```python
+$ poetry run python greeter.py constants
+τ = 6.283185307179586
+π = 3.141592653589793
+
+$ poetry run python greeter.py get-pi-value
+usage: greeter.py [-h] {factorial,constants,goodbye,mientras,пока,hello} ...
+greeter.py: error: argument command: invalid choice: 'get-pi-value' (choose from 'factorial', 'constants', 'goodbye', 'mientras', 'пока', 'hello')
+```
