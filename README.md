@@ -29,7 +29,9 @@ Name | DSL-based | Casts arg types | Extensible | Testable without shell exec | 
 [Click](http://click.pocoo.org/) | ❌ | ❌ | ✔, in third-party modules | ❌ | ✔
 [docopt](http://docopt.org/) | ✔  | ❌ | ❌ | ❌ | ❌
 [argparse](https://docs.python.org/3/library/argparse.html) | ❌ | ❌ | ❌ | ❌ | ❌
-[Cliar](https://moigagoo.github.io/cliar/) | ❌ | ✔ | ✔, *in* third-party modules and *with* third-party modules | ✔ | ✔
+[Cliar](https://moigagoo.github.io/cliar/) | ❌ | ✔ | ✔, *in* third-party modules and *with* third-party modules [1] | ✔ | ✔
+
+*[1]: [A Note on CLI Extensibility](https://moigagoo.github.io/cliar/extensibility/)*
 
 
 ## Basic Usage

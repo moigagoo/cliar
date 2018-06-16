@@ -9,6 +9,7 @@ preprocessors:
 chapters:
   - index.md
   - tutorial.md
+  - extensibility.md
   - changelog.md
 
 backend_config:
