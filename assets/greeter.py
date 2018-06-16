@@ -6,6 +6,12 @@ from cliar import Cliar, set_help, set_metavars, set_arg_map, add_aliases, set_n
 class Greeter(Cliar):
     '''Greeter app created with in Cliar.'''
 
+    def _root(self, version=False):
+        if version:
+            print(f'Greeter 1.0.0.')
+        else:
+            print('Welcome to Greeter!')
+
     def _get_tau_value(self):
         return tau
 
