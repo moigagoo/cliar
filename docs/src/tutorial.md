@@ -170,6 +170,10 @@ optional arguments:
 
 That's much better! Now, let's add descriptions for `--shout` and `name` arguments.
 
+!!! hint
+
+    You can print the help message by calling `self._parser.print_help()`.
+
 
 ## Argument Descriptions
 
@@ -491,4 +495,40 @@ $ poetry run python greeter.py constants
 $ poetry run python greeter.py get-pi-value
 usage: greeter.py [-h] {factorial,constants,goodbye,mientras,пока,hello} ...
 greeter.py: error: argument command: invalid choice: 'get-pi-value' (choose from 'factorial', 'constants', 'goodbye', 'mientras', 'пока', 'hello')
+```
+
+
+# Root Command
+
+So far, we've defined args and flags only for commands, e.g. `hello` and `goodbye`. But some flags are commonly defined for the entire script rather for a particular command, for example `--version`. Also, sometimes you don't need commands at all: if there's only only action that your CLI does, defining a single command is redundant as the script name will suffice:
+
+```shell
+$ python say_hello.py           # We want this
+$ python say_hello.py say_hello # rather than this.
+```
+
+In other words, we need a way to define a nameless command that runs when you run the script itself without any command.
+
+Cliar lets you define such command by defining a special `_root` method:
+
+```python
+class Greeter(Cliar):
+    '''Greeter app created with in Cliar.'''
+
+    def _root(self, version=False):
+        if version:
+            print(f'Greeter 1.0.0.')
+        else:
+            print('Welcome to Greeter!')
+    ...
+```
+
+If you run `greeter.py` with `--version` or `-v` flag, you'll see its version. If you call `greeter.py` without any flags or commands, you'll see a welcome message:
+
+```shell
+$ python greeter.py
+Welcome to Greeter!
+
+$ python greeter.py --version
+Greeter 1.0.0.
 ```
