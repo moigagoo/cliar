@@ -59,18 +59,18 @@ Save this code to `calc.py` and run it with different inputs:
 
 -   Valid input:
 
-        $ python run calc.py add 12 34
+        $ python calc.py add 12 34
         The sum of 12.0 and 34.0 is 46.0.
 
 -   Invalid input:
 
-        $ python run calc.py foo bar
+        $ python calc.py add foo bar
         usage: calc.py add [-h] x y
         calc.py add: error: argument x: invalid float value: 'foo'
 
 -   Get help:
 
-        $ python run calc.py -h
+        $ python calc.py -h
         usage: calc.py [-h] {add} ...
 
         Calculator app.
