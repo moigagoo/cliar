@@ -492,7 +492,7 @@
 <ul>
 <li>
 <p>Valid input:</p>
-<div class="codehilite"><pre><span></span>$ python run calc.py add <span class="m">12</span> <span class="m">34</span>
+<div class="codehilite"><pre><span></span>$ python calc.py add <span class="m">12</span> <span class="m">34</span>
 The sum of <span class="m">12</span>.0 and <span class="m">34</span>.0 is <span class="m">46</span>.0.
 </pre></div>
 
@@ -500,7 +500,7 @@ The sum of <span class="m">12</span>.0 and <span class="m">34</span>.0 is <span 
 </li>
 <li>
 <p>Invalid input:</p>
-<div class="codehilite"><pre><span></span>$ python run calc.py foo bar
+<div class="codehilite"><pre><span></span>$ python calc.py add foo bar
 usage: calc.py add <span class="o">[</span>-h<span class="o">]</span> x y
 calc.py add: error: argument x: invalid float value: <span class="s1">&#39;foo&#39;</span>
 </pre></div>
@@ -509,7 +509,7 @@ calc.py add: error: argument x: invalid float value: <span class="s1">&#39;foo&#
 </li>
 <li>
 <p>Get help:</p>
-<div class="codehilite"><pre><span></span>$ python run calc.py -h
+<div class="codehilite"><pre><span></span>$ python calc.py -h
 usage: calc.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">{</span>add<span class="o">}</span> ...
 
 Calculator app.
