@@ -102,12 +102,12 @@
         },
         {
             "location": "/extensibility/",
-            "text": "A Note on CLI Extensibility\n\u00b6\n\n\nThere are two scenarios where we want to extend your CLI:\n\n\n\n\nYou have a base CLI definition and want to define a third-party CLI that reuses the base CLI commands.\n\n\nYou have a base CLI definition that itself should be extensible with third-party CLI definitions.\n\n\n\n\nThe definition of extension is slightly different for each case.",
+            "text": "A Note on CLI Extensibility\n\u00b6\n\n\nTODO",
             "title": "A Note on CLI Extensibility"
         },
         {
             "location": "/extensibility/#a-note-on-cli-extensibility",
-            "text": "There are two scenarios where we want to extend your CLI:   You have a base CLI definition and want to define a third-party CLI that reuses the base CLI commands.  You have a base CLI definition that itself should be extensible with third-party CLI definitions.   The definition of extension is slightly different for each case.",
+            "text": "TODO",
             "title": "A Note on CLI Extensibility"
         },
         {
