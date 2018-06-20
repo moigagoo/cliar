@@ -1,8 +1,6 @@
 from subprocess import run
 from math import factorial, log
 
-from pytest import fixture
-
 
 def test_positional_args(capfd, datadir):
     x, y = 12, 34
