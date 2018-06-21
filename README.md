@@ -13,17 +13,6 @@ Cliar is yet another Python package to create commandline interfaces. It focuses
 Cliar's mission is to let the programmer focus on the business logic instead of building an interface for it. At the same time, Cliar doesn't want to stand in the programmer's way, so it provides the means to customize the generated CLI.
 
 
-## Installation
-
-```shell
-$ pip install cliar
-```
-
-Cliar runs on Python 3.6+ on Windows, Linux, and Mac. There are no dependencies outside Python's standard library.
-
-
-## Comparison of Python CLI Packages
-
 Name | DSL-based | Casts arg types | Extensible | Testable without shell exec | Has pun in name
 ---- | --------- | --------------- | ---------- | --------------------------- | ---------------
 [Click](http://click.pocoo.org/) | ❌ | ❌ | ✔, in third-party modules | ❌ | ✔
@@ -32,6 +21,15 @@ Name | DSL-based | Casts arg types | Extensible | Testable without shell exec | 
 [Cliar](https://moigagoo.github.io/cliar/) | ❌ | ✔ | ✔, *in* third-party modules and *with* third-party modules | ✔ | ✔
 
 [Cliar vs. Click vs. docopt →](https://moigagoo.github.io/cliar/vs/)
+
+
+## Installation
+
+```shell
+$ pip install cliar
+```
+
+Cliar runs on Python 3.6+ on Windows, Linux, and Mac. There are no dependencies outside Python's standard library.
 
 
 ## Basic Usage
@@ -107,8 +105,6 @@ There are a few things to note here:
 -   The `--help` and `-h` flags are added automatically and the help messages are generated from the docstrings.
 
 
-## But wait! There's more!
+## Read Next
 
-Cliar lets you customize your CLI in many ways! [Read the tutorial](https://moigagoo.github.io/cliar/tutorial/) to learn all Cliar's powers.
-
-Happy hacking!
+[Tutorial →](https://moigagoo.github.io/cliar/tutorial/)
