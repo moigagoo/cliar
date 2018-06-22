@@ -13,16 +13,6 @@ Cliar is yet another Python package to create commandline interfaces. It focuses
 Cliar's mission is to let the programmer focus on the business logic instead of building an interface for it. At the same time, Cliar doesn't want to stand in the programmer's way, so it provides the means to customize the generated CLI.
 
 
-Name | DSL-based | Casts arg types | Extensible | Testable without shell exec | Has pun in name
----- | --------- | --------------- | ---------- | --------------------------- | ---------------
-[Cliar](https://moigagoo.github.io/cliar/) | ❌ | ✔ | ✔, *in* third-party modules and *with* third-party modules | ✔ | ✔
-[Click](http://click.pocoo.org/) | ❌ | ❌ | ✔, in third-party modules | ❌ | ✔
-[docopt](http://docopt.org/) | ✔  | ❌ | ❌ | ❌ | ❌
-[argparse](https://docs.python.org/3/library/argparse.html) | ❌ | ❌ | ❌ | ❌ | ❌
-
-[Cliar vs. Click vs. docopt →](https://moigagoo.github.io/cliar/vs/)
-
-
 ## Installation
 
 ```shell
