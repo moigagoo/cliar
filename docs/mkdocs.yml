@@ -5,7 +5,7 @@ edit_uri: edit/develop/docs/src/
 theme:
   name: material
   palette:
-    primary: teal
+    primary: cyan
     accent: cyan
   font:
     text: PT Sans
