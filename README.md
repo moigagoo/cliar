@@ -107,4 +107,5 @@ There are a few things to note here:
 
 ## Read Next
 
-[Tutorial →](https://moigagoo.github.io/cliar/tutorial/)
+-   [Tutorial →](https://moigagoo.github.io/cliar/tutorial/)
+-   [Cliar vs. Click vs. docopt →](https://moigagoo.github.io/cliar/vs/)
