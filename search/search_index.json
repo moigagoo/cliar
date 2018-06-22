@@ -97,12 +97,12 @@
         },
         {
             "location": "/vs/",
-            "text": "Cliar vs. Click vs. docopt\n\u00b6\n\n\n\n\n\n\n\n\nName\n\n\nDSL-based\n\n\nCasts arg types\n\n\nExtensible\n\n\nTestable without shell exec\n\n\nHas pun in name\n\n\n\n\n\n\n\n\n\n\nCliar\n\n\n\u274c\n\n\n\u2714\n\n\n\u2714, \nin\n third-party modules and \nwith\n third-party modules\n\n\n\u2714\n\n\n\u2714\n\n\n\n\n\n\nClick\n\n\n\u274c\n\n\n\u274c\n\n\n\u2714, in third-party modules\n\n\n\u274c\n\n\n\u2714\n\n\n\n\n\n\ndocopt\n\n\n\u2714\n\n\n\u274c\n\n\n\u274c\n\n\n\u274c\n\n\n\u274c\n\n\n\n\n\n\nargparse\n\n\n\u274c\n\n\n\u274c\n\n\n\u274c\n\n\n\u274c\n\n\n\u274c",
+            "text": "Cliar vs. Click vs. docopt\n\u00b6\n\n\n\n\n\n\n\n\nName\n\n\nDSL-free\n\n\nCasts arg types\n\n\nUses type hints\n\n\nExtensible\n\n\nHas pun in name\n\n\n\n\n\n\n\n\n\n\nCliar\n\n\n\u2714\n\n\n\u2714\n\n\n\u2714\n\n\n\u2714, \nin\n third-party modules and \nwith\n third-party modules\n\n\n\u2714\n\n\n\n\n\n\nClick\n\n\n\u2714\n\n\n\u2714\n\n\n\u274c\n\n\n\u2714, in third-party modules\n\n\n\u2714\n\n\n\n\n\n\ndocopt\n\n\n\u274c\n\n\n\u274c\n\n\n\u274c\n\n\n\u274c\n\n\n\u274c",
             "title": "Cliar vs. Click vs. docopt"
         },
         {
             "location": "/vs/#cliar-vs-click-vs-docopt",
-            "text": "Name  DSL-based  Casts arg types  Extensible  Testable without shell exec  Has pun in name      Cliar  \u274c  \u2714  \u2714,  in  third-party modules and  with  third-party modules  \u2714  \u2714    Click  \u274c  \u274c  \u2714, in third-party modules  \u274c  \u2714    docopt  \u2714  \u274c  \u274c  \u274c  \u274c    argparse  \u274c  \u274c  \u274c  \u274c  \u274c",
+            "text": "Name  DSL-free  Casts arg types  Uses type hints  Extensible  Has pun in name      Cliar  \u2714  \u2714  \u2714  \u2714,  in  third-party modules and  with  third-party modules  \u2714    Click  \u2714  \u2714  \u274c  \u2714, in third-party modules  \u2714    docopt  \u274c  \u274c  \u274c  \u274c  \u274c",
             "title": "Cliar vs. Click vs. docopt"
         },
         {
