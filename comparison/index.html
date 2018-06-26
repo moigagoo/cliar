@@ -268,9 +268,38 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Cliar vs. Click vs. docopt
+      </label>
+    
     <a href="./" title="Cliar vs. Click vs. docopt" class="md-nav__link md-nav__link--active">
       Cliar vs. Click vs. docopt
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#modular-clis" title="Modular CLIs" class="md-nav__link">
+    Modular CLIs
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -304,6 +333,22 @@
     
   
   
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#modular-clis" title="Modular CLIs" class="md-nav__link">
+    Modular CLIs
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -314,19 +359,21 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/moigagoo/cliar/edit/develop/docs/src/vs.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/moigagoo/cliar/edit/develop/docs/src/comparison.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
                 <h1 id="cliar-vs-click-vs-docopt">Cliar vs. Click vs. docopt<a class="headerlink" href="#cliar-vs-click-vs-docopt" title="Permanent link">&para;</a></h1>
+<p>It may seem strange to develop yet another Python package for CLI creation when we already have great tools like Click and docopt. Why not use one of those?</p>
+<p>It turns out there's at least one area where Click and docopt just won't do—<em>modular CLI</em>. Below, I'll try to explain what I mean by modular CLIs and why they are important. A will also cover other things that make Cliar special.</p>
 <table>
 <thead>
 <tr>
 <th>Name</th>
+<th>Modular CLIs</th>
 <th>DSL-free</th>
 <th>Magic-free</th>
-<th>Casts arg types</th>
+<th>Type casting</th>
 <th>Uses type hints</th>
-<th>Extensible</th>
 </tr>
 </thead>
 <tbody>
@@ -336,26 +383,42 @@
 <td>✔</td>
 <td>✔</td>
 <td>✔</td>
-<td>✔, <em>in</em> third-party modules and <em>with</em> third-party modules</td>
+<td>✔</td>
 </tr>
 <tr>
 <td><a href="http://click.pocoo.org/">Click</a></td>
-<td>✔</td>
 <td>❌</td>
 <td>✔</td>
 <td>❌</td>
-<td>✔, in third-party modules</td>
+<td>✔</td>
+<td>❌</td>
 </tr>
 <tr>
 <td><a href="http://docopt.org/">docopt</a></td>
 <td>❌</td>
-<td>✔</td>
 <td>❌</td>
+<td>✔</td>
 <td>❌</td>
 <td>❌</td>
 </tr>
 </tbody>
 </table>
+<h2 id="modular-clis">Modular CLIs<a class="headerlink" href="#modular-clis" title="Permanent link">&para;</a></h2>
+<p>Imagine you're developing a CLI-based audio player. You want it to have a ton of features but you don't want to develop them all on your own. The core version will only play a given file, but the rest of the functionality will be implemented with extensions.</p>
+<p>You want the usage to be something like this:</p>
+<div class="codehilite"><pre><span></span>$ player play file.mp3          <span class="c1"># Core functionality</span>
+$ pip install player.ext.seek   <span class="c1"># Install extension</span>
+$ player seek <span class="m">1</span>:23              <span class="c1"># Extension-provided functionality</span>
+</pre></div>
+
+
+<p>This approach has several benefits:</p>
+<ul>
+<li>the user will be able to install only the parts they need</li>
+<li>you will be able to delegate most of the work on the player to the community</li>
+<li>if you add functionality to the player yourself, you'll use the same API as third-party developers, i.e. eat your own dog food, which makes for better APIs</li>
+</ul>
+<p>So, your job is provide a way for third parties to add commands to the basic CLI and override existing commands.</p>
                 
                   
                 
