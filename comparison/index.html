@@ -405,20 +405,80 @@
 </table>
 <h2 id="modular-clis">Modular CLIs<a class="headerlink" href="#modular-clis" title="Permanent link">&para;</a></h2>
 <p>Imagine you're developing a CLI-based audio player. You want it to have a ton of features but you don't want to develop them all on your own. The core version will only play a given file, but the rest of the functionality will be implemented with extensions.</p>
-<p>You want the usage to be something like this:</p>
+<p>You want the usage of the player to be something like this:</p>
 <div class="codehilite"><pre><span></span>$ player play file.mp3          <span class="c1"># Core functionality</span>
 $ pip install player.ext.seek   <span class="c1"># Install extension</span>
-$ player seek <span class="m">1</span>:23              <span class="c1"># Extension-provided functionality</span>
+$ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c1"># Extension-provided functionality</span>
 </pre></div>
 
 
 <p>This approach has several benefits:</p>
 <ul>
 <li>the user will be able to install only the parts they need</li>
-<li>you will be able to delegate most of the work on the player to the community</li>
-<li>if you add functionality to the player yourself, you'll use the same API as third-party developers, i.e. eat your own dog food, which makes for better APIs</li>
+<li>you will be able to delegate responsibility to the community</li>
+<li>new commands are added via a unified API, which is the same for core and third-party developers</li>
 </ul>
 <p>So, your job is provide a way for third parties to add commands to the basic CLI and override existing commands.</p>
+<p>With docopt, this is simply impossible since CLIs are declared using a DSL:</p>
+<div class="codehilite"><pre><span></span><span class="sd">&#39;&#39;&#39;Player.</span>
+
+<span class="sd">Usage:</span>
+<span class="sd">  player play &lt;file&gt;</span>
+<span class="sd">  player (-h | --help)</span>
+
+<span class="sd">Options:</span>
+<span class="sd">  -h --help     Show this screen.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">docopt</span> <span class="kn">import</span> <span class="n">docopt</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">arguments</span> <span class="o">=</span> <span class="n">docopt</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Adding a new command means adding a line into a spec before it gets parsed, so the on;y way an extension can add a new command to the base CLI is by inserting lines into the base CLI spec. This is inconvenient if you're adding one command, but it's a nightmare if you're creating an API for adding unlimited commands:</p>
+<div class="codehilite"><pre><span></span><span class="sd">&#39;&#39;&#39;Player.</span>
+
+<span class="sd">Usage:</span>
+<span class="sd">  player play &lt;file&gt;</span>
+<span class="sd">  player (-h | --help)</span>
+
+<span class="sd">Options:</span>
+<span class="sd">  -h --help     Show this screen.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">docopt</span> <span class="kn">import</span> <span class="n">docopt</span>
+
+<span class="kn">from</span> <span class="nn">player.ext.seek</span> <span class="kn">import</span> <span class="n">insert_seek_command</span>
+<span class="c1"># &quot;insert_seek_command&quot; function inserts &quot;player seek &lt;pos&gt;&quot;</span>
+<span class="c1"># after &quot;player play&quot;. You can already feel how quickly it gets old.</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">extended_doc</span> <span class="o">=</span> <span class="n">insert_seek_command</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
+    <span class="n">arguments</span> <span class="o">=</span> <span class="n">docopt</span><span class="p">(</span><span class="n">extended_doc</span><span class="p">)</span>
+</pre></div>
+
+
+<p>With Click, you can reuse commands from one CLI in another one:</p>
+<div class="codehilite"><pre><span></span><span class="c1"># In file a:</span>
+<span class="n">cli</span> <span class="o">=</span> <span class="n">click</span><span class="o">.</span><span class="n">Group</span><span class="p">()</span>
+
+<span class="nd">@cli.command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">cmd_a</span><span class="p">():</span> <span class="k">print</span><span class="p">(</span><span class="s2">&quot;You called cmd_a&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># In file b:</span>
+
+<span class="kn">from</span> <span class="nn">a</span> <span class="kn">import</span> <span class="n">cli</span>
+
+<span class="nd">@cli.command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">cmd_b</span><span class="p">():</span> <span class="k">print</span><span class="p">(</span><span class="s2">&quot;You called cmd_b&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<blockquote>
+<p>Thanks to /u/Brian for the <a href="https://www.reddit.com/r/Python/comments/3j28oa/cliar_create_clis_clearly_cliar_103_documentation/culnqg2">code sample</a>.</p>
+</blockquote>
+<p>However, you can't reuse commands from multiple third-party modules in one CLI this way. That's because command reuse is described with decorators, which leave close to function declarations, not to their call sites: you can't decorate an imported function. In other words, you can create a new player that implements <code>seek</code> and borrows <code>play</code> from <code>player</code>, but you can't add <code>seek</code> into <code>player</code>.</p>
                 
                   
                 
