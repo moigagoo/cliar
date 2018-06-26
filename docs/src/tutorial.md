@@ -31,6 +31,8 @@ Hello World!
 
 And here it is: your first CLI created with Cliar! That was easy, wasn't it?
 
+## Optional Flags
+
 Let's enhance `hello` method to shout the greeting loud if `--shout` flag is passed:
 
 ```python
@@ -63,7 +65,7 @@ Cliar did a few things for us here:
 -   not only was `--shout` flag generated from the eponymous `shout` param, but a short version `-s` was also generated
 
 
-## Hello {user}
+## Positional Arguments
 
 Ok, but what if we want our app to be able to greet anyone, not just the world? Just add a positional param to `hello`:
 

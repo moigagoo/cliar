@@ -4,7 +4,7 @@ slug: cliar-docs
 chapters:
   - index.md
   - tutorial.md
-  - vs.md
+  - comparison.md
   - changelog.md
 
 backend_config:
