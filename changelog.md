@@ -1,3 +1,7 @@
+# 1.2.3 🚧
+
+-   Fix Python 3.7 incompatibility.
+
 # 1.2.2
 
 -   Make `_root` not an abstract method.

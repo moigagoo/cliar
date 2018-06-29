@@ -48,7 +48,10 @@ def test_root_command(capfd, datadir):
 def test_nargs(capfd, datadir):
     numbers = 1, 2, 42, 101
 
-    run(f'python {datadir/"basicmath.py"} summ {" ".join(str(number) for number in numbers)}', shell=True)
+    run(
+        f'python {datadir/"basicmath.py"} summ {" ".join(str(number) for number in numbers)}',
+        shell=True
+    )
     assert int(capfd.readouterr().out) == sum(numbers)
 
     numbers = 1, 2, 42.2, 101.1

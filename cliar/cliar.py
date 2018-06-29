@@ -84,7 +84,7 @@ class _Command:
             if arg.type == bool:
                 arg.action = 'store_true'
 
-            elif isclass(arg.type) and (issubclass(arg.type, List) or issubclass(arg.type, Tuple)):
+            elif hasattr(arg.type, '__origin__') and arg.type.__origin__ in {list, tuple}:
                 if arg.default:
                     arg.nargs = '*'
                 else:
