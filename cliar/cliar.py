@@ -1,7 +1,7 @@
 ﻿from argparse import ArgumentParser, RawTextHelpFormatter
-from inspect import signature, getmembers, ismethod, isclass
+from inspect import signature, getmembers, ismethod
 from collections import OrderedDict
-from typing import List, Tuple, Iterable, Callable, Set, Type
+from typing import List, Iterable, Callable, Set, Type
 
 from .utils import ignore
 
@@ -62,9 +62,13 @@ class _Command:
 
     @staticmethod
     def _get_origins(typ) -> Set[Type]:
-        '''To properly parse arg types like ``typing.List[int]``, we need a way to determine that the type is based on ``list`` or ``tuple``. In Python 3.6, we'd use subclass check, but it doesn't work anymore in Python 3.7. In Python 3.7, the right way to do such a check is with ``__origin__``.
+        '''To properly parse arg types like ``typing.List[int]``, we need a way to determine that
+        the type is based on ``list`` or ``tuple``. In Python 3.6, we'd use subclass check,
+        but it doesn't work anymore in Python 3.7. In Python 3.7, the right way to do such a check
+        is by looking at ``__origin__``.
 
-        This method checks the type's ``__origin__`` to detect its origin in Python 3.7 and ``__orig_bases__`` for Python 3.6.
+        This method checks the type's ``__origin__`` to detect its origin in Python 3.7
+        and ``__orig_bases__`` for Python 3.6.
         '''
 
         origin = getattr(typ, '__origin__', None)
