@@ -94,43 +94,41 @@ def cmd_b(): print("You called cmd_b")
 
 However, you can't reuse commands from multiple third-party modules in one CLI, which is what we want. That's because command reuse relations are defined with decorators, and you can't decorate an imported function. In other words, you can create a new player that implements `seek` and borrows `play` from `player`, but you can't add `seek` into `player`.
 
-**With Cliar**, extending an existing CLI with any number of third parties is trivial. Since in Cliar a CLI is a regular Python class, extending it means extending the class in the most natural way—inheritance. Just subclass your CLI from as many ``Cliar`` ancestors as you need:
+**With Cliar**, extending an existing CLI is trivial. Since in Cliar a CLI is a regular Python class, extending it means extending the class the most natural way—with inheritance. Just subclass your CLI from as many ``Cliar`` ancestors as you need:
 
 ```python
-# Basic CLI, player/basic_cli.py:
 from cliar import Cliar
 
+# Basic CLI:
 class BasicCLI(CLiar):
     def play(self, path):
         ...
 
-# Seek extension, player/ext/seek.py:
-from cliar import Cliar
-
+# Seek extension:
 class SeekCLI(Cliar):
     def seek(self, position):
         ...
 
 # Complete CLI:
-from player.basic_cli import BasicCLI
-from player.ext.seek import SeekCLI
 
-class CLI(BasicCLI, SeekCLI):
-    '''The complete CLI that borrows from the basic CLI and Seek extension.
+class CLI(BasicCLI, SeekCLI, *MoreExtensions):
+    '''The complete CLI that borrows from the basic CLI and extensionss.
 
-    Notice that the class body is empty: all logic is already implemented in the imported classes.
+    Notice that the class body is empty: the logic is already implemented by the parents.
     '''
     pass
 ```
 
-Cliar relies on Python's standard mechanisms and doesn't reinvent the wheel when it comes to adding new features to an object. Python supports both single and multiple inheritance, so CLI extension goes both ways: you can create a completely new interface that borrows from an existing one or build an interface from extensions.
+Cliar relies on Python's standard mechanisms and doesn't reinvent the wheel when it comes to adding new features to objects. Python supports both single and multiple inheritance, so CLI extension goes both ways: you can create a completely new interface that borrows from an existing one or build an interface from extensions.
 
 
 ## DSL-free
 
 I believe that whenever pure Python does the trick, we should avoid DSLs. Every new DSL requires time to learn, and the knowledge you gain is virtually useless anywhere outside the scope of the DSL, which is by definition limited by the app it's used by. This thought along with other great ones has been beautifully explained by Robert E Brewer in [The Zen in Cherrypy](https://pyvideo.org/pycon-us-2010/pycon-2010--the-zen-of-cherrypy---111.html).
 
-**In Docopt**, you describe your CLI using a special DSL. You then ask docopt to parse the commandline string and pass the extracted values to the business logic. Interface is completely separated from the business logic. Which may seem like a good idea until you actually start using docopt. In reality, you end up duplicating argument definitions all the time: once in the DSL and then in the business logic:
+**In Docopt**, you describe your CLI using a special DSL. You then ask docopt to parse the commandline string and pass the extracted values to the business logic. The interface is completely separated from the business logic.
+
+It may seem like a good idea until you actually start using docopt. In reality, you end up duplicating argument definitions: once in the DSL and then in the business logic:
 
 ```python
 '''Player.
@@ -161,3 +159,5 @@ if __name__ == '__main__':
         seek(arguments['<position>'])
     # ...and so on and so on.
 ```
+
+Even in this toy example you can see how much redundant code this pattern creates.

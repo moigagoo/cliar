@@ -174,7 +174,7 @@ That's much better! Now, let's add descriptions for `--shout` and `name` argumen
 
 !!! hint
 
-    You can print the help message by calling `self._parser.print_help()`.
+    `self._parser` is an [`ArgumentParser`](https://docs.python.org/3/library/argparse.html#argparse.ArgumentParser) instance, so you can use all its methods and attributes, like `print_help` or `usage`.
 
 
 ## Argument Descriptions
