@@ -493,38 +493,35 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 <p>Thanks to /u/Brian for the <a href="https://www.reddit.com/r/Python/comments/3j28oa/cliar_create_clis_clearly_cliar_103_documentation/culnqg2">code sample</a>.</p>
 </blockquote>
 <p>However, you can't reuse commands from multiple third-party modules in one CLI, which is what we want. That's because command reuse relations are defined with decorators, and you can't decorate an imported function. In other words, you can create a new player that implements <code>seek</code> and borrows <code>play</code> from <code>player</code>, but you can't add <code>seek</code> into <code>player</code>.</p>
-<p><strong>With Cliar</strong>, extending an existing CLI with any number of third parties is trivial. Since in Cliar a CLI is a regular Python class, extending it means extending the class in the most natural way—inheritance. Just subclass your CLI from as many <code>Cliar</code> ancestors as you need:</p>
-<div class="codehilite"><pre><span></span><span class="c1"># Basic CLI, player/basic_cli.py:</span>
-<span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span>
+<p><strong>With Cliar</strong>, extending an existing CLI is trivial. Since in Cliar a CLI is a regular Python class, extending it means extending the class the most natural way—with inheritance. Just subclass your CLI from as many <code>Cliar</code> ancestors as you need:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span>
 
+<span class="c1"># Basic CLI:</span>
 <span class="k">class</span> <span class="nc">BasicCLI</span><span class="p">(</span><span class="n">CLiar</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
         <span class="o">...</span>
 
-<span class="c1"># Seek extension, player/ext/seek.py:</span>
-<span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span>
-
+<span class="c1"># Seek extension:</span>
 <span class="k">class</span> <span class="nc">SeekCLI</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">seek</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
         <span class="o">...</span>
 
 <span class="c1"># Complete CLI:</span>
-<span class="kn">from</span> <span class="nn">player.basic_cli</span> <span class="kn">import</span> <span class="n">BasicCLI</span>
-<span class="kn">from</span> <span class="nn">player.ext.seek</span> <span class="kn">import</span> <span class="n">SeekCLI</span>
 
-<span class="k">class</span> <span class="nc">CLI</span><span class="p">(</span><span class="n">BasicCLI</span><span class="p">,</span> <span class="n">SeekCLI</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;The complete CLI that borrows from the basic CLI and Seek extension.</span>
+<span class="k">class</span> <span class="nc">CLI</span><span class="p">(</span><span class="n">BasicCLI</span><span class="p">,</span> <span class="n">SeekCLI</span><span class="p">,</span> <span class="o">*</span><span class="n">MoreExtensions</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;The complete CLI that borrows from the basic CLI and extensionss.</span>
 
-<span class="sd">    Notice that the class body is empty: all logic is already implemented in the imported classes.</span>
+<span class="sd">    Notice that the class body is empty: the logic is already implemented by the parents.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">pass</span>
 </pre></div>
 
 
-<p>Cliar relies on Python's standard mechanisms and doesn't reinvent the wheel when it comes to adding new features to an object. Python supports both single and multiple inheritance, so CLI extension goes both ways: you can create a completely new interface that borrows from an existing one or build an interface from extensions.</p>
+<p>Cliar relies on Python's standard mechanisms and doesn't reinvent the wheel when it comes to adding new features to objects. Python supports both single and multiple inheritance, so CLI extension goes both ways: you can create a completely new interface that borrows from an existing one or build an interface from extensions.</p>
 <h2 id="dsl-free">DSL-free<a class="headerlink" href="#dsl-free" title="Permanent link">&para;</a></h2>
 <p>I believe that whenever pure Python does the trick, we should avoid DSLs. Every new DSL requires time to learn, and the knowledge you gain is virtually useless anywhere outside the scope of the DSL, which is by definition limited by the app it's used by. This thought along with other great ones has been beautifully explained by Robert E Brewer in <a href="https://pyvideo.org/pycon-us-2010/pycon-2010--the-zen-of-cherrypy---111.html">The Zen in Cherrypy</a>.</p>
-<p><strong>In Docopt</strong>, you describe your CLI using a special DSL. You then ask docopt to parse the commandline string and pass the extracted values to the business logic. Interface is completely separated from the business logic. Which may seem like a good idea until you actually start using docopt. In reality, you end up duplicating argument definitions all the time: once in the DSL and then in the business logic:</p>
+<p><strong>In Docopt</strong>, you describe your CLI using a special DSL. You then ask docopt to parse the commandline string and pass the extracted values to the business logic. The interface is completely separated from the business logic.</p>
+<p>It may seem like a good idea until you actually start using docopt. In reality, you end up duplicating argument definitions: once in the DSL and then in the business logic:</p>
 <div class="codehilite"><pre><span></span><span class="sd">&#39;&#39;&#39;Player.</span>
 
 <span class="sd">Usage:</span>
@@ -553,6 +550,9 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
         <span class="n">seek</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="s1">&#39;&lt;position&gt;&#39;</span><span class="p">])</span>
     <span class="c1"># ...and so on and so on.</span>
 </pre></div>
+
+
+<p>Even in this toy example you can see how much redundant code this pattern creates.</p>
                 
                   
                 

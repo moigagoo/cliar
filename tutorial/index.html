@@ -671,7 +671,7 @@ optional arguments:
 <p>That's much better! Now, let's add descriptions for <code>--shout</code> and <code>name</code> arguments.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>You can print the help message by calling <code>self._parser.print_help()</code>.</p>
+<p><code>self._parser</code> is an <a href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentParser"><code>ArgumentParser</code></a> instance, so you can use all its methods and attributes, like <code>print_help</code> or <code>usage</code>.</p>
 </div>
 <h2 id="argument-descriptions">Argument Descriptions<a class="headerlink" href="#argument-descriptions" title="Permanent link">&para;</a></h2>
 <p>To add description for arguments, use <code>set_help</code> decorator:</p>
