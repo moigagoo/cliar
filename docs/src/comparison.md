@@ -127,6 +127,7 @@ Cliar relies on Python's standard mechanisms and doesn't reinvent the wheel when
 I believe DSLs should be avoided whenever pure Python is enough. A DSL requires time to learn, and the knowledge you gain is virtually useless anywhere outside the scope of the DSL, which is by definition the app it's used in.
 
 !!! note
+
     This thought along with other great ones has been beautifully explained by Robert E Brewer in [The Zen in Cherrypy](https://pyvideo.org/pycon-us-2010/pycon-2010--the-zen-of-cherrypy---111.html).
 
 **In Docopt**, you describe your CLI using a DSL. Then, you ask docopt to parse the commandline string and pass the extracted values to the business logic. The interface is completely separated from the business logic.
@@ -165,16 +166,16 @@ if __name__ == '__main__':
 
 Even in this toy example you can see how much redundant code this pattern spawns.
 
-**Click** and **Cliar** are DSL-free. Whereas docopt is "spec first," Click and Cliar and "code first": they generate the usage text from the code, not the other way around.
+**Click** and **Cliar** are DSL-free. Whereas docopt is "spec first," Click and Cliar are "code first": they generate the usage text from the code, not the other way around.
 
 
 ## Magic-free
 
-*Magic* is illogical behavior driven by a hidden mechanism. It may provide a short "wow" effect, but the price to pay is that your code become harder to debug and read. Writing idiomatic Python generally means avoiding magic.
+*Magic* is atypical behavior driven by a hidden mechanism. It may give a short "wow" effect, but the price to pay is that your code becomes harder to debug and harder to follow. Writing idiomatic Python generally means avoiding magic.
 
-It's easy to see if a tool is "magical": if you remove its usage from the code and the code breaks, the tool was magical. That means that the tool relied on obscure mechanisms that work against regular code writing practices.
+It's easy to see if a tool is "magical": if after you remove it from the code it breaks, the tool was magical.
 
-**Docopt**, for example, is magic-free. If you remove `__doc__` parsing, the remaining code is still 100% valid Python. Removing docopt does not break you program, it just removes the commandline parsing functionality:
+**Docopt**, for example, is magic-free. If you remove the `__doc__` parsing part, the remaining code is still 100% valid Python. Removing docopt does not break you program, it just removes the commandline parsing functionality:
 
 ```python
 '''Player.
@@ -186,11 +187,10 @@ Usage:
 Options:
   -h --help     Show this screen.
 '''
-#from docopt import docopt
-
+# from docopt import docopt
 
 if __name__ == '__main__':
-#   arguments = docopt(__doc__)
+    # arguments = docopt(__doc__)
     pass
 ```
 
@@ -212,4 +212,15 @@ if __name__ == '__main__':
     hello()
 ```
 
-Note that `hello` function accepts two positional arguments, `count` and `name`, but we call it without any params. That's because the params are added by the decorators above the function definition. Remove the decorators and you end up with broken Python.
+Note that `hello` function accepts two positional arguments, `count` and `name`, but we call it without any arguments. That's because the params are added by the decorators based on the arguments of the decorator generators (`--count` and `--name`). This is broken code only forced to work by the magic of Click's decorators.
+
+**Cliar** is magic-free. The class you describe your CLI with is a regular Python class. If you remove `Cliar` from its parents and remove all Cliar's decorators, the class will remain functional. It will continue to contain all the business logic, only without the CLI:
+
+```python
+# from cliar import Cliar
+
+# class Player(Cliar):
+class Player(object):
+    def play(self, file):
+        print(f'Playing {file}')
+```
