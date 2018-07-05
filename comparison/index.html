@@ -294,15 +294,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dsl-free" title="DSL-free" class="md-nav__link">
-    DSL-free
+  <a href="#dsl-free" title="DSL-Free" class="md-nav__link">
+    DSL-Free
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#magic-free" title="Magic-free" class="md-nav__link">
-    Magic-free
+  <a href="#magic-free" title="Magic-Free" class="md-nav__link">
+    Magic-Free
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-casting" title="Type Casting" class="md-nav__link">
+    Type Casting
   </a>
   
 </li>
@@ -358,15 +365,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dsl-free" title="DSL-free" class="md-nav__link">
-    DSL-free
+  <a href="#dsl-free" title="DSL-Free" class="md-nav__link">
+    DSL-Free
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#magic-free" title="Magic-free" class="md-nav__link">
-    Magic-free
+  <a href="#magic-free" title="Magic-Free" class="md-nav__link">
+    Magic-Free
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-casting" title="Type Casting" class="md-nav__link">
+    Type Casting
   </a>
   
 </li>
@@ -401,7 +415,7 @@
 <th>DSL-free</th>
 <th>Magic-free</th>
 <th>Type casting</th>
-<th>Uses type hints</th>
+<th>Pun in name</th>
 </tr>
 </thead>
 <tbody>
@@ -419,7 +433,7 @@
 <td>✔</td>
 <td>❌</td>
 <td>✔</td>
-<td>❌</td>
+<td>✔</td>
 </tr>
 <tr>
 <td><a href="http://docopt.org/">docopt</a></td>
@@ -532,7 +546,7 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 
 
 <p>Cliar relies on Python's standard mechanisms and doesn't reinvent the wheel when it comes to adding new features to objects. Python supports both single and multiple inheritance, so CLI extension goes both ways: you can create a completely new interface that borrows from an existing one or build an interface from extensions.</p>
-<h2 id="dsl-free">DSL-free<a class="headerlink" href="#dsl-free" title="Permanent link">&para;</a></h2>
+<h2 id="dsl-free">DSL-Free<a class="headerlink" href="#dsl-free" title="Permanent link">&para;</a></h2>
 <p>I believe DSLs should be avoided whenever pure Python is enough. A DSL requires time to learn, and the knowledge you gain is virtually useless anywhere outside the scope of the DSL, which is by definition the app it's used in.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -572,7 +586,7 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 
 <p>Even in this toy example you can see how much redundant code this pattern spawns.</p>
 <p><strong>Click</strong> and <strong>Cliar</strong> are DSL-free. Whereas docopt is "spec first," Click and Cliar are "code first": they generate the usage text from the code, not the other way around.</p>
-<h2 id="magic-free">Magic-free<a class="headerlink" href="#magic-free" title="Permanent link">&para;</a></h2>
+<h2 id="magic-free">Magic-Free<a class="headerlink" href="#magic-free" title="Permanent link">&para;</a></h2>
 <p><em>Magic</em> is atypical behavior driven by a hidden mechanism. It may give a short "wow" effect, but the price to pay is that your code becomes harder to debug and harder to follow. Writing idiomatic Python generally means avoiding magic.</p>
 <p>It's easy to see if a tool is "magical": if after you remove it from the code it breaks, the tool was magical.</p>
 <p><strong>Docopt</strong>, for example, is magic-free. If you remove the <code>__doc__</code> parsing part, the remaining code is still 100% valid Python. Removing docopt does not break you program, it just removes the commandline parsing functionality:</p>
@@ -611,6 +625,7 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 
 
 <p>Note that <code>hello</code> function accepts two positional arguments, <code>count</code> and <code>name</code>, but we call it without any arguments. That's because the params are added by the decorators based on the arguments of the decorator generators (<code>--count</code> and <code>--name</code>). This is broken code only forced to work by the magic of Click's decorators.</p>
+<p>Also, Click forces you to use its own <code>echo</code> function instead of the good old print. I'm sure this is justified but it still is confusing.</p>
 <p><strong>Cliar</strong> is magic-free. The class you describe your CLI with is a regular Python class. If you remove <code>Cliar</code> from its parents, the class will remain functional. It will continue to contain all the business logic, only without the CLI:</p>
 <div class="codehilite"><pre><span></span><span class="c1"># from cliar import Cliar</span>
 
@@ -622,6 +637,25 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 
 
 <p>Cliar's decorators like <code>set_name</code> or <code>add_aliases</code> can also be safely remove without breaking any code.</p>
+<h2 id="type-casting">Type Casting<a class="headerlink" href="#type-casting" title="Permanent link">&para;</a></h2>
+<p>In commandline, any argument or flag value is a string. Converting strings to numbers and other types manually within business logic is tedious, requires dancing with exception handling, and, most importantly, has nothing to do with the business logic itself: it's a necessity induced by the fact the shell works only with strings and Python works with all sorts of types rather than a valuable data processing within business logic.</p>
+<p><strong>Docopt</strong> doesn't attempt to cast types. It just parses a string into smaller ones in a nicely structured way, leaving all the necessary processing to the programmer.</p>
+<div class="codehilite"><pre><span></span><span class="n">args</span> <span class="o">=</span> <span class="n">docopt</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;play&#39;</span><span class="p">]:</span>
+    <span class="nb">file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s1">&#39;&lt;file&gt;&#39;</span><span class="p">])</span>
+</pre></div>
+
+
+<p><strong>Click</strong> lets you define an argument and option type in the decorator constructor:</p>
+<div class="codehilite"><pre><span></span><span class="nd">@click.argument</span><span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+
+
+<p>If the type is not set, Click tries to infer it from the default value. It that's not set as well, string is assumed.</p>
+<p><strong>Cliar</strong> lets you define argument and option type with type hints. The logic is similar to Click's: if the type hint is given, use it, if not, infer the type from the default value, otherwise assume string:</p>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="nb">file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
                 
                   
                 
