@@ -4,13 +4,12 @@
 
 # Cliar
 
-Cliar is yet another Python package to create commandline interfaces. It focuses on simplicity, extensibility, and testability:
+**Cliar** is yet another Python package to help you create commandline interfaces. It focuses on simplicity and extensibility:
 
--   Creating a CLI is as simple as subclassing `cliar.Cliar`.
--   Extending a CLI is as simple as extending the class via inheritance.
--   Testing a CLI is as simple as unittesting the class's methods.
+-   Creating a CLI is as simple as subclassing a Python class from `cliar.Cliar`.
+-   Extending a CLI is as simple as extending the class with inheritance.
 
-Cliar's mission is to let the programmer focus on the business logic instead of building an interface for it. At the same time, Cliar doesn't want to stand in the programmer's way, so it provides the means to customize the generated CLI.
+Cliar's mission is to let you focus on the business logic instead of building an interface for it. At the same time, Cliar doesn't want to stand in your way, so it provides the means to customize the generated CLI.
 
 
 ## Installation
@@ -19,12 +18,12 @@ Cliar's mission is to let the programmer focus on the business logic instead of 
 $ pip install cliar
 ```
 
-Cliar runs on Python 3.6+ on Windows, Linux, and Mac. There are no dependencies outside Python's standard library.
+Cliar requires Python 3.6+ and was tested on Windows, Linux, and macOS. There are no dependencies outside Python's standard library.
 
 
 ## Basic Usage
 
-Let's create a commandline calculator that adds two real numbers with Cliar:
+Let's create a commandline calculator that adds two real numbers:
 
 ```python
 from cliar import Cliar
