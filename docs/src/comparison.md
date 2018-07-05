@@ -124,11 +124,14 @@ Cliar relies on Python's standard mechanisms and doesn't reinvent the wheel when
 
 ## DSL-free
 
-I believe that whenever pure Python does the trick, we should avoid DSLs. Every new DSL requires time to learn, and the knowledge you gain is virtually useless anywhere outside the scope of the DSL, which is by definition limited by the app it's used by. This thought along with other great ones has been beautifully explained by Robert E Brewer in [The Zen in Cherrypy](https://pyvideo.org/pycon-us-2010/pycon-2010--the-zen-of-cherrypy---111.html).
+I believe DSLs should be avoided whenever pure Python is enough. A DSL requires time to learn, and the knowledge you gain is virtually useless anywhere outside the scope of the DSL, which is by definition the app it's used in.
 
-**In Docopt**, you describe your CLI using a special DSL. You then ask docopt to parse the commandline string and pass the extracted values to the business logic. The interface is completely separated from the business logic.
+!!! note
+    This thought along with other great ones has been beautifully explained by Robert E Brewer in [The Zen in Cherrypy](https://pyvideo.org/pycon-us-2010/pycon-2010--the-zen-of-cherrypy---111.html).
 
-It may seem like a good idea until you actually start using docopt. In reality, you end up duplicating argument definitions: once in the DSL and then in the business logic:
+**In Docopt**, you describe your CLI using a DSL. Then, you ask docopt to parse the commandline string and pass the extracted values to the business logic. The interface is completely separated from the business logic.
+
+It may seem a good idea until you actually start using docopt. What happens is you end up duplicating argument definitions all the time:
 
 ```python
 '''Player.
@@ -140,11 +143,11 @@ Usage:
 
 Options:
   -h --help     Show this screen.
-'''
+'''                                     # one time
 from docopt import docopt
 
 
-def play(file):
+def play(file):                         # two times
     ...
 
 def seek(position):
@@ -153,11 +156,13 @@ def seek(position):
 if __name__ == '__main__':
     arguments = docopt(__doc__)
 
-    if arguments.get('play'):
+    if arguments.get('play'):           # three times
         play(arguments['<file>'])
     elif arguments.get('seek'):
         seek(arguments['<position>'])
-    # ...and so on and so on.
+    ...                                 # ...and it goes on and on and on.
 ```
 
-Even in this toy example you can see how much redundant code this pattern creates.
+Even in this toy example you can see how much redundant code this pattern spawns.
+
+**Click** and **Cliar** are DSL-free. Whereas docopt is "spec first," Click and Cliar and "code first": they generate the usage text from the code, not the other way around.
