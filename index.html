@@ -394,21 +394,20 @@
 <a href="https://travis-ci.org/moigagoo/cliar"><img alt="image" src="https://travis-ci.org/moigagoo/cliar.svg?branch=develop" /></a>
 <a href="https://codecov.io/gh/moigagoo/cliar"><img alt="image" src="https://codecov.io/gh/moigagoo/cliar/branch/develop/graph/badge.svg" /></a></p>
 <h1 id="cliar">Cliar<a class="headerlink" href="#cliar" title="Permanent link">&para;</a></h1>
-<p>Cliar is yet another Python package to create commandline interfaces. It focuses on simplicity, extensibility, and testability:</p>
+<p><strong>Cliar</strong> is yet another Python package to help you create commandline interfaces. It focuses on simplicity and extensibility:</p>
 <ul>
-<li>Creating a CLI is as simple as subclassing <code>cliar.Cliar</code>.</li>
-<li>Extending a CLI is as simple as extending the class via inheritance.</li>
-<li>Testing a CLI is as simple as unittesting the class's methods.</li>
+<li>Creating a CLI is as simple as subclassing a Python class from <code>cliar.Cliar</code>.</li>
+<li>Extending a CLI is as simple as extending the class with inheritance.</li>
 </ul>
-<p>Cliar's mission is to let the programmer focus on the business logic instead of building an interface for it. At the same time, Cliar doesn't want to stand in the programmer's way, so it provides the means to customize the generated CLI.</p>
+<p>Cliar's mission is to let you focus on the business logic instead of building an interface for it. At the same time, Cliar doesn't want to stand in your way, so it provides the means to customize the generated CLI.</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span>$ pip install cliar
 </pre></div>
 
 
-<p>Cliar runs on Python 3.6+ on Windows, Linux, and Mac. There are no dependencies outside Python's standard library.</p>
+<p>Cliar requires Python 3.6+ and was tested on Windows, Linux, and macOS. There are no dependencies outside Python's standard library.</p>
 <h2 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h2>
-<p>Let's create a commandline calculator that adds two real numbers with Cliar:</p>
+<p>Let's create a commandline calculator that adds two real numbers:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span>
 
 
