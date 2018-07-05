@@ -4,10 +4,10 @@ It may seem strange to develop yet another Python package for CLI creation when 
 
 It turns out there's at least one area where Click and docopt just won't do—*modular CLI*. Below, I'll try to explain what I mean by modular CLIs and why they are important. A will also cover other things that make Cliar special.
 
-Name | Modular CLIs | DSL-free | Magic-free | Type casting | Uses type hints
----- | ------------ | -------- | ---------- | ------------ | ---------------
+Name | Modular CLIs | DSL-free | Magic-free | Type casting | Pun in name
+---- | ------------ | -------- | ---------- | ------------ | -----------
 [Cliar](https://moigagoo.github.io/cliar/) | ✔ | ✔ | ✔ | ✔ | ✔
-[Click](http://click.pocoo.org/) | ❌ | ✔ | ❌ | ✔ | ❌
+[Click](http://click.pocoo.org/) | ❌ | ✔ | ❌ | ✔ | ✔
 [docopt](http://docopt.org/) | ❌ | ❌ | ✔ | ❌ | ❌
 
 
@@ -122,7 +122,7 @@ class CLI(BasicCLI, SeekCLI, *MoreExtensions):
 Cliar relies on Python's standard mechanisms and doesn't reinvent the wheel when it comes to adding new features to objects. Python supports both single and multiple inheritance, so CLI extension goes both ways: you can create a completely new interface that borrows from an existing one or build an interface from extensions.
 
 
-## DSL-free
+## DSL-Free
 
 I believe DSLs should be avoided whenever pure Python is enough. A DSL requires time to learn, and the knowledge you gain is virtually useless anywhere outside the scope of the DSL, which is by definition the app it's used in.
 
@@ -169,7 +169,7 @@ Even in this toy example you can see how much redundant code this pattern spawns
 **Click** and **Cliar** are DSL-free. Whereas docopt is "spec first," Click and Cliar are "code first": they generate the usage text from the code, not the other way around.
 
 
-## Magic-free
+## Magic-Free
 
 *Magic* is atypical behavior driven by a hidden mechanism. It may give a short "wow" effect, but the price to pay is that your code becomes harder to debug and harder to follow. Writing idiomatic Python generally means avoiding magic.
 
@@ -214,6 +214,8 @@ if __name__ == '__main__':
 
 Note that `hello` function accepts two positional arguments, `count` and `name`, but we call it without any arguments. That's because the params are added by the decorators based on the arguments of the decorator generators (`--count` and `--name`). This is broken code only forced to work by the magic of Click's decorators.
 
+Also, Click forces you to use its own `echo` function instead of the good old print. I'm sure this is justified but it still is confusing.
+
 **Cliar** is magic-free. The class you describe your CLI with is a regular Python class. If you remove `Cliar` from its parents, the class will remain functional. It will continue to contain all the business logic, only without the CLI:
 
 ```python
@@ -226,3 +228,31 @@ class Player(object):
 ```
 
 Cliar's decorators like `set_name` or `add_aliases` can also be safely remove without breaking any code.
+
+
+## Type Casting
+
+In commandline, any argument or flag value is a string. Converting strings to numbers and other types manually within business logic is tedious, requires dancing with exception handling, and, most importantly, has nothing to do with the business logic itself: it's a necessity induced by the fact the shell works only with strings and Python works with all sorts of types rather than a valuable data processing within business logic.
+
+**Docopt** doesn't attempt to cast types. It just parses a string into smaller ones in a nicely structured way, leaving all the necessary processing to the programmer.
+
+```python
+args = docopt(__doc__)
+
+if args['play']:
+    file = Path(args['<file>'])
+```
+
+**Click** lets you define an argument and option type in the decorator constructor:
+
+```python
+@click.argument('num', type=int)
+```
+
+If the type is not set, Click tries to infer it from the default value. It that's not set as well, string is assumed.
+
+**Cliar** lets you define argument and option type with type hints. The logic is similar to Click's: if the type hint is given, use it, if not, infer the type from the default value, otherwise assume string:
+
+```python
+def play(file: Path, num=1)
+```
