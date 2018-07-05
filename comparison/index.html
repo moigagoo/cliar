@@ -611,7 +611,7 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 
 
 <p>Note that <code>hello</code> function accepts two positional arguments, <code>count</code> and <code>name</code>, but we call it without any arguments. That's because the params are added by the decorators based on the arguments of the decorator generators (<code>--count</code> and <code>--name</code>). This is broken code only forced to work by the magic of Click's decorators.</p>
-<p><strong>Cliar</strong> is magic-free. The class you describe your CLI with is a regular Python class. If you remove <code>Cliar</code> from its parents and remove all Cliar's decorators, the class will remain functional. It will continue to contain all the business logic, only without the CLI:</p>
+<p><strong>Cliar</strong> is magic-free. The class you describe your CLI with is a regular Python class. If you remove <code>Cliar</code> from its parents, the class will remain functional. It will continue to contain all the business logic, only without the CLI:</p>
 <div class="codehilite"><pre><span></span><span class="c1"># from cliar import Cliar</span>
 
 <span class="c1"># class Player(Cliar):</span>
@@ -619,6 +619,9 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
     <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">file</span><span class="p">):</span>
         <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Playing {file}&#39;</span><span class="p">)</span>
 </pre></div>
+
+
+<p>Cliar's decorators like <code>set_name</code> or <code>add_aliases</code> can also be safely remove without breaking any code.</p>
                 
                   
                 
