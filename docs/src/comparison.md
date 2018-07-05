@@ -214,7 +214,7 @@ if __name__ == '__main__':
 
 Note that `hello` function accepts two positional arguments, `count` and `name`, but we call it without any arguments. That's because the params are added by the decorators based on the arguments of the decorator generators (`--count` and `--name`). This is broken code only forced to work by the magic of Click's decorators.
 
-**Cliar** is magic-free. The class you describe your CLI with is a regular Python class. If you remove `Cliar` from its parents and remove all Cliar's decorators, the class will remain functional. It will continue to contain all the business logic, only without the CLI:
+**Cliar** is magic-free. The class you describe your CLI with is a regular Python class. If you remove `Cliar` from its parents, the class will remain functional. It will continue to contain all the business logic, only without the CLI:
 
 ```python
 # from cliar import Cliar
@@ -224,3 +224,5 @@ class Player(object):
     def play(self, file):
         print(f'Playing {file}')
 ```
+
+Cliar's decorators like `set_name` or `add_aliases` can also be safely remove without breaking any code.
