@@ -519,9 +519,13 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 
 <p>Cliar relies on Python's standard mechanisms and doesn't reinvent the wheel when it comes to adding new features to objects. Python supports both single and multiple inheritance, so CLI extension goes both ways: you can create a completely new interface that borrows from an existing one or build an interface from extensions.</p>
 <h2 id="dsl-free">DSL-free<a class="headerlink" href="#dsl-free" title="Permanent link">&para;</a></h2>
-<p>I believe that whenever pure Python does the trick, we should avoid DSLs. Every new DSL requires time to learn, and the knowledge you gain is virtually useless anywhere outside the scope of the DSL, which is by definition limited by the app it's used by. This thought along with other great ones has been beautifully explained by Robert E Brewer in <a href="https://pyvideo.org/pycon-us-2010/pycon-2010--the-zen-of-cherrypy---111.html">The Zen in Cherrypy</a>.</p>
-<p><strong>In Docopt</strong>, you describe your CLI using a special DSL. You then ask docopt to parse the commandline string and pass the extracted values to the business logic. The interface is completely separated from the business logic.</p>
-<p>It may seem like a good idea until you actually start using docopt. In reality, you end up duplicating argument definitions: once in the DSL and then in the business logic:</p>
+<p>I believe DSLs should be avoided whenever pure Python is enough. A DSL requires time to learn, and the knowledge you gain is virtually useless anywhere outside the scope of the DSL, which is by definition the app it's used in.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This thought along with other great ones has been beautifully explained by Robert E Brewer in <a href="https://pyvideo.org/pycon-us-2010/pycon-2010--the-zen-of-cherrypy---111.html">The Zen in Cherrypy</a>.</p>
+</div>
+<p><strong>In Docopt</strong>, you describe your CLI using a DSL. Then, you ask docopt to parse the commandline string and pass the extracted values to the business logic. The interface is completely separated from the business logic.</p>
+<p>It may seem a good idea until you actually start using docopt. What happens is you end up duplicating argument definitions all the time:</p>
 <div class="codehilite"><pre><span></span><span class="sd">&#39;&#39;&#39;Player.</span>
 
 <span class="sd">Usage:</span>
@@ -531,11 +535,11 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 
 <span class="sd">Options:</span>
 <span class="sd">  -h --help     Show this screen.</span>
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">&#39;&#39;&#39;</span>                                     <span class="c1"># one time</span>
 <span class="kn">from</span> <span class="nn">docopt</span> <span class="kn">import</span> <span class="n">docopt</span>
 
 
-<span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="nb">file</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="nb">file</span><span class="p">):</span>                         <span class="c1"># two times</span>
     <span class="o">...</span>
 
 <span class="k">def</span> <span class="nf">seek</span><span class="p">(</span><span class="n">position</span><span class="p">):</span>
@@ -544,15 +548,16 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">arguments</span> <span class="o">=</span> <span class="n">docopt</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">arguments</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;play&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">arguments</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;play&#39;</span><span class="p">):</span>           <span class="c1"># three times</span>
         <span class="n">play</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="s1">&#39;&lt;file&gt;&#39;</span><span class="p">])</span>
     <span class="k">elif</span> <span class="n">arguments</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;seek&#39;</span><span class="p">):</span>
         <span class="n">seek</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="s1">&#39;&lt;position&gt;&#39;</span><span class="p">])</span>
-    <span class="c1"># ...and so on and so on.</span>
+    <span class="o">...</span>                                 <span class="c1"># ...and it goes on and on and on.</span>
 </pre></div>
 
 
-<p>Even in this toy example you can see how much redundant code this pattern creates.</p>
+<p>Even in this toy example you can see how much redundant code this pattern spawns.</p>
+<p><strong>Click</strong> and <strong>Cliar</strong> are DSL-free. Whereas docopt is "spec first," Click and Cliar and "code first": they generate the usage text from the code, not the other way around.</p>
                 
                   
                 
