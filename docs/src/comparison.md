@@ -166,3 +166,50 @@ if __name__ == '__main__':
 Even in this toy example you can see how much redundant code this pattern spawns.
 
 **Click** and **Cliar** are DSL-free. Whereas docopt is "spec first," Click and Cliar and "code first": they generate the usage text from the code, not the other way around.
+
+
+## Magic-free
+
+*Magic* is illogical behavior driven by a hidden mechanism. It may provide a short "wow" effect, but the price to pay is that your code become harder to debug and read. Writing idiomatic Python generally means avoiding magic.
+
+It's easy to see if a tool is "magical": if you remove its usage from the code and the code breaks, the tool was magical. That means that the tool relied on obscure mechanisms that work against regular code writing practices.
+
+**Docopt**, for example, is magic-free. If you remove `__doc__` parsing, the remaining code is still 100% valid Python. Removing docopt does not break you program, it just removes the commandline parsing functionality:
+
+```python
+'''Player.
+
+Usage:
+  player play <file>
+  player (-h | --help)
+
+Options:
+  -h --help     Show this screen.
+'''
+#from docopt import docopt
+
+
+if __name__ == '__main__':
+#   arguments = docopt(__doc__)
+    pass
+```
+
+**Click**, on the other hand, is full of magic. Let's examine the hello world example from the [Click documentation](http://click.pocoo.org/):
+
+```python
+import click
+
+@click.command()
+@click.option('--count', default=1, help='Number of greetings.')
+@click.option('--name', prompt='Your name',
+              help='The person to greet.')
+def hello(count, name):
+    """Simple program that greets NAME for a total of COUNT times."""
+    for x in range(count):
+        click.echo('Hello %s!' % name)
+
+if __name__ == '__main__':
+    hello()
+```
+
+Note that `hello` function accepts two positional arguments, `count` and `name`, but we call it without any params. That's because the params are added by the decorators above the function definition. Remove the decorators and you end up with broken Python.
