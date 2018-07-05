@@ -300,6 +300,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#magic-free" title="Magic-free" class="md-nav__link">
+    Magic-free
+  </a>
+  
+</li>
+      
       
       
       
@@ -353,6 +360,13 @@
         <li class="md-nav__item">
   <a href="#dsl-free" title="DSL-free" class="md-nav__link">
     DSL-free
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#magic-free" title="Magic-free" class="md-nav__link">
+    Magic-free
   </a>
   
 </li>
@@ -558,6 +572,46 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 
 <p>Even in this toy example you can see how much redundant code this pattern spawns.</p>
 <p><strong>Click</strong> and <strong>Cliar</strong> are DSL-free. Whereas docopt is "spec first," Click and Cliar and "code first": they generate the usage text from the code, not the other way around.</p>
+<h2 id="magic-free">Magic-free<a class="headerlink" href="#magic-free" title="Permanent link">&para;</a></h2>
+<p><em>Magic</em> is illogical behavior driven by a hidden mechanism. It may provide a short "wow" effect, but the price to pay is that your code become harder to debug and read. Writing idiomatic Python generally means avoiding magic.</p>
+<p>It's easy to see if a tool is "magical": if you remove its usage from the code and the code breaks, the tool was magical. That means that the tool relied on obscure mechanisms that work against regular code writing practices.</p>
+<p><strong>Docopt</strong>, for example, is magic-free. If you remove <code>__doc__</code> parsing, the remaining code is still 100% valid Python. Removing docopt does not break you program, it just removes the commandline parsing functionality:</p>
+<div class="codehilite"><pre><span></span><span class="sd">&#39;&#39;&#39;Player.</span>
+
+<span class="sd">Usage:</span>
+<span class="sd">  player play &lt;file&gt;</span>
+<span class="sd">  player (-h | --help)</span>
+
+<span class="sd">Options:</span>
+<span class="sd">  -h --help     Show this screen.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="c1">#from docopt import docopt</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="c1">#   arguments = docopt(__doc__)</span>
+    <span class="k">pass</span>
+</pre></div>
+
+
+<p><strong>Click</strong>, on the other hand, is full of magic. Let's examine the hello world example from the <a href="http://click.pocoo.org/">Click documentation</a>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">click</span>
+
+<span class="nd">@click.command</span><span class="p">()</span>
+<span class="nd">@click.option</span><span class="p">(</span><span class="s1">&#39;--count&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Number of greetings.&#39;</span><span class="p">)</span>
+<span class="nd">@click.option</span><span class="p">(</span><span class="s1">&#39;--name&#39;</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;Your name&#39;</span><span class="p">,</span>
+              <span class="n">help</span><span class="o">=</span><span class="s1">&#39;The person to greet.&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Simple program that greets NAME for a total of COUNT times.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+        <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s1">&#39;Hello </span><span class="si">%s</span><span class="s1">!&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">hello</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Note that <code>hello</code> function accepts two positional arguments, <code>count</code> and <code>name</code>, but we call it without any params. That's because the params are added by the decorators above the function definition. Remove the decorators and you end up with broken Python.</p>
                 
                   
                 
