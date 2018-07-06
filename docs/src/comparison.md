@@ -10,6 +10,11 @@ Name | Modular CLIs | DSL-free | Magic-free | Type casting | Pun in name
 [Click](http://click.pocoo.org/) | ❌ | ✔ | ❌ | ✔ | ✔
 [docopt](http://docopt.org/) | ❌ | ❌ | ✔ | ❌ | ❌
 
+!!! note
+    Of course, any tool lets you do anything. Below, when I say "feature X is not supported by tool Y," I mean that the effort needed to implement X with Y is *subjectively* too high. I'm basing my conclusions on the solutions provided by the official documentations of the tools being compared.
+
+    Feel free to disagree.
+
 
 ## Modular CLIs
 
