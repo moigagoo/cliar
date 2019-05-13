@@ -372,6 +372,43 @@ Hello John!
 
     This decorator lets you use Python's reserved words as arg names: `--for`, `--with`, etc.
 
+You can also override argument short names specifically. This is useful when you have several arguments that start with the same letter, which creates a conflict between short arg names:
+
+```python
+from cliar import Cliar, set_help, set_metavars, set_arg_map, set_sharg_map
+
+...
+
+    @set_arg_map({'n': 'repeat'})
+    @set_sharg_map({'n': 'n'})
+    @set_metavars({'name': 'NAME'})
+    @set_help({'name': 'The greetee', 'shout': 'Set to shout the greeting'})
+    def hello(self, name, n=1, shout=False):
+        '''Say hello.'''
+
+        greeting = f'Hello {name}!'
+
+        for _ in range(n):
+            if shout:
+                print(greeting.upper())
+            else:
+                print(greeting)
+```
+
+Now you can use `-n` instead of `-r`:
+
+```shell
+$ python greeter.py hello John --repeat 2
+Hello John!
+Hello John!
+
+$ python greeter.py hello John -n 2
+Hello John!
+Hello John!
+```
+
+To disable short argument variant entirely, set the short arg name to `None`: ```@set_sharg_map({'argname': None})```.
+
 
 ## More Commands
 
