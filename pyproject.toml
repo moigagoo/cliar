@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cliar"
-version = "1.2.2"
+version = "1.2.3"
 description = "Create CLIs with classes and type hints."
 license = "MIT"
 authors = ["Konstantin Molchanov <moigagoo@live.com>"]
