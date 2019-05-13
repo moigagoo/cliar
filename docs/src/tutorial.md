@@ -330,7 +330,7 @@ Because the passed value is invalid, Cliar stopped the execution before it even 
 
 ## Argument Names
 
-By default, Cliar takes the param name, replaces underscores with dashes, and uses that as the corresponding arg name: `name` is turned into `--name`, and `upper_limit` into `--upper-limit`; the first letter is used as a short option: `-n` for `--name`, `-u-` for `--upper-limit`.
+By default, Cliar takes the param name, replaces underscores with dashes, and uses that as the corresponding arg name: `name` is turned into `--name`, and `upper_limit` into `--upper-limit`; the first letter is used as a short option: `-n` for `--name`, `-u` for `--upper-limit`.
 
 In the previous example, `-n` is a rather poor name for a flag. Something more descriptive, like `--repeat` would be better.
 

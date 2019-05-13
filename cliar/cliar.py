@@ -22,6 +22,7 @@ class _Arg:
         self.nargs = None
         self.metavar = None
         self.help = None
+        self.short_name = None
 
 
 class _Command:
@@ -37,6 +38,11 @@ class _Command:
             self.arg_map = handler._arg_map
         else:
             self.arg_map = {}
+
+        if hasattr(handler, '_sharg_map'):
+            self.sharg_map = handler._sharg_map
+        else:
+            self.sharg_map = {}
 
         if hasattr(handler, '_metavar_map'):
             self.metavar_map = handler._metavar_map
@@ -115,6 +121,8 @@ class _Command:
             if param_name not in self.arg_map:
                 self.arg_map[param_name] = param_name.replace('_', '-')
 
+            arg.short_name = self.sharg_map.get(param_name, self.arg_map[param_name][0])
+
             args[self.arg_map[param_name]] = arg
 
         return args
@@ -174,8 +182,11 @@ class Cliar:
         if arg_data.default is None:
             arg_prefixed_names = [arg_name]
 
+        elif arg_data.short_name:
+            arg_prefixed_names = ['-'+arg_data.short_name, '--'+arg_name]
+
         else:
-            arg_prefixed_names = ['-'+arg_name[0], '--'+arg_name]
+            arg_prefixed_names = ['--'+arg_name]
 
         if arg_data.action:
             command_parser.add_argument(

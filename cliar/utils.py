@@ -51,6 +51,23 @@ def set_arg_map(arg_map: Dict[str, str]) -> Callable:
     return decorator
 
 
+def set_sharg_map(sharg_map: Dict[str, str]) -> Callable:
+    '''Override mapping from handler params to short commandline arg names.
+
+    Be default, the first character of arg names are used as short arg names.
+
+    :param arg_map: mapping from handler param names to short arg names
+    '''
+
+    def decorator(handler: Callable) -> Callable:
+        '''Decorator returning command handler with a custom shaarg map.'''
+
+        handler._sharg_map = sharg_map
+        return handler
+
+    return decorator
+
+
 def set_name(name: str) -> Callable:
     '''Override the name of the CLI command. By default, commands are called the same
     as their corresponding handlers.
