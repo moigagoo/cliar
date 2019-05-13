@@ -812,7 +812,7 @@ greeter.py hello: error: argument -n/--n: invalid int value: <span class="s1">&#
 <p>If no type is set for a param, <code>str</code> is implied by default. So, <code>name: str</code> is the same as just <code>name</code>.</p>
 </div>
 <h2 id="argument-names">Argument Names<a class="headerlink" href="#argument-names" title="Permanent link">&para;</a></h2>
-<p>By default, Cliar takes the param name, replaces underscores with dashes, and uses that as the corresponding arg name: <code>name</code> is turned into <code>--name</code>, and <code>upper_limit</code> into <code>--upper-limit</code>; the first letter is used as a short option: <code>-n</code> for <code>--name</code>, <code>-u-</code> for <code>--upper-limit</code>.</p>
+<p>By default, Cliar takes the param name, replaces underscores with dashes, and uses that as the corresponding arg name: <code>name</code> is turned into <code>--name</code>, and <code>upper_limit</code> into <code>--upper-limit</code>; the first letter is used as a short option: <code>-n</code> for <code>--name</code>, <code>-u</code> for <code>--upper-limit</code>.</p>
 <p>In the previous example, <code>-n</code> is a rather poor name for a flag. Something more descriptive, like <code>--repeat</code> would be better.</p>
 <p>Cliar lets you set the names of the args without changing the handler code at all. Just use <code>set_arg_map</code> decorator:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span>
@@ -850,6 +850,40 @@ Hello John!
 <p class="admonition-title">Hint</p>
 <p>This decorator lets you use Python's reserved words as arg names: <code>--for</code>, <code>--with</code>, etc.</p>
 </div>
+<p>You can also override argument short names specifically. This is useful when you have several arguments that start with the same letter, which creates a conflict between short arg names:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span><span class="p">,</span> <span class="n">set_sharg_map</span>
+
+<span class="o">...</span>
+
+    <span class="nd">@set_arg_map</span><span class="p">({</span><span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="s1">&#39;repeat&#39;</span><span class="p">})</span>
+    <span class="nd">@set_sharg_map</span><span class="p">({</span><span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="s1">&#39;n&#39;</span><span class="p">})</span>
+    <span class="nd">@set_metavars</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;NAME&#39;</span><span class="p">})</span>
+    <span class="nd">@set_help</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;The greetee&#39;</span><span class="p">,</span> <span class="s1">&#39;shout&#39;</span><span class="p">:</span> <span class="s1">&#39;Set to shout the greeting&#39;</span><span class="p">})</span>
+    <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Say hello.&#39;&#39;&#39;</span>
+
+        <span class="n">greeting</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;Hello {name}!&#39;</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">shout</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">greeting</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Now you can use <code>-n</code> instead of <code>-r</code>:</p>
+<div class="codehilite"><pre><span></span>$ python greeter.py hello John --repeat <span class="m">2</span>
+Hello John!
+Hello John!
+
+$ python greeter.py hello John -n <span class="m">2</span>
+Hello John!
+Hello John!
+</pre></div>
+
+
+<p>To disable short argument variant entirely, set the short arg name to <code>None</code>: <code>@set_sharg_map({'argname': None})</code>.</p>
 <h2 id="more-commands">More Commands<a class="headerlink" href="#more-commands" title="Permanent link">&para;</a></h2>
 <p>Adding more commands to the CLI simply means adding more methods to the CLI class:</p>
 <div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
