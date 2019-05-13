@@ -6,7 +6,7 @@ from typing import List, Iterable, Callable, Set, Type
 from .utils import ignore
 
 
-# pylint: disable=too-few-public-methods,protected-access
+# pylint: disable=too-few-public-methods,protected-access, too-many-instance-attributes
 
 
 class _Arg:
