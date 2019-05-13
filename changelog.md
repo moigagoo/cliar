@@ -1,3 +1,8 @@
+# 1.2.3
+
+-   Fix Python 3.7 incompatibility.
+-   Add `set_sharg_map` to override or disable short arg names.
+
 # 1.2.2
 
 -   Make `_root` not an abstract method.

@@ -1,12 +1,12 @@
 ﻿from argparse import ArgumentParser, RawTextHelpFormatter
-from inspect import signature, getmembers, ismethod, isclass
+from inspect import signature, getmembers, ismethod
 from collections import OrderedDict
-from typing import List, Tuple, Iterable, Callable
+from typing import List, Iterable, Callable, Set, Type
 
 from .utils import ignore
 
 
-# pylint: disable=too-few-public-methods,protected-access
+# pylint: disable=too-few-public-methods,protected-access, too-many-instance-attributes
 
 
 class _Arg:
@@ -22,6 +22,7 @@ class _Arg:
         self.nargs = None
         self.metavar = None
         self.help = None
+        self.short_name = None
 
 
 class _Command:
@@ -37,6 +38,11 @@ class _Command:
             self.arg_map = handler._arg_map
         else:
             self.arg_map = {}
+
+        if hasattr(handler, '_sharg_map'):
+            self.sharg_map = handler._sharg_map
+        else:
+            self.sharg_map = {}
 
         if hasattr(handler, '_metavar_map'):
             self.metavar_map = handler._metavar_map
@@ -59,6 +65,22 @@ class _Command:
             self.help_map = {}
 
         self.args = self._get_args()
+
+    @staticmethod
+    def _get_origins(typ) -> Set[Type]:
+        '''To properly parse arg types like ``typing.List[int]``, we need a way to determine that
+        the type is based on ``list`` or ``tuple``. In Python 3.6, we'd use subclass check,
+        but it doesn't work anymore in Python 3.7. In Python 3.7, the right way to do such a check
+        is by looking at ``__origin__``.
+
+        This method checks the type's ``__origin__`` to detect its origin in Python 3.7
+        and ``__orig_bases__`` for Python 3.6.
+        '''
+
+        origin = getattr(typ, '__origin__', None)
+        orig_bases = getattr(typ, '__orig_bases__', ())
+
+        return set((origin, *orig_bases))
 
     def _get_args(self) -> OrderedDict:
         '''Get command arguments from the parsed signature of its handler.'''
@@ -84,7 +106,7 @@ class _Command:
             if arg.type == bool:
                 arg.action = 'store_true'
 
-            elif isclass(arg.type) and (issubclass(arg.type, List) or issubclass(arg.type, Tuple)):
+            elif self._get_origins(arg.type) & {list, tuple}:
                 if arg.default:
                     arg.nargs = '*'
                 else:
@@ -98,6 +120,8 @@ class _Command:
 
             if param_name not in self.arg_map:
                 self.arg_map[param_name] = param_name.replace('_', '-')
+
+            arg.short_name = self.sharg_map.get(param_name, self.arg_map[param_name][0])
 
             args[self.arg_map[param_name]] = arg
 
@@ -158,8 +182,11 @@ class Cliar:
         if arg_data.default is None:
             arg_prefixed_names = [arg_name]
 
+        elif arg_data.short_name:
+            arg_prefixed_names = ['-'+arg_data.short_name, '--'+arg_name]
+
         else:
-            arg_prefixed_names = ['-'+arg_name[0], '--'+arg_name]
+            arg_prefixed_names = ['--'+arg_name]
 
         if arg_data.action:
             command_parser.add_argument(

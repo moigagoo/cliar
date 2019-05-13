@@ -1,0 +1,18 @@
+title: 'Cliar: Simple and extensible CLIs'
+slug: cliar-docs
+
+chapters:
+  - index.md
+  - tutorial.md
+  - comparison.md
+  - changelog.md
+
+backend_config:
+  mkdocs:
+    mkdocs.yml: !include mkdocs.yml
+
+preprocessors:
+  - includes:
+      aliases:
+        cliar: https://github.com/moigagoo/cliar.git
+  - blockdiag

@@ -1,0 +1,35 @@
+repo_name: moigagoo/cliar
+repo_url: https://github.com/moigagoo/cliar
+edit_uri: edit/develop/docs/src/
+
+theme:
+  name: material
+  palette:
+    primary: cyan
+    accent: cyan
+  font:
+    text: PT Sans
+    code: PT Mono
+  logo: assets/terminal.svg
+  favicon: assets/terminal.ico
+
+extra:
+  social:
+    - type: github
+      link: https://github.com/moigagoo/cliar
+
+markdown_extensions:
+  - codehilite
+  - toc:
+      permalink: true
+  - admonition
+
+copyright: >
+  <p>Created by <a href="https://github.com/moigagoo/">Konstantin Molchanov</a>
+  using <a href="https://foliant-docs.github.io/docs/">Foliant</a>.</p>
+
+  <p>Icons made by <a href="https://www.flaticon.com/authors/inipagistudio" title="inipagistudio">inipagistudio</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
+
+google_analytics:
+  - 'UA-120535275-1'
+  - 'auto'
