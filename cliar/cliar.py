@@ -34,35 +34,33 @@ class _Command:
     def __init__(self, handler: Callable):
         self.handler = handler
 
+        self.arg_map = {}
         if hasattr(handler, '_arg_map'):
             self.arg_map = handler._arg_map
-        else:
-            self.arg_map = {}
 
+        self.sharg_map = {}
         if hasattr(handler, '_sharg_map'):
             self.sharg_map = handler._sharg_map
-        else:
-            self.sharg_map = {}
 
+        self.metavar_map = {}
         if hasattr(handler, '_metavar_map'):
             self.metavar_map = handler._metavar_map
-        else:
-            self.metavar_map = {}
 
+        self.name = handler.__name__.replace('_', '-')
         if hasattr(handler, '_command_name'):
             self.name = handler._command_name
-        else:
-            self.name = handler.__name__.replace('_', '-')
 
+        self.aliases = []
         if hasattr(handler, '_command_aliases'):
             self.aliases = handler._command_aliases
-        else:
-            self.aliases = []
 
+        self.help_map = {}
         if hasattr(handler, '_help_map'):
             self.help_map = handler._help_map
-        else:
-            self.help_map = {}
+
+        self.formatter_class = RawTextHelpFormatter
+        if hasattr(handler, '_formatter_class'):
+            self.formatter_class = handler._formatter_class
 
         self.args = self._get_args()
 
@@ -234,7 +232,7 @@ class Cliar:
                 command.name,
                 help=handler.__doc__.splitlines()[0] if handler.__doc__ else '',
                 description=handler.__doc__,
-                formatter_class=RawTextHelpFormatter,
+                formatter_class=command.formatter_class,
                 aliases=command.aliases
             )
 

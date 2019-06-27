@@ -50,6 +50,7 @@ class Math(Cliar):
 
     @set_arg_map({'base': 'to'})
     @set_metavars({'base': 'BASE'})
+    @set_help({'base': 'Logarithm base'}, show_defaults = True)
     def log(self, x: float, base=e):
         print(log(x, base))
 
