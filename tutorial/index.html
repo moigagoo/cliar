@@ -734,6 +734,32 @@ optional arguments:
 </pre></div>
 
 
+<p>To show default values for optional params, add <code>show_defaults = True</code> to <code>set_help</code>:</p>
+<div class="codehilite"><pre><span></span><span class="o">...</span>
+    <span class="nd">@set_help</span><span class="p">(</span>
+        <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;The greetee&#39;</span><span class="p">,</span> <span class="s1">&#39;shout&#39;</span><span class="p">:</span> <span class="s1">&#39;Set to shout the greeting&#39;</span><span class="p">},</span>
+        <span class="n">show_defaults</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="p">)</span>
+    <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<span class="o">...</span>
+</pre></div>
+
+
+<p>Call help again to see the default value:</p>
+<div class="codehilite"><pre><span></span>$ python greeter.py hello -h
+usage: greeter.py hello <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-s<span class="o">]</span> name
+
+Say hello.
+
+positional arguments:
+  name         The greetee
+
+optional arguments:
+  -h, --help   show this <span class="nb">help</span> message and <span class="nb">exit</span>
+  -s, --shout  Set to shout the greeting <span class="o">(</span>default: False<span class="o">)</span>
+</pre></div>
+
+
 <h2 id="metavars">Metavars<a class="headerlink" href="#metavars" title="Permanent link">&para;</a></h2>
 <p><em>Metavar</em> is the placeholder of a positional arg as it appears in the usage message. By default, Cliar uses the param name as its metavar. So, for <code>name</code> param the metavar is called <code>name</code>:</p>
 <div class="codehilite"><pre><span></span>$ python greeter.py hello -h
