@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cliar"
-version = "1.2.3"
+version = "1.2.4"
 description = "Create CLIs with classes and type hints."
 license = "MIT"
 authors = ["Konstantin Molchanov <moigagoo@live.com>"]
@@ -24,5 +24,5 @@ pytest-datadir = "^1.0"
 foliant = "^1.0"
 "foliantcontrib.mkdocs" = "^1.0.5"
 "foliantcontrib.includes" = "^1.0"
-mkdocs-material = "^2.7"
+mkdocs-material = "^4.0"
 "foliantcontrib.blockdiag" = "^1.0"
