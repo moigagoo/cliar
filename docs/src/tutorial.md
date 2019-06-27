@@ -216,6 +216,34 @@ optional arguments:
   -s, --shout  Set to shout the greeting
 ```
 
+To show default values for optional params, add `show_defaults = True` to `set_help`:
+
+```python
+...
+    @set_help(
+        {'name': 'The greetee', 'shout': 'Set to shout the greeting'},
+        show_defaults = True
+    )
+    def hello(self, name, shout=False):
+...
+```
+
+Call help again to see the default value:
+
+```shell
+$ python greeter.py hello -h
+usage: greeter.py hello [-h] [-s] name
+
+Say hello.
+
+positional arguments:
+  name         The greetee
+
+optional arguments:
+  -h, --help   show this help message and exit
+  -s, --shout  Set to shout the greeting (default: False)
+```
+
 
 ## Metavars
 

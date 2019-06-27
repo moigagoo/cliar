@@ -1,3 +1,7 @@
+# 1.2.4
+
+-   Add `show_defaults` param to `set_help` util. [Read more](https://moigagoo.github.io/cliar/tutorial/#argument-descriptions).
+
 # 1.2.3
 
 -   Fix Python 3.7 incompatibility.

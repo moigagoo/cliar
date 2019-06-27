@@ -191,6 +191,11 @@ def test_metavars(capfd, datadir):
     assert '-t BASE, --to BASE' in capfd.readouterr().out
 
 
+def test_show_defaults(capfd, datadir):
+    run(f'python {datadir/"basicmath.py"} log -h', shell=True)
+    assert '(default: 2.718281828459045)' in capfd.readouterr().out
+
+
 def test_set_name():
     from pytest import raises
 

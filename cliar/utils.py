@@ -1,18 +1,24 @@
 from typing import Callable, List, Dict
+from argparse import ArgumentDefaultsHelpFormatter
 
 
 # pylint: disable=too-few-public-methods,protected-access
 
 
-def set_help(help_map: Dict[str, str]) -> Callable:
+def set_help(help_map: Dict[str, str], show_defaults=False) -> Callable:
     '''Set help messages for arguments.
 
     :param help_map: mapping from handler param names to help messages
+    :param show_defaults: show default values after argument help messages
     '''
     def decorator(handler: Callable) -> Callable:
         '''Decorator returning command handler with a help message map.'''
 
         handler._help_map = help_map
+
+        if show_defaults:
+            handler._formatter_class = ArgumentDefaultsHelpFormatter
+
         return handler
 
     return decorator
