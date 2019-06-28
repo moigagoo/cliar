@@ -4,10 +4,10 @@
 
 # Cliar
 
-**Cliar** is yet another Python package to help you create commandline interfaces. It focuses on simplicity and extensibility:
+**Cliar** is a Python package to help you create commandline interfaces. It focuses on simplicity and extensibility:
 
--   Creating a CLI is as simple as subclassing a Python class from `cliar.Cliar`.
--   Extending a CLI is as simple as extending the class with inheritance.
+-   Creating a CLI is as simple as subclassing from `cliar.Cliar`.
+-   Extending a CLI is as simple as subclassing from a `cliar.Cliar` subclass.
 
 Cliar's mission is to let you focus on the business logic instead of building an interface for it. At the same time, Cliar doesn't want to stand in your way, so it provides the means to customize the generated CLI.
 
@@ -18,12 +18,12 @@ Cliar's mission is to let you focus on the business logic instead of building an
 $ pip install cliar
 ```
 
-Cliar requires Python 3.6+ and was tested on Windows, Linux, and macOS. There are no dependencies outside Python's standard library.
+Cliar requires Python 3.6+ and is tested on Windows, Linux, and macOS. There are no dependencies outside Python's standard library.
 
 
 ## Basic Usage
 
-Let's create a commandline calculator that adds two real numbers:
+Let's create a commandline calculator that adds two floats:
 
 ```python
 from cliar import Cliar
@@ -33,7 +33,7 @@ class Calculator(Cliar):
 '''Calculator app.'''
 
     def add(self, x: float, y: float):
-    '''Add two real numbers.'''
+    '''Add two numbers.'''
 
         print(f'The sum of {x} and {y} is {x+y}.')
 
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     Calculator().parse()
 ```
 
-Save this code to `calc.py` and run it with different inputs:
+Save this code to `calc.py` and run it. Try different inputs:
 
 -   Valid input:
 
@@ -55,7 +55,7 @@ Save this code to `calc.py` and run it with different inputs:
         usage: calc.py add [-h] x y
         calc.py add: error: argument x: invalid float value: 'foo'
 
--   Get help:
+-   Help:
 
         $ python calc.py -h
         usage: calc.py [-h] {add} ...
@@ -67,14 +67,14 @@ Save this code to `calc.py` and run it with different inputs:
 
         commands:
         {add}       Available commands:
-            add       Add two real numbers.
+            add       Add two numbers.
 
--   Get help for a specific command:
+-   Help for `add` command:
 
         $ python calc.py add -h
         usage: calc.py add [-h] x y
 
-        Add two real numbers.
+        Add two numbers.
 
         positional arguments:
         x
@@ -83,13 +83,13 @@ Save this code to `calc.py` and run it with different inputs:
         optional arguments:
         -h, --help  show this help message and exit
 
-There are a few things to note here:
+A few thing to note:
 
 -   It's a regular Python class with a regular Python method. You don't need to learn any new syntax to use Cliar.
 
--   The `add` method is converted into `add` command, and its positional params are converted into positional commandline args.
+-   `add` method is converted to `add` command, its positional params are converted to positional commandline args.
 
--   We don't convert `x` or `y` to `float` or handle any potential conversion errors in the `add` body. Instead, we treat `x` and `y` as if they were already guaranteed to be floats. That's because Cliar does the validation and conversion for us, using the information from `add`'s type hints. Note how invalid input doesn't even reach your code.
+-   There is no explicit conversion to float for `x` or `y` or error handling in the `add` method body. Instead, `x` and `y` are just treated as floats. Cliar converts the types using `add`'s type hints. Invalid input doesn't even reach your code.
 
 -   The `--help` and `-h` flags are added automatically and the help messages are generated from the docstrings.
 
