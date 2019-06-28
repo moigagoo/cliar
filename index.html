@@ -420,10 +420,10 @@
 <a href="https://travis-ci.org/moigagoo/cliar"><img alt="image" src="https://travis-ci.org/moigagoo/cliar.svg?branch=develop" /></a>
 <a href="https://codecov.io/gh/moigagoo/cliar"><img alt="image" src="https://codecov.io/gh/moigagoo/cliar/branch/develop/graph/badge.svg" /></a></p>
 <h1 id="cliar">Cliar<a class="headerlink" href="#cliar" title="Permanent link">&para;</a></h1>
-<p><strong>Cliar</strong> is yet another Python package to help you create commandline interfaces. It focuses on simplicity and extensibility:</p>
+<p><strong>Cliar</strong> is a Python package to help you create commandline interfaces. It focuses on simplicity and extensibility:</p>
 <ul>
-<li>Creating a CLI is as simple as subclassing a Python class from <code>cliar.Cliar</code>.</li>
-<li>Extending a CLI is as simple as extending the class with inheritance.</li>
+<li>Creating a CLI is as simple as subclassing from <code>cliar.Cliar</code>.</li>
+<li>Extending a CLI is as simple as subclassing from a <code>cliar.Cliar</code> subclass.</li>
 </ul>
 <p>Cliar's mission is to let you focus on the business logic instead of building an interface for it. At the same time, Cliar doesn't want to stand in your way, so it provides the means to customize the generated CLI.</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
@@ -431,9 +431,9 @@
 </pre></div>
 
 
-<p>Cliar requires Python 3.6+ and was tested on Windows, Linux, and macOS. There are no dependencies outside Python's standard library.</p>
+<p>Cliar requires Python 3.6+ and is tested on Windows, Linux, and macOS. There are no dependencies outside Python's standard library.</p>
 <h2 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h2>
-<p>Let's create a commandline calculator that adds two real numbers:</p>
+<p>Let's create a commandline calculator that adds two floats:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span>
 
 
@@ -441,7 +441,7 @@
 <span class="sd">&#39;&#39;&#39;Calculator app.&#39;&#39;&#39;</span>
 
     <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Add two real numbers.&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;Add two numbers.&#39;&#39;&#39;</span>
 
         <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;The sum of {x} and {y} is {x+y}.&#39;</span><span class="p">)</span>
 
@@ -451,7 +451,7 @@
 </pre></div>
 
 
-<p>Save this code to <code>calc.py</code> and run it with different inputs:</p>
+<p>Save this code to <code>calc.py</code> and run it. Try different inputs:</p>
 <ul>
 <li>
 <p>Valid input:</p>
@@ -471,7 +471,7 @@ calc.py add: error: argument x: invalid float value: <span class="s1">&#39;foo&#
 
 </li>
 <li>
-<p>Get help:</p>
+<p>Help:</p>
 <div class="codehilite"><pre><span></span>$ <span class="nv">python</span> <span class="nv">calc</span>.<span class="nv">py</span> <span class="o">-</span><span class="nv">h</span>
 <span class="nv">usage</span>: <span class="nv">calc</span>.<span class="nv">py</span> [<span class="o">-</span><span class="nv">h</span>] {<span class="nv">add</span>} ...
 
@@ -482,17 +482,17 @@ calc.py add: error: argument x: invalid float value: <span class="s1">&#39;foo&#
 
 <span class="nv">commands</span>:
 {<span class="nv">add</span>}       <span class="nv">Available</span> <span class="nv">commands</span>:
-    <span class="nv">add</span>       <span class="nv">Add</span> <span class="nv">two</span> <span class="nv">real</span> <span class="nv">numbers</span>.
+    <span class="nv">add</span>       <span class="nv">Add</span> <span class="nv">two</span> <span class="nv">numbers</span>.
 </pre></div>
 
 
 </li>
 <li>
-<p>Get help for a specific command:</p>
+<p>Help for <code>add</code> command:</p>
 <div class="codehilite"><pre><span></span>$ <span class="nv">python</span> <span class="nv">calc</span>.<span class="nv">py</span> <span class="nv">add</span> <span class="o">-</span><span class="nv">h</span>
 <span class="nv">usage</span>: <span class="nv">calc</span>.<span class="nv">py</span> <span class="nv">add</span> [<span class="o">-</span><span class="nv">h</span>] <span class="nv">x</span> <span class="nv">y</span>
 
-<span class="nv">Add</span> <span class="nv">two</span> <span class="nv">real</span> <span class="nv">numbers</span>.
+<span class="nv">Add</span> <span class="nv">two</span> <span class="nv">numbers</span>.
 
 <span class="nv">positional</span> <span class="nv">arguments</span>:
 <span class="nv">x</span>
@@ -505,16 +505,16 @@ calc.py add: error: argument x: invalid float value: <span class="s1">&#39;foo&#
 
 </li>
 </ul>
-<p>There are a few things to note here:</p>
+<p>A few thing to note:</p>
 <ul>
 <li>
 <p>It's a regular Python class with a regular Python method. You don't need to learn any new syntax to use Cliar.</p>
 </li>
 <li>
-<p>The <code>add</code> method is converted into <code>add</code> command, and its positional params are converted into positional commandline args.</p>
+<p><code>add</code> method is converted to <code>add</code> command, its positional params are converted to positional commandline args.</p>
 </li>
 <li>
-<p>We don't convert <code>x</code> or <code>y</code> to <code>float</code> or handle any potential conversion errors in the <code>add</code> body. Instead, we treat <code>x</code> and <code>y</code> as if they were already guaranteed to be floats. That's because Cliar does the validation and conversion for us, using the information from <code>add</code>'s type hints. Note how invalid input doesn't even reach your code.</p>
+<p>There is no explicit conversion to float for <code>x</code> or <code>y</code> or error handling in the <code>add</code> method body. Instead, <code>x</code> and <code>y</code> are just treated as floats. Cliar converts the types using <code>add</code>'s type hints. Invalid input doesn't even reach your code.</p>
 </li>
 <li>
 <p>The <code>--help</code> and <code>-h</code> flags are added automatically and the help messages are generated from the docstrings.</p>
