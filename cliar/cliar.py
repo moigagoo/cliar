@@ -1,7 +1,7 @@
 ﻿from argparse import ArgumentParser, RawTextHelpFormatter
 from inspect import signature, getmembers, ismethod
 from collections import OrderedDict
-from typing import List, Iterable, Callable, Set, Type
+from typing import List, Iterable, Callable, Set, Type, get_type_hints
 
 from .utils import ignore
 
@@ -92,8 +92,7 @@ class _Command:
 
             arg.help = self.help_map.get(param_name, '')
 
-            if param_data.annotation is not param_data.empty:
-                arg.type = param_data.annotation
+            arg.type = get_type_hints(self.handler).get(param_name)
 
             if param_data.default is not param_data.empty:
                 arg.default = param_data.default
