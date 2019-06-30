@@ -1,3 +1,7 @@
+# 1.2.5
+
+-   Prepare for postponed annotation evaluation, which will be the default in Python 4.0 (see #2).
+
 # 1.2.4
 
 -   Add `show_defaults` param to `set_help` util. [Read more](https://moigagoo.github.io/cliar/tutorial/#argument-descriptions).
