@@ -11,7 +11,7 @@ $ docker-compose run --rm site
 $ docker-compose run --rm pdf
 ```
 
-With pip and stuff (requires Python 3.7+, Pandoc, and TeXLive):
+With pip and stuff (requires Python 3.6+, Pandoc, and TeXLive):
 
 ```bash
 $ pip install -r requirements.txt

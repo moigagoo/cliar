@@ -566,8 +566,8 @@ python-versions = ">=2.7"
 version = "0.5.1"
 
 [metadata]
-content-hash = "90aefd31d0757e6fa1ec29a110163f956278d12a9b126615878acd84e1dd9fcc"
-python-versions = "^3.7"
+content-hash = "245f885b0525563851344432934c79aa5dd3e98e09bc4bc42a502b676045e093"
+python-versions = "^3.6"
 
 [metadata.hashes]
 actdiag = ["983071777d9941093aaef3be1f67c198a8ac8d2bba264cdd1f337ca415ab46af", "ccfd02b8a4b5237b318c3eff4fc36d6748f1d1cc897c68ce1075a29de617fa54"]
