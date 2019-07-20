@@ -138,7 +138,11 @@ class Cliar:
     -   ``self._root`` corresponds to the class itself. Use it to define global args.
     '''
 
-    def __init__(self, parser_name: str or None = None, parent_subparsers: _SubParsersAction or None = None):
+    def __init__(
+            self,
+            parser_name: str or None = None,
+            parent_subparsers: _SubParsersAction or None = None
+        ):
         if parent_subparsers:
             self._parser = parent_subparsers.add_parser(
                 parser_name,
@@ -172,9 +176,8 @@ class Cliar:
     def _register_root_args(self):
         '''Register root args, i.e. params of ``self._root``, in the global argparser.'''
 
-        self._parser.set_defaults(func=self._root)
-
         self.root_command = _Command(self._root)
+        self._parser.set_defaults(func=self.root_command)
 
         for arg_name, arg_data in self.root_command.args.items():
             self._register_arg(self._parser, arg_name, arg_data)
@@ -255,7 +258,7 @@ class Cliar:
                 formatter_class=command.formatter_class,
                 aliases=command.aliases
             )
-            command_parser.set_defaults(func=handler)
+            command_parser.set_defaults(func=command)
 
             for arg_name, arg_data in command.args.items():
                 self._register_arg(command_parser, arg_name, arg_data)
@@ -271,15 +274,14 @@ class Cliar:
 
         args = self._parser.parse_args()
 
-        handler = args.func
-        handler_args = {
-            arg_name: arg
-            for arg_name, arg in vars(args).items()
-            if arg_name not in {'command', 'func'}
-        }
+        command = args.func
 
-        if handler(**handler_args) == NotImplemented:
-            handler.__self__._parser.print_help()
+        command_args = {arg: vars(args)[arg.replace('-', '_')] for arg in command.args}
+        inverse_arg_map = {arg: param for param, arg in command.arg_map.items()}
+        handler_args = {inverse_arg_map[arg]: value for arg, value in command_args.items()}
+
+        if command.handler(**handler_args) == NotImplemented:
+            command.handler.__self__._parser.print_help()
 
     def _root(self):
         '''The root command, which corresponds to the script being called without any command.'''
