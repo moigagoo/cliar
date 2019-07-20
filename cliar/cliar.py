@@ -164,7 +164,6 @@ class Cliar:
 
         if handlers or subclis:
             self._command_parsers = self._parser.add_subparsers(
-                dest='command',
                 title='commands'
             )
 
@@ -177,54 +176,54 @@ class Cliar:
         '''Register root args, i.e. params of ``self._root``, in the global argparser.'''
 
         self.root_command = _Command(self._root)
-        self._parser.set_defaults(func=self.root_command)
+        self._parser.set_defaults(command=self.root_command)
 
-        for arg_name, arg_data in self.root_command.args.items():
-            self._register_arg(self._parser, arg_name, arg_data)
+        for arg_name, arg in self.root_command.args.items():
+            self._register_arg(self._parser, arg_name, arg)
 
     @staticmethod
-    def _register_arg(command_parser: ArgumentParser, arg_name: str, arg_data: _Arg):
+    def _register_arg(command_parser: ArgumentParser, arg_name: str, arg: _Arg):
         '''Register an arg in the specified argparser.
 
         :param command_parser: global argparser or a subparser corresponding to a CLI command
         :param str arg_name: handler param name without prefixing dashes
-        :param arg_data: arg type, default value, and action
+        :param arg: arg type, default value, and action
         '''
 
-        if arg_data.default is None:
+        if arg.default is None:
             arg_prefixed_names = [arg_name]
 
-        elif arg_data.short_name:
-            arg_prefixed_names = ['-'+arg_data.short_name, '--'+arg_name]
+        elif arg.short_name:
+            arg_prefixed_names = ['-'+arg.short_name, '--'+arg_name]
 
         else:
             arg_prefixed_names = ['--'+arg_name]
 
-        if arg_data.action:
+        if arg.action:
             command_parser.add_argument(
                 *arg_prefixed_names,
-                default=arg_data.default,
-                action=arg_data.action,
-                help=arg_data.help
+                default=arg.default,
+                action=arg.action,
+                help=arg.help
             )
 
-        elif arg_data.nargs:
+        elif arg.nargs:
             command_parser.add_argument(
                 *arg_prefixed_names,
-                type=arg_data.type,
-                default=arg_data.default,
-                nargs=arg_data.nargs,
-                metavar=arg_data.metavar,
-                help=arg_data.help
+                type=arg.type,
+                default=arg.default,
+                nargs=arg.nargs,
+                metavar=arg.metavar,
+                help=arg.help
             )
 
         else:
             command_parser.add_argument(
                 *arg_prefixed_names,
-                type=arg_data.type,
-                default=arg_data.default,
-                metavar=arg_data.metavar,
-                help=arg_data.help
+                type=arg.type,
+                default=arg.default,
+                metavar=arg.metavar,
+                help=arg.help
             )
 
     def _get_handlers(self) -> List[Callable]:
@@ -258,10 +257,10 @@ class Cliar:
                 formatter_class=command.formatter_class,
                 aliases=command.aliases
             )
-            command_parser.set_defaults(func=command)
+            command_parser.set_defaults(command=command)
 
-            for arg_name, arg_data in command.args.items():
-                self._register_arg(command_parser, arg_name, arg_data)
+            for arg_name, arg in command.args.items():
+                self._register_arg(command_parser, arg_name, arg)
 
             self._commands[command.name] = command
 
@@ -274,9 +273,8 @@ class Cliar:
 
         args = self._parser.parse_args()
 
-        command = args.func
-
-        command_args = {arg: vars(args)[arg.replace('-', '_')] for arg in command.args}
+        command = args.command
+        command_args = {arg: vars(args)[arg.replace('_', '-')] for arg in command.args}
         inverse_arg_map = {arg: param for param, arg in command.arg_map.items()}
         handler_args = {inverse_arg_map[arg]: value for arg, value in command_args.items()}
 
