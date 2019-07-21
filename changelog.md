@@ -1,6 +1,7 @@
-# 1.2.6 [WIP]
+# 1.3.0 [WIP]
 
--   Add support for nested commands.
+-   Add support for nested commands. [Read more](https://moigagoo.github.io/cliar/tutorial/#nested-commands).
+
 
 # 1.2.5
 
