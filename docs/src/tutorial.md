@@ -18,8 +18,7 @@ class Greeter(Cliar):           # Define a regular Python class
 
 
 if __name__ == '__main__':
-    greeter = Greeter()         # Create an instance of the class
-    greeter.parse()             # and run its `parse` method.
+    Greeter().parse()           # Instantiate the class and run `parse` method.
 ```
 
 Save this code into `greeter.py` and run it with Python:
@@ -460,6 +459,42 @@ $ python greeter.py goodbye Mary
 Goodbye Mary!
 ```
 
+## Nested Commands
+
+You can have any level of nested commands by adding Cliar CLIs as class attributes.
+
+For example, let's add a `utils` subcommand with its own `time` subcommand that has `now` command:
+
+```python
+class Time(Cliar):
+    def now(self, utc=False):
+        if utc:
+            print(f'UTC time is {datetime.utcnow().ctime()}')
+        else:
+            print(f'Local time is {datetime.now().ctime()}')
+
+class Utils(Cliar):
+    time = Time
+
+class Greeter(Cliar):
+    '''Greeter app created with in Cliar.'''
+
+    utils = Utils
+
+    def _root(self, version=False):
+        ...
+```
+
+You can now call `now` command:
+
+```shell
+$ python greeter.py utils time now
+Local time is Sun Jul 21 15:25:52 2019
+
+$ python greeter.py utils time now --utc
+UTC time is Sun Jul 21 11:25:57 2019
+```
+
 
 ## Command Aliases
 
@@ -584,7 +619,7 @@ class Greeter(Cliar):
 
     def _root(self, version=False):
         if version:
-            print(f'Greeter 1.0.0.')
+            print('Greeter 1.0.0.')
         else:
             print('Welcome to Greeter!')
     ...

@@ -1,14 +1,26 @@
 from math import factorial, tau, pi
+from datetime import datetime
 
-from cliar import Cliar, set_help, set_metavars, set_arg_map, add_aliases, set_name, ignore
+from cliar import Cliar, set_help, set_metavars, set_arg_map, set_sharg_map, add_aliases, set_name, ignore
 
+class Time(Cliar):
+    def now(self, utc=False):
+        if utc:
+            print(f'UTC time is {datetime.utcnow().ctime()}')
+        else:
+            print(f'Local time is {datetime.now().ctime()}')
+
+class Utils(Cliar):
+    time = Time
 
 class Greeter(Cliar):
     '''Greeter app created with in Cliar.'''
 
+    utils = Utils
+
     def _root(self, version=False):
         if version:
-            print(f'Greeter 1.0.0.')
+            print('Greeter 1.0.0.')
         else:
             print('Welcome to Greeter!')
 
@@ -34,6 +46,7 @@ class Greeter(Cliar):
         print(f'Goodbye {name}!')
 
     @set_arg_map({'n': 'repeat'})
+    @set_sharg_map({'n': 'n'})
     @set_metavars({'name': 'NAME'})
     @set_help({'name': 'The greetee', 'shout': 'Set to shout the greeting'})
     def hello(self, name, n=1, shout=False):
@@ -49,5 +62,4 @@ class Greeter(Cliar):
 
 
 if __name__ == '__main__':
-    greeter = Greeter()
-    greeter.parse()
+    Greeter().parse()
