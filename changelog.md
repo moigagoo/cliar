@@ -1,3 +1,8 @@
+# 1.3.0
+
+-   Add support for nested commands. [Read more](https://moigagoo.github.io/cliar/tutorial/#nested-commands).
+
+
 # 1.2.5
 
 -   Prepare for postponed annotation evaluation, which will be the default in Python 4.0 (see #2).

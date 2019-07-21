@@ -1,5 +1,5 @@
 [![image](https://img.shields.io/pypi/v/cliar.svg)](https://pypi.org/project/cliar)
-[![image](https://travis-ci.org/moigagoo/cliar.svg?branch=develop)](https://travis-ci.org/moigagoo/cliar)
+[![Build Status](https://travis-ci.com/moigagoo/cliar.svg?branch=develop)](https://travis-ci.com/moigagoo/cliar)
 [![image](https://codecov.io/gh/moigagoo/cliar/branch/develop/graph/badge.svg)](https://codecov.io/gh/moigagoo/cliar)
 
 # Cliar
