@@ -13,13 +13,25 @@ class Remote(Cliar):
 
     def show(self):
         '''Remote show help.'''
-        print('Show all remotes')
+        print('Showing all remotes')
 
+class Feature(Cliar):
+    '''Feature help.'''
+
+    def start(self, name: str):
+        '''Feature start help.'''
+        print(f'Starting feature {name}')
+
+class Flow(Cliar):
+    '''Flow help.'''
+
+    feature = Feature
 
 class Git(Cliar):
     '''Git help.'''
 
     remote = Remote
+    flow = Flow
 
     def _root(self):
         print('Git root.')
