@@ -202,6 +202,7 @@ class Cliar:
         if arg.action:
             command_parser.add_argument(
                 *arg_prefixed_names,
+                dest=arg_name,
                 default=arg.default,
                 action=arg.action,
                 help=arg.help
@@ -274,7 +275,7 @@ class Cliar:
         args = self._parser.parse_args()
 
         command = args.command
-        command_args = {arg: vars(args)[arg.replace('_', '-')] for arg in command.args}
+        command_args = {arg: vars(args)[arg] for arg in command.args}
         inverse_arg_map = {arg: param for param, arg in command.arg_map.items()}
         handler_args = {inverse_arg_map[arg]: value for arg, value in command_args.items()}
 
