@@ -349,6 +349,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#nested-commands" title="Nested Commands" class="md-nav__link">
+    Nested Commands
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#command-aliases" title="Command Aliases" class="md-nav__link">
     Command Aliases
   </a>
@@ -488,6 +495,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#nested-commands" title="Nested Commands" class="md-nav__link">
+    Nested Commands
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#command-aliases" title="Command Aliases" class="md-nav__link">
     Command Aliases
   </a>
@@ -541,8 +555,7 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">greeter</span> <span class="o">=</span> <span class="n">Greeter</span><span class="p">()</span>         <span class="c1"># Create an instance of the class</span>
-    <span class="n">greeter</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>             <span class="c1"># and run its `parse` method.</span>
+    <span class="n">Greeter</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>           <span class="c1"># Instantiate the class and run `parse` method.</span>
 </pre></div>
 
 
@@ -935,6 +948,38 @@ Goodbye Mary!
 </pre></div>
 
 
+<h2 id="nested-commands">Nested Commands<a class="headerlink" href="#nested-commands" title="Permanent link">&para;</a></h2>
+<p>You can have any level of nested commands by adding Cliar CLIs as class attributes.</p>
+<p>For example, let's add a <code>utils</code> subcommand with its own <code>time</code> subcommand that has <code>now</code> command:</p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Time</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">now</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">utc</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;UTC time is {datetime.utcnow().ctime()}&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Local time is {datetime.now().ctime()}&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Utils</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">Time</span>
+
+<span class="k">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Greeter app created with in Cliar.&#39;&#39;&#39;</span>
+
+    <span class="n">utils</span> <span class="o">=</span> <span class="n">Utils</span>
+
+    <span class="k">def</span> <span class="nf">_root</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+
+
+<p>You can now call <code>now</code> command:</p>
+<div class="codehilite"><pre><span></span>$ python greeter.py utils <span class="nb">time</span> now
+Local <span class="nb">time</span> is Sun Jul <span class="m">21</span> <span class="m">15</span>:25:52 <span class="m">2019</span>
+
+$ python greeter.py utils <span class="nb">time</span> now --utc
+UTC <span class="nb">time</span> is Sun Jul <span class="m">21</span> <span class="m">11</span>:25:57 <span class="m">2019</span>
+</pre></div>
+
+
 <h2 id="command-aliases">Command Aliases<a class="headerlink" href="#command-aliases" title="Permanent link">&para;</a></h2>
 <p>Imagine you want to let user to call the same command with different keywords. For example, we want to ship our greeter app to Spain and let the users call <code>greeter.py mientras</code> as well as <code>greeter.py goodbye</code>.</p>
 <p>The keywords that point to the same command are called <em>aliases</em>. To add aliases to a command, use <code>add_aliases</code> decorator:</p>
@@ -1039,7 +1084,7 @@ $ python say_hello.py say_hello <span class="c1"># rather than this.</span>
 
     <span class="k">def</span> <span class="nf">_root</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">version</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Greeter 1.0.0.&#39;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Greeter 1.0.0.&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Welcome to Greeter!&#39;</span><span class="p">)</span>
     <span class="o">...</span>
