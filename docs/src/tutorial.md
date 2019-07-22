@@ -600,7 +600,7 @@ greeter.py: error: argument command: invalid choice: 'get-pi-value' (choose from
 ```
 
 
-# Root Command
+## Root Command
 
 So far, we've defined args and flags only for commands, e.g. `hello` and `goodbye`. But some flags are commonly defined for the entire script rather for a particular command, for example `--version`. Also, sometimes you don't need commands at all: if there's only only action that your CLI does, defining a single command is redundant as the script name will suffice:
 
@@ -633,4 +633,28 @@ Welcome to Greeter!
 
 $ python greeter.py --version
 Greeter 1.0.0.
+```
+
+Arguments of the [root command](#root-command) can be accessed in commands of the same CLI via `self._root_args`:
+
+```python
+    ...
+
+    def constants(self):
+        if self._root_args.get('version'):
+            print('Greeter 1.0.0.')
+
+        print(f'τ = {self._get_tau_value()}')
+        print(f'π = {self.get_pi_value()}')
+
+    ...
+```
+
+Run `constants` with `--version`:
+
+```shell
+$ poetry run python greeter.py constants
+Greeter 1.0.0.
+τ = 6.283185307179586
+π = 3.141592653589793
 ```
