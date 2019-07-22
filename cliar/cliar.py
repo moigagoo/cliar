@@ -135,7 +135,7 @@ class Cliar:
     -   Regular methods are converted to commands. Such methods are called *handlers*.
     -   Command args are generated from the corresponding method args.
     -   Methods that start with an underscore are ignored.
-    -   ``self._root`` corresponds to the class itself. Use it to define global args.
+    -   ``self._root`` corresponds to the root command. Use it to define global args.
     '''
 
     def __init__(
