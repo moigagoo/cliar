@@ -17,7 +17,6 @@ def test_helps(capfd, datadir):
     run(f'python {datadir/"nested.py"} flow feature start -h', shell=True)
     assert 'Feature start help.' in capfd.readouterr().out
 
-
 def test_git(capfd, datadir):
     run(f'python {datadir/"nested.py"}', shell=True)
     assert capfd.readouterr().out.strip() == 'Git root.'
