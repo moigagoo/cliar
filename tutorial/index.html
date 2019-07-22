@@ -376,6 +376,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#root-command" title="Root Command" class="md-nav__link">
+    Root Command
+  </a>
+  
+</li>
+      
       
       
       
@@ -518,6 +525,13 @@
         <li class="md-nav__item">
   <a href="#ignore-methods" title="Ignore Methods" class="md-nav__link">
     Ignore Methods
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#root-command" title="Root Command" class="md-nav__link">
+    Root Command
   </a>
   
 </li>
@@ -1070,7 +1084,7 @@ greeter.py: error: argument command: invalid choice: <span class="s1">&#39;get-p
 </pre></div>
 
 
-<h1 id="root-command">Root Command<a class="headerlink" href="#root-command" title="Permanent link">&para;</a></h1>
+<h2 id="root-command">Root Command<a class="headerlink" href="#root-command" title="Permanent link">&para;</a></h2>
 <p>So far, we've defined args and flags only for commands, e.g. <code>hello</code> and <code>goodbye</code>. But some flags are commonly defined for the entire script rather for a particular command, for example <code>--version</code>. Also, sometimes you don't need commands at all: if there's only only action that your CLI does, defining a single command is redundant as the script name will suffice:</p>
 <div class="codehilite"><pre><span></span>$ python say_hello.py           <span class="c1"># We want this</span>
 $ python say_hello.py say_hello <span class="c1"># rather than this.</span>
@@ -1097,6 +1111,28 @@ Welcome to Greeter!
 
 $ python greeter.py --version
 Greeter <span class="m">1</span>.0.0.
+</pre></div>
+
+
+<p>Arguments of the <a href="#root-command">root command</a> can be accessed in commands of the same CLI via <code>self._root_args</code>:</p>
+<div class="codehilite"><pre><span></span>    <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">constants</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Greeter 1.0.0.&#39;</span><span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;τ = {self._get_tau_value()}&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;π = {self.get_pi_value()}&#39;</span><span class="p">)</span>
+
+    <span class="o">...</span>
+</pre></div>
+
+
+<p>Run <code>constants</code> with <code>--version</code>:</p>
+<div class="codehilite"><pre><span></span>$ poetry run python greeter.py constants
+Greeter <span class="m">1</span>.0.0.
+<span class="nv">τ</span> <span class="o">=</span> <span class="m">6</span>.283185307179586
+<span class="nv">π</span> <span class="o">=</span> <span class="m">3</span>.141592653589793
 </pre></div>
                 
                   
