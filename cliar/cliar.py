@@ -274,6 +274,8 @@ class Cliar:
 
         args = self._parser.parse_args()
 
+        self._root_args = {arg: vars(args)[arg] for arg in self.root_command.args}
+
         command = args.command
         command_args = {arg: vars(args)[arg] for arg in command.args}
         inverse_arg_map = {arg: param for param, arg in command.arg_map.items()}
