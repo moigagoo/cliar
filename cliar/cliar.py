@@ -1,4 +1,4 @@
-﻿from argparse import ArgumentParser, RawTextHelpFormatter, _SubParsersAction
+﻿from argparse import ArgumentParser, RawTextHelpFormatter
 from inspect import signature, getmembers, ismethod, isclass
 from collections import OrderedDict
 from typing import List, Iterable, Callable, Set, Type, get_type_hints
@@ -141,10 +141,10 @@ class Cliar:
     def __init__(
             self,
             parser_name: str or None = None,
-            parent_subparsers: _SubParsersAction or None = None
+            parent: Type['Cliar'] or None = None
         ):
-        if parent_subparsers:
-            self._parser = parent_subparsers.add_parser(
+        if parent:
+            self._parser = parent._command_parsers.add_parser(
                 parser_name,
                 description=self.__doc__,
                 help=self.__doc__,
@@ -170,7 +170,7 @@ class Cliar:
             self._register_commands(handlers)
 
             for subcli_name, subcli_class in subclis.items():
-                subcli_class(subcli_name, self._command_parsers)
+                subcli_class(subcli_name, self)
 
         self._root_args = {}
 
