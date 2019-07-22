@@ -172,6 +172,8 @@ class Cliar:
             for subcli_name, subcli_class in subclis.items():
                 subcli_class(subcli_name, self._command_parsers)
 
+        self._root_args = {}
+
     def _register_root_args(self):
         '''Register root args, i.e. params of ``self._root``, in the global argparser.'''
 
@@ -273,6 +275,8 @@ class Cliar:
         '''Parse commandline input, i.e. launch the CLI.'''
 
         args = self._parser.parse_args()
+
+        self._root_args = {arg: vars(args)[arg] for arg in self.root_command.args}
 
         command = args.command
         command_args = {arg: vars(args)[arg] for arg in command.args}

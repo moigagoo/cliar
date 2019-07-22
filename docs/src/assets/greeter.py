@@ -32,6 +32,9 @@ class Greeter(Cliar):
         return pi
 
     def constants(self):
+        if self._root_args.get('version'):
+            print('Greeter 1.0.0.')
+
         print(f'τ = {self._get_tau_value()}')
         print(f'π = {self.get_pi_value()}')
 
