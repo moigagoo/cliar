@@ -1,4 +1,4 @@
-# 1.3.1 [WIP]
+# 1.3.1
 
 -   Commands can now access root command args via `self._root_args`. [Read more](https://moigagoo.github.io/cliar/tutorial/#root-command).
 
