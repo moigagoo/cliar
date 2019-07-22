@@ -1,6 +1,7 @@
 # 1.3.0
 
 -   Add support for nested commands. [Read more](https://moigagoo.github.io/cliar/tutorial/#nested-commands).
+-   Fix incorrect mapping from handler params to optional CLI args.
 
 
 # 1.2.5
