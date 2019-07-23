@@ -1,4 +1,4 @@
-﻿from argparse import ArgumentParser, RawTextHelpFormatter, _SubParsersAction
+﻿from argparse import ArgumentParser, RawTextHelpFormatter
 from inspect import signature, getmembers, ismethod, isclass
 from collections import OrderedDict
 from typing import List, Iterable, Callable, Set, Type, get_type_hints
@@ -135,16 +135,16 @@ class Cliar:
     -   Regular methods are converted to commands. Such methods are called *handlers*.
     -   Command args are generated from the corresponding method args.
     -   Methods that start with an underscore are ignored.
-    -   ``self._root`` corresponds to the class itself. Use it to define global args.
+    -   ``self._root`` corresponds to the root command. Use it to define global args.
     '''
 
     def __init__(
             self,
             parser_name: str or None = None,
-            parent_subparsers: _SubParsersAction or None = None
+            parent: Type['Cliar'] or None = None
         ):
-        if parent_subparsers:
-            self._parser = parent_subparsers.add_parser(
+        if parent:
+            self._parser = parent._command_parsers.add_parser(
                 parser_name,
                 description=self.__doc__,
                 help=self.__doc__,
@@ -159,6 +159,7 @@ class Cliar:
         self._register_root_args()
 
         self._commands = {}
+        self._subclis = []
 
         handlers, subclis = self._get_handlers(), self._get_subclis()
 
@@ -166,19 +167,18 @@ class Cliar:
             self._command_parsers = self._parser.add_subparsers(
                 title='commands'
             )
-
             self._register_commands(handlers)
 
             for subcli_name, subcli_class in subclis.items():
-                subcli_class(subcli_name, self._command_parsers)
+                self._subclis.append(subcli_class(subcli_name, self))
 
-        self._root_args = {}
+        self.global_args = {}
 
     def _register_root_args(self):
         '''Register root args, i.e. params of ``self._root``, in the global argparser.'''
 
         self.root_command = _Command(self._root)
-        self._parser.set_defaults(command=self.root_command)
+        self._parser.set_defaults(_command=self.root_command)
 
         for arg_name, arg in self.root_command.args.items():
             self._register_arg(self._parser, arg_name, arg)
@@ -260,7 +260,7 @@ class Cliar:
                 formatter_class=command.formatter_class,
                 aliases=command.aliases
             )
-            command_parser.set_defaults(command=command)
+            command_parser.set_defaults(_command=command)
 
             for arg_name, arg in command.args.items():
                 self._register_arg(command_parser, arg_name, arg)
@@ -276,12 +276,18 @@ class Cliar:
 
         args = self._parser.parse_args()
 
-        self._root_args = {arg: vars(args)[arg] for arg in self.root_command.args}
-
-        command = args.command
+        command = args._command
         command_args = {arg: vars(args)[arg] for arg in command.args}
         inverse_arg_map = {arg: param for param, arg in command.arg_map.items()}
         handler_args = {inverse_arg_map[arg]: value for arg, value in command_args.items()}
+
+        self.global_args = {
+            arg: value
+            for arg, value in vars(args).items()
+            if arg not in ['_command', *command_args.keys()]
+        }
+        for subcli in self._subclis:
+            subcli.global_args = self.global_args
 
         if command.handler(**handler_args) == NotImplemented:
             command.handler.__self__._parser.print_help()

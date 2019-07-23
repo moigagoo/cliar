@@ -1,3 +1,9 @@
+# 1.3.2
+
+-   **[Breaks backward compatibility]** Global args are now stored in `self.global_args` instead of `self._root_args`.
+-   Global args are now available in nested commands. [Read more](https://moigagoo.github.io/cliar/tutorial/#global-arguments).
+
+
 # 1.3.1
 
 -   Commands can now access root command args via `self._root_args`. [Read more](https://moigagoo.github.io/cliar/tutorial/#root-command).
