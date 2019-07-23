@@ -656,7 +656,7 @@ Global arguments defined in `_root` can be accessed in commands via `self.global
 Run `constants` with `--version`:
 
 ```shell
-$ poetry run python greeter.py --version constants
+$ python greeter.py --version constants
 Greeter 1.0.0.
 τ = 6.283185307179586
 π = 3.141592653589793
