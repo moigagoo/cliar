@@ -31,7 +31,6 @@ class Git(Cliar):
     '''Git help.'''
 
     remote = Remote
-    flow = Flow
 
     def _root(self):
         print('Git root.')
@@ -39,5 +38,7 @@ class Git(Cliar):
     def branch(self, name):
         '''Git branch help.'''
         print(f'Setting branch to {name}')
+
+Git.flow = Flow
 
 Git().parse()
