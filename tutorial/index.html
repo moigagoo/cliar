@@ -383,6 +383,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#global-arguments" title="Global Arguments" class="md-nav__link">
+    Global Arguments
+  </a>
+  
+</li>
+      
       
       
       
@@ -532,6 +539,13 @@
         <li class="md-nav__item">
   <a href="#root-command" title="Root Command" class="md-nav__link">
     Root Command
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#global-arguments" title="Global Arguments" class="md-nav__link">
+    Global Arguments
   </a>
   
 </li>
@@ -1114,11 +1128,12 @@ Greeter <span class="m">1</span>.0.0.
 </pre></div>
 
 
-<p>Arguments of the <a href="#root-command">root command</a> can be accessed in commands of the same CLI via <code>self._root_args</code>:</p>
+<h2 id="global-arguments">Global Arguments<a class="headerlink" href="#global-arguments" title="Permanent link">&para;</a></h2>
+<p>Global arguments defined in <code>_root</code> can be accessed in commands via <code>self.global_args</code>:</p>
 <div class="codehilite"><pre><span></span>    <span class="o">...</span>
 
     <span class="k">def</span> <span class="nf">constants</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">):</span>
             <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Greeter 1.0.0.&#39;</span><span class="p">)</span>
 
         <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;τ = {self._get_tau_value()}&#39;</span><span class="p">)</span>
@@ -1129,11 +1144,14 @@ Greeter <span class="m">1</span>.0.0.
 
 
 <p>Run <code>constants</code> with <code>--version</code>:</p>
-<div class="codehilite"><pre><span></span>$ poetry run python greeter.py constants
+<div class="codehilite"><pre><span></span>$ poetry run python greeter.py --version constants
 Greeter <span class="m">1</span>.0.0.
 <span class="nv">τ</span> <span class="o">=</span> <span class="m">6</span>.283185307179586
 <span class="nv">π</span> <span class="o">=</span> <span class="m">3</span>.141592653589793
 </pre></div>
+
+
+<p>This works with <a href="#nested-commands">nested commands</a>, too. Global arguments of nested commands override global arguments of their parents.</p>
                 
                   
                 
