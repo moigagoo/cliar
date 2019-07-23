@@ -635,13 +635,16 @@ $ python greeter.py --version
 Greeter 1.0.0.
 ```
 
-Arguments of the [root command](#root-command) can be accessed in commands of the same CLI via `self._root_args`:
+
+## Global Arguments
+
+Global arguments defined in `_root` can be accessed in commands via `self.global_args`:
 
 ```python
     ...
 
     def constants(self):
-        if self._root_args.get('version'):
+        if self.global_args.get('version'):
             print('Greeter 1.0.0.')
 
         print(f'τ = {self._get_tau_value()}')
@@ -653,8 +656,10 @@ Arguments of the [root command](#root-command) can be accessed in commands of th
 Run `constants` with `--version`:
 
 ```shell
-$ poetry run python greeter.py constants
+$ poetry run python greeter.py --version constants
 Greeter 1.0.0.
 τ = 6.283185307179586
 π = 3.141592653589793
 ```
+
+This works with [nested commands](#nested-commands), too. Global arguments of nested commands override global arguments of their parents.
