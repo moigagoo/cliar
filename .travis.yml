@@ -14,16 +14,14 @@ script:
   - poetry run foliant make site -p docs
 
 deploy:
-  provider: script
-  script: poetry publish --build --username="$PYPI_USERNAME" --password="$PYPI_PASSWORD"
-  on:
-    tags: true
-
-deploy:
-  provider: pages
-  local-dir: cliar-docs.mkdocs
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  on:
-    branch: develop
+  - provider: script
+    script: poetry publish --build --username="$PYPI_USERNAME" --password="$PYPI_PASSWORD"
+    on:
+      tags: true
+  - provider: pages
+    local-dir: cliar-docs.mkdocs
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN
+    keep-history: true
+    on:
+      branch: develop
