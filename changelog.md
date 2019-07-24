@@ -1,42 +1,42 @@
-# 1.3.2
+# 1.3.2 (July 23, 2019)
 
 -   **[Breaks backward compatibility]** Global args are now stored in `self.global_args` instead of `self._root_args`.
 -   Global args are now available in nested commands. [Read more](https://moigagoo.github.io/cliar/tutorial/#global-arguments).
 
 
-# 1.3.1
+# 1.3.1 (July 22, 2019)
 
 -   Commands can now access root command args via `self._root_args`. [Read more](https://moigagoo.github.io/cliar/tutorial/#root-command).
 
 
-# 1.3.0
+# 1.3.0 (July 21, 2019)
 
 -   Add support for nested commands. [Read more](https://moigagoo.github.io/cliar/tutorial/#nested-commands).
 -   Fix incorrect mapping from handler params to optional CLI args.
 
 
-# 1.2.5
+# 1.2.5 (June 30, 2019)
 
 -   Prepare for postponed annotation evaluation, which will be the default in Python 4.0 (see #2).
 
-# 1.2.4
+# 1.2.4 (June 27, 2019)
 
 -   Add `show_defaults` param to `set_help` util. [Read more](https://moigagoo.github.io/cliar/tutorial/#argument-descriptions).
 
-# 1.2.3
+# 1.2.3 (May 13, 2019)
 
 -   Fix Python 3.7 incompatibility.
 -   Add `set_sharg_map` to override or disable short arg names.
 
-# 1.2.2
+# 1.2.2 (June 3, 2018)
 
 -   Make `_root` not an abstract method.
 
-# 1.2.1
+# 1.2.1 (June 2, 2018)
 
 -   Fix critical bug that disallowed string params.
 
-# 1.2.0
+# 1.2.0 (June 1, 2018) 
 
 -   Boolean handler params are converted into `store_true` arguments. Before that, params with default value of `True` were much confusingly converted into `store_false` arguments.
 -   Support `List[int]` and similar arg types. If the param type is a subclass of `typing.Iterable` and has a type specified in brackets, it's converted into multivalue arg of the type in the brackets.
