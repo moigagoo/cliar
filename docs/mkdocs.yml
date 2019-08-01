@@ -12,8 +12,6 @@ theme:
     code: PT Mono
   logo: assets/terminal.svg
   favicon: assets/terminal.ico
-  feature:
-    tabs: true
 
 extra:
   social:
