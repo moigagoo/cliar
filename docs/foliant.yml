@@ -11,6 +11,8 @@ backend_config:
   mkdocs:
     mkdocs.yml: !include mkdocs.yml
 
+escape_code: true
+
 preprocessors:
   - includes:
       aliases:
