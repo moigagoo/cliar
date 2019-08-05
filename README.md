@@ -83,7 +83,7 @@ Save this code to `calc.py` and run it. Try different inputs:
         optional arguments:
         -h, --help  show this help message and exit
 
-A few thing to note:
+A few things to note:
 
 -   It's a regular Python class with a regular Python method. You don't need to learn any new syntax to use Cliar.
 
@@ -91,7 +91,7 @@ A few thing to note:
 
 -   There is no explicit conversion to float for `x` or `y` or error handling in the `add` method body. Instead, `x` and `y` are just treated as floats. Cliar converts the types using `add`'s type hints. Invalid input doesn't even reach your code.
 
--   The `--help` and `-h` flags are added automatically and the help messages are generated from the docstrings.
+-   `--help` and `-h` flags are added automatically and the help messages are generated from the docstrings.
 
 
 ## Read Next
