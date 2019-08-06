@@ -223,7 +223,7 @@ usage: greeter.py hello [-h] [-s] name
 Say hello.
 
 positional arguments:
-  name         The greetee
+  name         Who to greet
 
 optional arguments:
   -h, --help   show this help message and exit
@@ -256,7 +256,7 @@ usage: greeter.py hello [-h] [-s] NAME
 Say hello.
 
 positional arguments:
-  NAME         The greetee
+  NAME         Who to greet
 
 optional arguments:
   -h, --help   show this help message and exit
