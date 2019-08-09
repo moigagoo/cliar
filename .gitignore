@@ -110,6 +110,5 @@ ENV/
 
 *.mkdocs
 *.pdf
-.includescache
-.escapecodecache
+.*cache
 __folianttmp__
