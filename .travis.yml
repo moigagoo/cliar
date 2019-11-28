@@ -5,6 +5,7 @@ python:
 install:
   - curl -OsSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py
   - python get-poetry.py --preview -y
+  - export PATH=$PATH:~/.poetry/bin
   - poetry install
 
 script:
