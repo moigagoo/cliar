@@ -1,4 +1,4 @@
-# WIP
+# 1.3.3 (November 29, 2019)
 
 -   Fix [#11](https://github.com/moigagoo/cliar/issues/11): multiword optional args of any type other than `bool` couldn't be used.
 
