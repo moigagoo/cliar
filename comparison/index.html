@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/terminal.ico">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.5.0">
     
     
       
@@ -40,9 +40,9 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.0284f74d.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-palette.01803549.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
       
         
@@ -51,7 +51,7 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
@@ -202,7 +202,7 @@
         
       
       
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -298,28 +298,28 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#modular-clis" title="Modular CLIs" class="md-nav__link">
+  <a href="#modular-clis" class="md-nav__link">
     Modular CLIs
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#dsl-free" title="DSL-Free" class="md-nav__link">
+  <a href="#dsl-free" class="md-nav__link">
     DSL-Free
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#magic-free" title="Magic-Free" class="md-nav__link">
+  <a href="#magic-free" class="md-nav__link">
     Magic-Free
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#type-casting" title="Type Casting" class="md-nav__link">
+  <a href="#type-casting" class="md-nav__link">
     Type Casting
   </a>
   
@@ -369,28 +369,28 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#modular-clis" title="Modular CLIs" class="md-nav__link">
+  <a href="#modular-clis" class="md-nav__link">
     Modular CLIs
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#dsl-free" title="DSL-Free" class="md-nav__link">
+  <a href="#dsl-free" class="md-nav__link">
     DSL-Free
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#magic-free" title="Magic-Free" class="md-nav__link">
+  <a href="#magic-free" class="md-nav__link">
     Magic-Free
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#type-casting" title="Type Casting" class="md-nav__link">
+  <a href="#type-casting" class="md-nav__link">
     Type Casting
   </a>
   
@@ -521,16 +521,16 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 <div class="codehilite"><pre><span></span><span class="c1"># In file a:</span>
 <span class="n">cli</span> <span class="o">=</span> <span class="n">click</span><span class="o">.</span><span class="n">Group</span><span class="p">()</span>
 
-<span class="nd">@cli.command</span><span class="p">()</span>
-<span class="k">def</span> <span class="nf">cmd_a</span><span class="p">():</span> <span class="k">print</span><span class="p">(</span><span class="s2">&quot;You called cmd_a&quot;</span><span class="p">)</span>
+<span class="nd">@cli</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">cmd_a</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You called cmd_a&quot;</span><span class="p">)</span>
 
 
 <span class="c1"># In file b:</span>
 
 <span class="kn">from</span> <span class="nn">a</span> <span class="kn">import</span> <span class="n">cli</span>
 
-<span class="nd">@cli.command</span><span class="p">()</span>
-<span class="k">def</span> <span class="nf">cmd_b</span><span class="p">():</span> <span class="k">print</span><span class="p">(</span><span class="s2">&quot;You called cmd_b&quot;</span><span class="p">)</span>
+<span class="nd">@cli</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">cmd_b</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You called cmd_b&quot;</span><span class="p">)</span>
 </pre></div>
 
 
@@ -584,7 +584,7 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 <span class="kn">from</span> <span class="nn">docopt</span> <span class="kn">import</span> <span class="n">docopt</span>
 
 
-<span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="nb">file</span><span class="p">):</span>                         <span class="c1"># two times</span>
+<span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>                         <span class="c1"># two times</span>
     <span class="o">...</span>
 
 <span class="k">def</span> <span class="nf">seek</span><span class="p">(</span><span class="n">position</span><span class="p">):</span>
@@ -627,9 +627,9 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 <p><strong>Click</strong>, on the other hand, is full of magic. Let's examine the hello world example from the <a href="http://click.pocoo.org/">Click documentation</a>:</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">click</span>
 
-<span class="nd">@click.command</span><span class="p">()</span>
-<span class="nd">@click.option</span><span class="p">(</span><span class="s1">&#39;--count&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Number of greetings.&#39;</span><span class="p">)</span>
-<span class="nd">@click.option</span><span class="p">(</span><span class="s1">&#39;--name&#39;</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;Your name&#39;</span><span class="p">,</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;--count&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Number of greetings.&#39;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;--name&#39;</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="s1">&#39;Your name&#39;</span><span class="p">,</span>
               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;The person to greet.&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Simple program that greets NAME for a total of COUNT times.&quot;&quot;&quot;</span>
@@ -647,8 +647,8 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 
 <span class="c1"># class Player(Cliar):</span>
 <span class="k">class</span> <span class="nc">Player</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">file</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Playing {file}&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Playing </span><span class="si">{file}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
 
@@ -659,18 +659,18 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 <div class="codehilite"><pre><span></span><span class="n">args</span> <span class="o">=</span> <span class="n">docopt</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;play&#39;</span><span class="p">]:</span>
-    <span class="nb">file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s1">&#39;&lt;file&gt;&#39;</span><span class="p">])</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s1">&#39;&lt;file&gt;&#39;</span><span class="p">])</span>
 </pre></div>
 
 
 <p><strong>Click</strong> lets you define an argument and option type in the decorator constructor:</p>
-<div class="codehilite"><pre><span></span><span class="nd">@click.argument</span><span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 </pre></div>
 
 
 <p>If the type is not set, Click tries to infer it from the default value. It that's not set as well, string is assumed.</p>
 <p><strong>Cliar</strong> lets you define argument and option type with type hints. The logic is similar to Click's: if the type hint is given, use it, if not, infer the type from the default value, otherwise assume string:</p>
-<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="nb">file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
                 
                   
@@ -754,7 +754,7 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
       
     </div>
     
-      <script src="../assets/javascripts/application.245445c6.js"></script>
+      <script src="../assets/javascripts/application.a8b5e56f.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       

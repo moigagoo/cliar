@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="assets/terminal.ico">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.5.0">
     
     
       
@@ -40,9 +40,9 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/application.0284f74d.css">
+      <link rel="stylesheet" href="assets/stylesheets/application.1b62728e.css">
       
-        <link rel="stylesheet" href="assets/stylesheets/application-palette.01803549.css">
+        <link rel="stylesheet" href="assets/stylesheets/application-palette.a8b3c06d.css">
       
       
         
@@ -51,7 +51,7 @@
       
     
     
-      <script src="assets/javascripts/modernizr.74668098.js"></script>
+      <script src="assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
@@ -202,7 +202,7 @@
         
       
       
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -274,21 +274,21 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#installation" title="Installation" class="md-nav__link">
+  <a href="#installation" class="md-nav__link">
     Installation
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#basic-usage" title="Basic Usage" class="md-nav__link">
+  <a href="#basic-usage" class="md-nav__link">
     Basic Usage
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#read-next" title="Read Next" class="md-nav__link">
+  <a href="#read-next" class="md-nav__link">
     Read Next
   </a>
   
@@ -362,21 +362,21 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#installation" title="Installation" class="md-nav__link">
+  <a href="#installation" class="md-nav__link">
     Installation
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#basic-usage" title="Basic Usage" class="md-nav__link">
+  <a href="#basic-usage" class="md-nav__link">
     Basic Usage
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#read-next" title="Read Next" class="md-nav__link">
+  <a href="#read-next" class="md-nav__link">
     Read Next
   </a>
   
@@ -428,7 +428,7 @@
     <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Add two numbers.&#39;&#39;&#39;</span>
 
-        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;The sum of {x} and {y} is {x+y}.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The sum of </span><span class="si">{x}</span><span class="s1"> and </span><span class="si">{y}</span><span class="s1"> is {x+y}.&#39;</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -457,34 +457,34 @@ calc.py add: error: argument x: invalid float value: <span class="s1">&#39;foo&#
 </li>
 <li>
 <p>Help:</p>
-<div class="codehilite"><pre><span></span>$ <span class="nv">python</span> <span class="nv">calc</span>.<span class="nv">py</span> <span class="o">-</span><span class="nv">h</span>
-<span class="nv">usage</span>: <span class="nv">calc</span>.<span class="nv">py</span> [<span class="o">-</span><span class="nv">h</span>] {<span class="nv">add</span>} ...
+<div class="codehilite"><pre><span></span>$ python calc.py -h
+usage: calc.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">{</span>add<span class="o">}</span> ...
 
-<span class="nv">Calculator</span> <span class="nv">app</span>.
+Calculator app.
 
-<span class="nv">optional</span> <span class="nv">arguments</span>:
-<span class="o">-</span><span class="nv">h</span>, <span class="o">--</span><span class="nv">help</span>  <span class="k">show</span> <span class="nv">this</span> <span class="nv">help</span> <span class="nv">message</span> <span class="nv">and</span> <span class="k">exit</span>
+optional arguments:
+-h, --help  show this <span class="nb">help</span> message and <span class="nb">exit</span>
 
-<span class="nv">commands</span>:
-{<span class="nv">add</span>}       <span class="nv">Available</span> <span class="nv">commands</span>:
-    <span class="nv">add</span>       <span class="nv">Add</span> <span class="nv">two</span> <span class="nv">numbers</span>.
+commands:
+<span class="o">{</span>add<span class="o">}</span>       Available commands:
+    add       Add two numbers.
 </pre></div>
 
 
 </li>
 <li>
 <p>Help for <code>add</code> command:</p>
-<div class="codehilite"><pre><span></span>$ <span class="nv">python</span> <span class="nv">calc</span>.<span class="nv">py</span> <span class="nv">add</span> <span class="o">-</span><span class="nv">h</span>
-<span class="nv">usage</span>: <span class="nv">calc</span>.<span class="nv">py</span> <span class="nv">add</span> [<span class="o">-</span><span class="nv">h</span>] <span class="nv">x</span> <span class="nv">y</span>
+<div class="codehilite"><pre><span></span>$ python calc.py add -h
+usage: calc.py add <span class="o">[</span>-h<span class="o">]</span> x y
 
-<span class="nv">Add</span> <span class="nv">two</span> <span class="nv">numbers</span>.
+Add two numbers.
 
-<span class="nv">positional</span> <span class="nv">arguments</span>:
-<span class="nv">x</span>
-<span class="nv">y</span>
+positional arguments:
+x
+y
 
-<span class="nv">optional</span> <span class="nv">arguments</span>:
-<span class="o">-</span><span class="nv">h</span>, <span class="o">--</span><span class="nv">help</span>  <span class="k">show</span> <span class="nv">this</span> <span class="nv">help</span> <span class="nv">message</span> <span class="nv">and</span> <span class="k">exit</span>
+optional arguments:
+-h, --help  show this <span class="nb">help</span> message and <span class="nb">exit</span>
 </pre></div>
 
 
@@ -578,7 +578,7 @@ calc.py add: error: argument x: invalid float value: <span class="s1">&#39;foo&#
       
     </div>
     
-      <script src="assets/javascripts/application.245445c6.js"></script>
+      <script src="assets/javascripts/application.a8b5e56f.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"."}})</script>
       
