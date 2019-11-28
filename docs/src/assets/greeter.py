@@ -5,24 +5,19 @@ from cliar import Cliar, set_help, set_metavars, set_arg_map, set_sharg_map, add
 
 class Time(Cliar):
     def now(self, utc=False):
-        if utc:
-            print(f'UTC time is {datetime.utcnow().ctime()}')
-        else:
-            print(f'Local time is {datetime.now().ctime()}')
+        now_ctime = datetime.utcnow().ctime() if utc else datetime.now().ctime()
+        print(f'UTC time is {now_ctime}')
 
 class Utils(Cliar):
     time = Time
 
 class Greeter(Cliar):
-    '''Greeter app created with in Cliar.'''
+    '''Greeter app created with Cliar.'''
 
     utils = Utils
 
     def _root(self, version=False):
-        if version:
-            print('Greeter 1.0.0.')
-        else:
-            print('Welcome to Greeter!')
+        print('Greeter 1.0.0.' if version else 'Welcome to Greeter!')
 
     def _get_tau_value(self):
         return tau
@@ -51,17 +46,14 @@ class Greeter(Cliar):
     @set_arg_map({'n': 'repeat'})
     @set_sharg_map({'n': 'n'})
     @set_metavars({'name': 'NAME'})
-    @set_help({'name': 'The greetee', 'shout': 'Set to shout the greeting'})
+    @set_help({'name': 'Who to greet', 'shout': 'Shout the greeting'})
     def hello(self, name, n=1, shout=False):
         '''Say hello.'''
 
         greeting = f'Hello {name}!'
 
         for _ in range(n):
-            if shout:
-                print(greeting.upper())
-            else:
-                print(greeting)
+            print(greeting.upper() if shout else greeting)
 
 
 if __name__ == '__main__':

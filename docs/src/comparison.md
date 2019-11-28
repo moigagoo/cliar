@@ -11,7 +11,9 @@ Name | Modular CLIs | DSL-free | Magic-free | Type casting | Pun in name
 [docopt](http://docopt.org/) | ❌ | ❌ | ✔ | ❌ | ❌
 
 !!! note
-    Of course, any tool lets you do anything. Below, when I say "feature X is not supported by tool Y," I mean that the effort needed to implement X with Y is *subjectively* too high. I'm basing my conclusions on the solutions provided by the official documentations of the tools being compared.
+    Of course, any tool lets you do anything. When I say "feature X is not supported by tool Y," I mean that the effort needed to implement X with Y is *in my opinion* too high.
+
+    Conclusions are based on official docs of the tools being compared.
 
     Feel free to disagree.
 
@@ -129,11 +131,11 @@ Cliar relies on Python's standard mechanisms and doesn't reinvent the wheel when
 
 ## DSL-Free
 
-I believe DSLs should be avoided whenever pure Python is enough. A DSL requires time to learn, and the knowledge you gain is virtually useless anywhere outside the scope of the DSL, which is by definition the app it's used in.
+DSLs should be avoided when pure Python is enough. A DSL requires time to learn, and the knowledge you gain is useless outside the scope of the DSL, which is by definition the app it's used in.
 
 !!! note
 
-    This thought along with other great ones has been beautifully explained by Robert E Brewer in [The Zen in Cherrypy](https://pyvideo.org/pycon-us-2010/pycon-2010--the-zen-of-cherrypy---111.html).
+    This thought has been explained by Robert E Brewer in [The Zen in CherryPy](https://pyvideo.org/pycon-us-2010/pycon-2010--the-zen-of-cherrypy---111.html).
 
 **In Docopt**, you describe your CLI using a DSL. Then, you ask docopt to parse the commandline string and pass the extracted values to the business logic. The interface is completely separated from the business logic.
 
@@ -176,9 +178,9 @@ Even in this toy example you can see how much redundant code this pattern spawns
 
 ## Magic-Free
 
-*Magic* is atypical behavior driven by a hidden mechanism. It may give a short "wow" effect, but the price to pay is that your code becomes harder to debug and harder to follow. Writing idiomatic Python generally means avoiding magic.
+*Magic* is unusual behavior driven by a hidden mechanism. It may give a short "wow" effect, but the price to pay is that code becomes harder to debug and harder to follow. Writing idiomatic Python generally means avoiding magic.
 
-It's easy to see if a tool is "magical": if after you remove it from the code it breaks, the tool was magical.
+To see if a tool is "magical," remove it from the code and see if the code breaks.
 
 **Docopt**, for example, is magic-free. If you remove the `__doc__` parsing part, the remaining code is still 100% valid Python. Removing docopt does not break you program, it just removes the commandline parsing functionality:
 
@@ -219,9 +221,7 @@ if __name__ == '__main__':
 
 Note that `hello` function accepts two positional arguments, `count` and `name`, but we call it without any arguments. That's because the params are added by the decorators based on the arguments of the decorator generators (`--count` and `--name`). This is broken code only forced to work by the magic of Click's decorators.
 
-Also, Click forces you to use its own `echo` function instead of the good old print. I'm sure this is justified but it still is confusing.
-
-**Cliar** is magic-free. The class you describe your CLI with is a regular Python class. If you remove `Cliar` from its parents, the class will remain functional. It will continue to contain all the business logic, only without the CLI:
+**Cliar** is magic-free. Your CLI classes are regular Python classes. If you remove `Cliar` from its parents, the class will remain functional. It will continue to contain all the business logic, only without the CLI:
 
 ```python
 # from cliar import Cliar
@@ -239,7 +239,7 @@ Cliar's decorators like `set_name` or `add_aliases` can also be safely remove wi
 
 In commandline, any argument or flag value is a string. Converting strings to numbers and other types manually within business logic is tedious, requires dancing with exception handling, and, most importantly, has nothing to do with the business logic itself: it's a necessity induced by the fact the shell works only with strings and Python works with all sorts of types rather than a valuable data processing within business logic.
 
-**Docopt** doesn't attempt to cast types. It just parses a string into smaller ones in a nicely structured way, leaving all the necessary processing to the programmer.
+**Docopt** doesn't attempt to cast types. It just parses a string into smaller ones in a nicely structured way, leaving all the necessary processing to the programmer:
 
 ```python
 args = docopt(__doc__)

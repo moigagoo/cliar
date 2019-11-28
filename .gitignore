@@ -98,6 +98,10 @@ ENV/
 # VSCode project settings
 .vscode
 
+# Sublime Test project settings
+*.sublime-project
+*.sublime-workspace
+
 # mkdocs documentation
 /site
 
@@ -106,5 +110,5 @@ ENV/
 
 *.mkdocs
 *.pdf
-.includescache
+.*cache
 __folianttmp__
