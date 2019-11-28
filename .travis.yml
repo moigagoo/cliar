@@ -1,11 +1,11 @@
 language: python
 python:
-  - 3.7
+  - 3.8
 
 install:
-  - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+  - curl -OsSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py
+  - python get-poetry.py --preview
   - export PATH=$PATH:~/.poetry/bin
-  - pip install cleo tomlkit jsonschema pyparsing keyring pkginfo cachecontrol cachy html5lib lockfile
   - poetry install
 
 script:
