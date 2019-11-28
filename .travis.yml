@@ -1,9 +1,10 @@
 language: python
 python:
-  - 3.6
+  - 3.8
 
 install:
-  - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+  - curl -OsSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py
+  - python get-poetry.py --preview -y
   - export PATH=$PATH:~/.poetry/bin
   - poetry install
 

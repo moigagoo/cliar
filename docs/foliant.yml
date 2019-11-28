@@ -17,4 +17,3 @@ preprocessors:
   - includes:
       aliases:
         cliar: https://github.com/moigagoo/cliar.git
-  - blockdiag
