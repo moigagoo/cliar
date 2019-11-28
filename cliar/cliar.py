@@ -193,7 +193,7 @@ class Cliar:
         '''
 
         if arg.default is None:
-            arg_prefixed_names = [arg_name]
+            arg_prefixed_names = []
 
         elif arg.short_name:
             arg_prefixed_names = ['-'+arg.short_name, '--'+arg_name]
@@ -213,6 +213,7 @@ class Cliar:
         elif arg.nargs:
             command_parser.add_argument(
                 *arg_prefixed_names,
+                dest=arg_name,
                 type=arg.type,
                 default=arg.default,
                 nargs=arg.nargs,
@@ -223,6 +224,7 @@ class Cliar:
         else:
             command_parser.add_argument(
                 *arg_prefixed_names,
+                dest=arg_name,
                 type=arg.type,
                 default=arg.default,
                 metavar=arg.metavar,
