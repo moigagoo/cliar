@@ -1,3 +1,8 @@
+# WIP
+
+-   Fix [#11](https://github.com/moigagoo/cliar/issues/11): multiword optional args of any type other than `bool` couldn't be used.
+
+
 # 1.3.2 (July 23, 2019)
 
 -   Global args are now stored in `self.global_args` instead of `self._root_args`.
@@ -36,7 +41,7 @@
 
 -   Fix critical bug that disallowed string params.
 
-# 1.2.0 (June 1, 2018) 
+# 1.2.0 (June 1, 2018)
 
 -   Boolean handler params are converted into `store_true` arguments. Before that, params with default value of `True` were much confusingly converted into `store_false` arguments.
 -   Support `List[int]` and similar arg types. If the param type is a subclass of `typing.Iterable` and has a type specified in brackets, it's converted into multivalue arg of the type in the brackets.
