@@ -6,7 +6,7 @@ install:
   - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
   - export PATH=$PATH:~/.poetry/bin
   - pip install cleo tomlkit jsonschema pyparsing keyring pkginfo cachecontrol cachy html5lib lockfile
-  - python -m poetry install
+  - poetry install
 
 script:
   - poetry run pytest --cov=cliar
