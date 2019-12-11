@@ -1,5 +1,6 @@
 ﻿from argparse import ArgumentParser, RawTextHelpFormatter
-from inspect import signature, getmembers, ismethod, isclass
+from asyncio import get_event_loop
+from inspect import signature, getmembers, ismethod, isclass, iscoroutine
 from collections import OrderedDict
 from typing import List, Iterable, Callable, Set, Type, get_type_hints
 
@@ -291,7 +292,12 @@ class Cliar:
         for subcli in self._subclis:
             subcli.global_args = self.global_args
 
-        if command.handler(**handler_args) == NotImplemented:
+        result = command.handler(**handler_args)
+
+        if iscoroutine(result):
+            result = get_event_loop().run_until_complete(result)
+
+        if result == NotImplemented:
             command.handler.__self__._parser.print_help()
 
     def _root(self):
