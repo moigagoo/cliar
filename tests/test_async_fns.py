@@ -11,7 +11,10 @@ def test_help(capfd, datadir):
 def test_wait(capfd, datadir):
     seconds_to_wait = 1.0
 
-    run(f'python {datadir/"async_fns.py"} wait -s "{seconds_to_wait}"',
-        shell=True)
+    run(
+        f'python {datadir/"async_fns.py"} wait -s "{seconds_to_wait}"',
+        shell=True
+    )
+
     seconds_awaited = float(capfd.readouterr().out.strip())
     assert round(seconds_awaited, 1) == round(seconds_to_wait, 1)

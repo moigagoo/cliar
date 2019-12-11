@@ -6,10 +6,11 @@ from cliar import Cliar
 
 class AsyncFunctions(Cliar):
     async def wait(self, seconds_to_wait: float = 1.0):
-        t1 = perf_counter()
+        start = perf_counter()
+
         await asyncio.sleep(seconds_to_wait)
-        elapsed = perf_counter() - t1
-        print(elapsed)
+
+        print(perf_counter() - start)
 
 if __name__ == "__main__":
     AsyncFunctions().parse()
