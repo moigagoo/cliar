@@ -573,7 +573,7 @@
 </pre></div>
 
 
-<p>In Cliar, CLI is a subclass of <code>Cliar</code>, with its methods are turned into commands and their params into args.</p>
+<p>In Cliar, CLI is a subclass of <code>Cliar</code>, with its methods turned into commands and their params into args.</p>
 <p>Save this code into <code>greeter.py</code> and run it:</p>
 <div class="codehilite"><pre><span></span>$ python greeter.py hello
 Hello World!
@@ -861,7 +861,7 @@ Hello John!
 
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>This decorator lets you use Python's reserved words as arg names like <code>--for</code> and <code>--with</code> as arg names.</p>
+<p>This decorator lets you use Python's reserved words like <code>--for</code> and <code>--with</code> as arg names.</p>
 </div>
 <p>You can also override argument short names specifically, with <code>set_sharg_map</code> decorator:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span><span class="p">,</span> <span class="n">set_sharg_map</span>
