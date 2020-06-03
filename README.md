@@ -30,10 +30,10 @@ from cliar import Cliar
 
 
 class Calculator(Cliar):
-'''Calculator app.'''
+    '''Calculator app.'''
 
     def add(self, x: float, y: float):
-    '''Add two numbers.'''
+        '''Add two numbers.'''
 
         print(f'The sum of {x} and {y} is {x+y}.')
 
@@ -92,6 +92,33 @@ A few things to note:
 -   There is no explicit conversion to float for `x` or `y` or error handling in the `add` method body. Instead, `x` and `y` are just treated as floats. Cliar converts the types using `add`'s type hints. Invalid input doesn't even reach your code.
 
 -   `--help` and `-h` flags are added automatically and the help messages are generated from the docstrings.
+
+
+## Setuptools and Poetry
+
+To invoke your CLI via an entrypoint, wrap `parse` call in a function and point to it in your `setup.py` or `pyproject.toml`.
+
+`calc.py`:
+
+    ...
+    def entry_point():
+        Calculator().parse()
+
+`setup.py`:
+
+    setup(
+        ...
+        entry_points = {
+            'console_scripts': ['calc=calc:entry_point'],
+        }
+        ...
+    )
+
+`pyproject.toml`:
+
+    ...
+    [tool.poetry.scripts]
+    calc = 'calc:entry_point'
 
 
 ## Read Next
