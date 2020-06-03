@@ -288,6 +288,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#setuptools-and-poetry" class="md-nav__link">
+    Setuptools and Poetry
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#read-next" class="md-nav__link">
     Read Next
   </a>
@@ -376,6 +383,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#setuptools-and-poetry" class="md-nav__link">
+    Setuptools and Poetry
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#read-next" class="md-nav__link">
     Read Next
   </a>
@@ -423,10 +437,10 @@
 
 
 <span class="k">class</span> <span class="nc">Calculator</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
-<span class="sd">&#39;&#39;&#39;Calculator app.&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;Calculator app.&#39;&#39;&#39;</span>
 
     <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Add two numbers.&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;Add two numbers.&#39;&#39;&#39;</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The sum of </span><span class="si">{x}</span><span class="s1"> and </span><span class="si">{y}</span><span class="s1"> is {x+y}.&#39;</span><span class="p">)</span>
 
@@ -505,6 +519,33 @@ optional arguments:
 <p><code>--help</code> and <code>-h</code> flags are added automatically and the help messages are generated from the docstrings.</p>
 </li>
 </ul>
+<h2 id="setuptools-and-poetry">Setuptools and Poetry<a class="headerlink" href="#setuptools-and-poetry" title="Permanent link">&para;</a></h2>
+<p>To invoke your CLI via an entrypoint, wrap <code>parse</code> call in a function and point to it in your <code>setup.py</code> or <code>pyproject.toml</code>.</p>
+<p><code>calc.py</code>:</p>
+<div class="codehilite"><pre><span></span><span class="err">...</span>
+<span class="err">def entry_point():</span>
+<span class="err">    Calculator().parse()</span>
+</pre></div>
+
+
+<p><code>setup.py</code>:</p>
+<div class="codehilite"><pre><span></span><span class="err">setup(</span>
+<span class="err">    ...</span>
+<span class="err">    entry_points = {</span>
+<span class="err">        &#39;console_scripts&#39;: [&#39;calc=calc:entry_point&#39;],</span>
+<span class="err">    }</span>
+<span class="err">    ...</span>
+<span class="err">)</span>
+</pre></div>
+
+
+<p><code>pyproject.toml</code>:</p>
+<div class="codehilite"><pre><span></span><span class="err">...</span>
+<span class="err">[tool.poetry.scripts]</span>
+<span class="err">calc = &#39;calc:entry_point&#39;</span>
+</pre></div>
+
+
 <h2 id="read-next">Read Next<a class="headerlink" href="#read-next" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://moigagoo.github.io/cliar/tutorial/">Tutorial →</a></li>
