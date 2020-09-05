@@ -4,6 +4,8 @@ from inspect import signature, getmembers, ismethod, isclass, iscoroutine
 from collections import OrderedDict
 from typing import List, Iterable, Callable, Set, Type, get_type_hints
 
+import argcomplete
+
 from .utils import ignore
 
 
@@ -276,6 +278,8 @@ class Cliar:
     @ignore
     def parse(self):
         '''Parse commandline input, i.e. launch the CLI.'''
+
+        argcomplete.autocomplete(self._parser)
 
         args = self._parser.parse_args()
 
