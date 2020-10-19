@@ -496,7 +496,7 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 </pre></div>
 
 
-<p>Adding a new command means adding a line into a spec before it gets parsed, so the on;y way an extension can add a new command to the base CLI is by inserting lines into the base CLI spec. This is inconvenient if you're adding one command, but it's a nightmare if you're creating an API for adding unlimited commands:</p>
+<p>Adding a new command means adding a line into a spec before it gets parsed, so the only way an extension can add a new command to the base CLI is by inserting lines into the base CLI spec. This is inconvenient if you're adding one command, but it's a nightmare if you're creating an API for adding unlimited commands:</p>
 <div class="codehilite"><pre><span></span><span class="sd">&#39;&#39;&#39;Player.</span>
 
 <span class="sd">Usage:</span>
@@ -654,7 +654,7 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 
 <p>Cliar's decorators like <code>set_name</code> or <code>add_aliases</code> can also be safely remove without breaking any code.</p>
 <h2 id="type-casting">Type Casting<a class="headerlink" href="#type-casting" title="Permanent link">&para;</a></h2>
-<p>In commandline, any argument or flag value is a string. Converting strings to numbers and other types manually within business logic is tedious, requires dancing with exception handling, and, most importantly, has nothing to do with the business logic itself: it's a necessity induced by the fact the shell works only with strings and Python works with all sorts of types rather than a valuable data processing within business logic.</p>
+<p>In commandline, any argument or flag value is a string. Converting strings to numbers and other types manually within business logic is tedious, requires dancing with exception handling, and, most importantly, has nothing to do with the business logic itself: it's a necessity induced by the fact the shell works only with strings and Python works with all sorts of types.</p>
 <p><strong>Docopt</strong> doesn't attempt to cast types. It just parses a string into smaller ones in a nicely structured way, leaving all the necessary processing to the programmer:</p>
 <div class="codehilite"><pre><span></span><span class="n">args</span> <span class="o">=</span> <span class="n">docopt</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
