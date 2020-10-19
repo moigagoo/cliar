@@ -57,7 +57,7 @@ if __name__ == '__main__':
     arguments = docopt(__doc__)
 ```
 
-Adding a new command means adding a line into a spec before it gets parsed, so the on;y way an extension can add a new command to the base CLI is by inserting lines into the base CLI spec. This is inconvenient if you're adding one command, but it's a nightmare if you're creating an API for adding unlimited commands:
+Adding a new command means adding a line into a spec before it gets parsed, so the only way an extension can add a new command to the base CLI is by inserting lines into the base CLI spec. This is inconvenient if you're adding one command, but it's a nightmare if you're creating an API for adding unlimited commands:
 
 ```python
 '''Player.
@@ -237,7 +237,7 @@ Cliar's decorators like `set_name` or `add_aliases` can also be safely remove wi
 
 ## Type Casting
 
-In commandline, any argument or flag value is a string. Converting strings to numbers and other types manually within business logic is tedious, requires dancing with exception handling, and, most importantly, has nothing to do with the business logic itself: it's a necessity induced by the fact the shell works only with strings and Python works with all sorts of types rather than a valuable data processing within business logic.
+In commandline, any argument or flag value is a string. Converting strings to numbers and other types manually within business logic is tedious, requires dancing with exception handling, and, most importantly, has nothing to do with the business logic itself: it's a necessity induced by the fact the shell works only with strings and Python works with all sorts of types.
 
 **Docopt** doesn't attempt to cast types. It just parses a string into smaller ones in a nicely structured way, leaving all the necessary processing to the programmer:
 
