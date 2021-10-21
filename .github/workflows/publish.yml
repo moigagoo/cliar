@@ -1,0 +1,36 @@
+name: Publish Package
+
+on:
+  workflow_run:
+    workflows:
+      - "Run Tests"
+      - "Deploy Docs"
+    tags:
+      - '*'
+    types: 
+      - completed
+
+jobs:
+  Publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+
+      - name: Download Poetry
+        run: curl -OsSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py
+
+      - name: Install Poetry
+        run: python install-poetry.py --preview -y && export PATH=$PATH:~/.poetry/bin
+
+      - name: Install Package
+        run: poetry install
+
+      - name: Publish Package
+        env:
+          PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: poetry publish --build --username="$PYPI_USERNAME" --password="$PYPI_PASSWORD"
+
