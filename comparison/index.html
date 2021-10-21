@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/terminal.ico">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.5.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-4.6.3">
     
     
       
@@ -40,7 +40,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
       
         <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -51,12 +51,12 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:300,400,400i,700|PT+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:300,400,400i,700%7CPT+Mono&display=fallback">
         <style>body,input{font-family:"PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"PT Mono","Courier New",Courier,monospace}</style>
       
     
@@ -110,7 +110,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#cliar-vs-click-vs-docopt" tabindex="1" class="md-skip">
+      <a href="#cliar-vs-click-vs-docopt" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -119,9 +119,9 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href=".." title="Cliar: Create modular Python CLIs with type annotations and inheritance" class="md-header-nav__button md-logo">
+        <a href=".." title="Cliar: Create modular Python CLIs with type annotations and inheritance" aria-label="Cliar: Create modular Python CLIs with type annotations and inheritance" class="md-header-nav__button md-logo">
           
-            <img src="../assets/terminal.svg" width="24" height="24">
+            <img alt="logo" src="../assets/terminal.svg" width="24" height="24">
           
         </a>
       </div>
@@ -150,7 +150,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -213,7 +213,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <a href=".." title="Cliar: Create modular Python CLIs with type annotations and inheritance" class="md-nav__button md-logo">
       
-        <img src="../assets/terminal.svg" width="48" height="48">
+        <img alt="logo" src="../assets/terminal.svg" width="48" height="48">
       
     </a>
     Cliar: Create modular Python CLIs with type annotations and inheritance
@@ -247,8 +247,8 @@
 
 
   <li class="md-nav__item">
-    <a href=".." title="Home" class="md-nav__link">
-      Home
+    <a href=".." title="Cliar" class="md-nav__link">
+      Cliar
     </a>
   </li>
 
@@ -465,11 +465,10 @@
 <h2 id="modular-clis">Modular CLIs<a class="headerlink" href="#modular-clis" title="Permanent link">&para;</a></h2>
 <p>Imagine you're developing a CLI-based audio player. You want it to have a ton of features but you don't want to develop them all on your own. The core version will only play a given file, but the rest of the functionality will be implemented with extensions.</p>
 <p>You want the usage of the player to be something like this:</p>
-<div class="codehilite"><pre><span></span>$ player play file.mp3          <span class="c1"># Core functionality</span>
+<div class="codehilite"><pre><span></span><code>$ player play file.mp3          <span class="c1"># Core functionality</span>
 $ pip install player.ext.seek   <span class="c1"># Install extension</span>
 $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c1"># Extension-provided functionality</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>This approach has several benefits:</p>
 <ul>
@@ -479,7 +478,7 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 </ul>
 <p>So, your job is provide a way for third parties to add commands to the basic CLI and override existing commands.</p>
 <p><strong>With docopt</strong> this is almost impossible since CLIs are declared in plaintext using a DSL:</p>
-<div class="codehilite"><pre><span></span><span class="sd">&#39;&#39;&#39;Player.</span>
+<div class="codehilite"><pre><span></span><code><span class="sd">&#39;&#39;&#39;Player.</span>
 
 <span class="sd">Usage:</span>
 <span class="sd">  player play &lt;file&gt;</span>
@@ -493,11 +492,10 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">arguments</span> <span class="o">=</span> <span class="n">docopt</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Adding a new command means adding a line into a spec before it gets parsed, so the only way an extension can add a new command to the base CLI is by inserting lines into the base CLI spec. This is inconvenient if you're adding one command, but it's a nightmare if you're creating an API for adding unlimited commands:</p>
-<div class="codehilite"><pre><span></span><span class="sd">&#39;&#39;&#39;Player.</span>
+<div class="codehilite"><pre><span></span><code><span class="sd">&#39;&#39;&#39;Player.</span>
 
 <span class="sd">Usage:</span>
 <span class="sd">  player play &lt;file&gt;</span>
@@ -514,11 +512,10 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">extended_doc</span> <span class="o">=</span> <span class="n">insert_seek_command</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
     <span class="n">arguments</span> <span class="o">=</span> <span class="n">docopt</span><span class="p">(</span><span class="n">extended_doc</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><strong>With Click</strong>, you can reuse commands from one CLI in another one:</p>
-<div class="codehilite"><pre><span></span><span class="c1"># In file a:</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># In file a:</span>
 <span class="n">cli</span> <span class="o">=</span> <span class="n">click</span><span class="o">.</span><span class="n">Group</span><span class="p">()</span>
 
 <span class="nd">@cli</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
@@ -531,15 +528,14 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 
 <span class="nd">@cli</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">cmd_b</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You called cmd_b&quot;</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <blockquote>
 <p>Thanks to /u/Brian for the <a href="https://www.reddit.com/r/Python/comments/3j28oa/cliar_create_clis_clearly_cliar_103_documentation/culnqg2">code sample</a>.</p>
 </blockquote>
 <p>However, you can't reuse commands from multiple third-party modules in one CLI, which is what we want. That's because command reuse relations are defined with decorators, and you can't decorate an imported function. In other words, you can create a new player that implements <code>seek</code> and borrows <code>play</code> from <code>player</code>, but you can't add <code>seek</code> into <code>player</code>.</p>
 <p><strong>With Cliar</strong>, extending an existing CLI is trivial. Since in Cliar a CLI is a regular Python class, extending it means extending the class the most natural way—with inheritance. Just subclass your CLI from as many <code>Cliar</code> ancestors as you need:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span>
 
 <span class="c1"># Basic CLI:</span>
 <span class="k">class</span> <span class="nc">BasicCLI</span><span class="p">(</span><span class="n">CLiar</span><span class="p">):</span>
@@ -559,8 +555,7 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 <span class="sd">    Notice that the class body is empty: the logic is already implemented by the parents.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">pass</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Cliar relies on Python's standard mechanisms and doesn't reinvent the wheel when it comes to adding new features to objects. Python supports both single and multiple inheritance, so CLI extension goes both ways: you can create a completely new interface that borrows from an existing one or build an interface from extensions.</p>
 <h2 id="dsl-free">DSL-Free<a class="headerlink" href="#dsl-free" title="Permanent link">&para;</a></h2>
@@ -571,7 +566,7 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 </div>
 <p><strong>In Docopt</strong>, you describe your CLI using a DSL. Then, you ask docopt to parse the commandline string and pass the extracted values to the business logic. The interface is completely separated from the business logic.</p>
 <p>It may seem a good idea until you actually start using docopt. What happens is you end up duplicating argument definitions all the time:</p>
-<div class="codehilite"><pre><span></span><span class="sd">&#39;&#39;&#39;Player.</span>
+<div class="codehilite"><pre><span></span><code><span class="sd">&#39;&#39;&#39;Player.</span>
 
 <span class="sd">Usage:</span>
 <span class="sd">  player play &lt;file&gt;</span>
@@ -598,8 +593,7 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
     <span class="k">elif</span> <span class="n">arguments</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;seek&#39;</span><span class="p">):</span>
         <span class="n">seek</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="s1">&#39;&lt;position&gt;&#39;</span><span class="p">])</span>
     <span class="o">...</span>                                 <span class="c1"># ...and it goes on and on and on.</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Even in this toy example you can see how much redundant code this pattern spawns.</p>
 <p><strong>Click</strong> and <strong>Cliar</strong> are DSL-free. Whereas docopt is "spec first," Click and Cliar are "code first": they generate the usage text from the code, not the other way around.</p>
@@ -607,7 +601,7 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 <p><em>Magic</em> is unusual behavior driven by a hidden mechanism. It may give a short "wow" effect, but the price to pay is that code becomes harder to debug and harder to follow. Writing idiomatic Python generally means avoiding magic.</p>
 <p>To see if a tool is "magical," remove it from the code and see if the code breaks.</p>
 <p><strong>Docopt</strong>, for example, is magic-free. If you remove the <code>__doc__</code> parsing part, the remaining code is still 100% valid Python. Removing docopt does not break you program, it just removes the commandline parsing functionality:</p>
-<div class="codehilite"><pre><span></span><span class="sd">&#39;&#39;&#39;Player.</span>
+<div class="codehilite"><pre><span></span><code><span class="sd">&#39;&#39;&#39;Player.</span>
 
 <span class="sd">Usage:</span>
 <span class="sd">  player play &lt;file&gt;</span>
@@ -621,11 +615,10 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1"># arguments = docopt(__doc__)</span>
     <span class="k">pass</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><strong>Click</strong>, on the other hand, is full of magic. Let's examine the hello world example from the <a href="http://click.pocoo.org/">Click documentation</a>:</p>
-<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">click</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;--count&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Number of greetings.&#39;</span><span class="p">)</span>
@@ -638,42 +631,39 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">hello</span><span class="p">()</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Note that <code>hello</code> function accepts two positional arguments, <code>count</code> and <code>name</code>, but we call it without any arguments. That's because the params are added by the decorators based on the arguments of the decorator generators (<code>--count</code> and <code>--name</code>). This is broken code only forced to work by the magic of Click's decorators.</p>
 <p><strong>Cliar</strong> is magic-free. Your CLI classes are regular Python classes. If you remove <code>Cliar</code> from its parents, the class will remain functional. It will continue to contain all the business logic, only without the CLI:</p>
-<div class="codehilite"><pre><span></span><span class="c1"># from cliar import Cliar</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># from cliar import Cliar</span>
 
 <span class="c1"># class Player(Cliar):</span>
 <span class="k">class</span> <span class="nc">Player</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Playing </span><span class="si">{file}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Playing </span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Cliar's decorators like <code>set_name</code> or <code>add_aliases</code> can also be safely remove without breaking any code.</p>
 <h2 id="type-casting">Type Casting<a class="headerlink" href="#type-casting" title="Permanent link">&para;</a></h2>
 <p>In commandline, any argument or flag value is a string. Converting strings to numbers and other types manually within business logic is tedious, requires dancing with exception handling, and, most importantly, has nothing to do with the business logic itself: it's a necessity induced by the fact the shell works only with strings and Python works with all sorts of types.</p>
 <p><strong>Docopt</strong> doesn't attempt to cast types. It just parses a string into smaller ones in a nicely structured way, leaving all the necessary processing to the programmer:</p>
-<div class="codehilite"><pre><span></span><span class="n">args</span> <span class="o">=</span> <span class="n">docopt</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="n">args</span> <span class="o">=</span> <span class="n">docopt</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;play&#39;</span><span class="p">]:</span>
     <span class="n">file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s1">&#39;&lt;file&gt;&#39;</span><span class="p">])</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><strong>Click</strong> lets you define an argument and option type in the decorator constructor:</p>
-<div class="codehilite"><pre><span></span><span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
-</pre></div>
-
+<div class="codehilite"><pre><span></span><code><span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+</code></pre></div>
 
 <p>If the type is not set, Click tries to infer it from the default value. It that's not set as well, string is assumed.</p>
 <p><strong>Cliar</strong> lets you define argument and option type with type hints. The logic is similar to Click's: if the type hint is given, use it, if not, infer the type from the default value, otherwise assume string:</p>
-<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
                 
                   
+                
                 
               
               
@@ -735,16 +725,16 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
           </div>
         
         powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs</a>
       </div>
       
   <div class="md-footer-social">
     <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
     
-      <a href="https://github.com/moigagoo/cliar" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/moigagoo/cliar" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
     
   </div>
 
@@ -754,9 +744,9 @@ $ player seek <span class="s2">&quot;1:23&quot;</span>            <span class="c
       
     </div>
     
-      <script src="../assets/javascripts/application.a8b5e56f.js"></script>
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      <script>app.initialize({version:"1.2.3",url:{base:".."}})</script>
       
     
   </body>

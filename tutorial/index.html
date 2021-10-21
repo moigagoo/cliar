@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/terminal.ico">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.5.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-4.6.3">
     
     
       
@@ -40,7 +40,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
       
         <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -51,12 +51,12 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:300,400,400i,700|PT+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:300,400,400i,700%7CPT+Mono&display=fallback">
         <style>body,input{font-family:"PT Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"PT Mono","Courier New",Courier,monospace}</style>
       
     
@@ -110,7 +110,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#tutorial" tabindex="1" class="md-skip">
+      <a href="#tutorial" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -119,9 +119,9 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href=".." title="Cliar: Create modular Python CLIs with type annotations and inheritance" class="md-header-nav__button md-logo">
+        <a href=".." title="Cliar: Create modular Python CLIs with type annotations and inheritance" aria-label="Cliar: Create modular Python CLIs with type annotations and inheritance" class="md-header-nav__button md-logo">
           
-            <img src="../assets/terminal.svg" width="24" height="24">
+            <img alt="logo" src="../assets/terminal.svg" width="24" height="24">
           
         </a>
       </div>
@@ -150,7 +150,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -213,7 +213,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <a href=".." title="Cliar: Create modular Python CLIs with type annotations and inheritance" class="md-nav__button md-logo">
       
-        <img src="../assets/terminal.svg" width="48" height="48">
+        <img alt="logo" src="../assets/terminal.svg" width="48" height="48">
       
     </a>
     Cliar: Create modular Python CLIs with type annotations and inheritance
@@ -247,8 +247,8 @@
 
 
   <li class="md-nav__item">
-    <a href=".." title="Home" class="md-nav__link">
-      Home
+    <a href=".." title="Cliar" class="md-nav__link">
+      Cliar
     </a>
   </li>
 
@@ -562,7 +562,7 @@
 </blockquote>
 <h2 id="hello-world">Hello World<a class="headerlink" href="#hello-world" title="Permanent link">&para;</a></h2>
 <p>Here's the simplest "Hello World" program with Cliar:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span>
 
 <span class="k">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -570,26 +570,23 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">Greeter</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>In Cliar, CLI is a subclass of <code>Cliar</code>, with its methods turned into commands and their params into args.</p>
 <p>Save this code into <code>greeter.py</code> and run it:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py hello
+<div class="codehilite"><pre><span></span><code>$ python greeter.py hello
 Hello World!
-</pre></div>
-
+</code></pre></div>
 
 <h2 id="optional-flags">Optional Flags<a class="headerlink" href="#optional-flags" title="Permanent link">&para;</a></h2>
 <p>Let's add a <code>--shout</code> flag to <code>hello</code>:</p>
-<div class="codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code>    <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="n">greeting</span> <span class="o">=</span> <span class="s1">&#39;Hello World!&#39;</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">if</span> <span class="n">shout</span> <span class="k">else</span> <span class="n">greeting</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Try running <code>greeter.py</code> with and without the newly defined flag:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py hello --shout
+<div class="codehilite"><pre><span></span><code>$ python greeter.py hello --shout
 HELLO WORLD!
 
 $ python greeter.py hello -s
@@ -597,19 +594,17 @@ HELLO WORLD!
 
 $ python greeter.py hello
 Hello World!
-</pre></div>
-
+</code></pre></div>
 
 <h2 id="positional-arguments">Positional Arguments<a class="headerlink" href="#positional-arguments" title="Permanent link">&para;</a></h2>
 <p>Positional args are added the same way as flags.</p>
-<div class="codehilite"><pre><span></span>    <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="n">greeting</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{name}</span><span class="s1">!&#39;</span>
+<div class="codehilite"><pre><span></span><code>    <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">greeting</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&#39;</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">if</span> <span class="n">shout</span> <span class="k">else</span> <span class="n">greeting</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Try it:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py hello John
+<div class="codehilite"><pre><span></span><code>$ python greeter.py hello John
 Hello John!
 
 $ python greeter.py hello John --shout
@@ -621,12 +616,11 @@ HELLO JOHN!
 $ python greeter.py hello
 usage: greeter.py hello <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-s<span class="o">]</span> name
 greeter.py hello: error: the following arguments are required: name
-</pre></div>
-
+</code></pre></div>
 
 <h2 id="help-messages">Help Messages<a class="headerlink" href="#help-messages" title="Permanent link">&para;</a></h2>
 <p>Cliar automatically registers <code>--help</code> flag for the program itself and its every command:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py --help
+<div class="codehilite"><pre><span></span><code>$ python greeter.py --help
 usage: greeter.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">{</span>hello<span class="o">}</span> ...
 
 optional arguments:
@@ -645,23 +639,21 @@ positional arguments:
 optional arguments:
   -h, --help   show this <span class="nb">help</span> message and <span class="nb">exit</span>
   -s, --shout
-</pre></div>
-
+</code></pre></div>
 
 <p>Command help messages are generated from docstrings. Let's add them:</p>
-<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Greeter app created with Cliar.&#39;&#39;&#39;</span>
 
     <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Say hello.&#39;&#39;&#39;</span>
 
-        <span class="n">greeting</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{name}</span><span class="s1">!&#39;</span>
+        <span class="n">greeting</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&#39;</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">if</span> <span class="n">shout</span> <span class="k">else</span> <span class="n">greeting</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>and view the updated help message:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py -h
+<div class="codehilite"><pre><span></span><code>$ python greeter.py -h
 usage: greeter.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">{</span>hello<span class="o">}</span> ...
 
 Greeter app created with Cliar.
@@ -684,11 +676,10 @@ positional arguments:
 optional arguments:
   -h, --help   show this <span class="nb">help</span> message and <span class="nb">exit</span>
   -s, --shout
-</pre></div>
-
+</code></pre></div>
 
 <p>To add description for arguments, use <code>set_help</code> decorator:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span>
 
 <span class="o">...</span>
 
@@ -696,14 +687,13 @@ optional arguments:
     <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Say hello.&#39;&#39;&#39;</span>
 
-        <span class="n">greeting</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{name}</span><span class="s1">!&#39;</span>
+        <span class="n">greeting</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&#39;</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">if</span> <span class="n">shout</span> <span class="k">else</span> <span class="n">greeting</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The decorator takes a mapping from param names to help messages.</p>
 <p>Call the help message for <code>hello</code> command:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py hello -h
+<div class="codehilite"><pre><span></span><code>$ python greeter.py hello -h
 usage: greeter.py hello <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-s<span class="o">]</span> name
 
 Say hello.
@@ -714,22 +704,20 @@ positional arguments:
 optional arguments:
   -h, --help   show this <span class="nb">help</span> message and <span class="nb">exit</span>
   -s, --shout  Shout the greeting
-</pre></div>
-
+</code></pre></div>
 
 <p>To show default values for flags, add <code>show_defaults = True</code> to <code>set_help</code>:</p>
-<div class="codehilite"><pre><span></span><span class="o">...</span>
+<div class="codehilite"><pre><span></span><code><span class="o">...</span>
     <span class="nd">@set_help</span><span class="p">(</span>
         <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Who to greet&#39;</span><span class="p">,</span> <span class="s1">&#39;shout&#39;</span><span class="p">:</span> <span class="s1">&#39;Shout the greeting&#39;</span><span class="p">},</span>
         <span class="n">show_defaults</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="p">)</span>
     <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="o">...</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Call help again to see the default value:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py hello -h
+<div class="codehilite"><pre><span></span><code>$ python greeter.py hello -h
 usage: greeter.py hello <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-s<span class="o">]</span> name
 
 Say hello.
@@ -740,12 +728,11 @@ positional arguments:
 optional arguments:
   -h, --help   show this <span class="nb">help</span> message and <span class="nb">exit</span>
   -s, --shout  Shout the greeting <span class="o">(</span>default: False<span class="o">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <h2 id="metavars">Metavars<a class="headerlink" href="#metavars" title="Permanent link">&para;</a></h2>
 <p><em>Metavar</em> is a placeholder of a positional arg as it appears in the help message. By default, Cliar uses the param name as its metavar. So, for <code>name</code> param the metavar is called <code>name</code>:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py hello -h
+<div class="codehilite"><pre><span></span><code>$ python greeter.py hello -h
 usage: greeter.py hello <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-s<span class="o">]</span> name
 
 Say hello.
@@ -756,11 +743,10 @@ positional arguments:
 optional arguments:
   -h, --help   show this <span class="nb">help</span> message and <span class="nb">exit</span>
   -s, --shout  Set to shout the greeting
-</pre></div>
-
+</code></pre></div>
 
 <p>To set a different metavar for a param, usd <code>set_metavars</code> decorator:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span>
 
 <span class="o">...</span>
 
@@ -769,14 +755,13 @@ optional arguments:
     <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Say hello.&#39;&#39;&#39;</span>
 
-        <span class="n">greeting</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{name}</span><span class="s1">!&#39;</span>
+        <span class="n">greeting</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&#39;</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">if</span> <span class="n">shout</span> <span class="k">else</span> <span class="n">greeting</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The decorator takes a mapping from param names to metavars.</p>
 <p>Call the help message for <code>hello</code>:</p>
-<div class="codehilite"><pre><span></span>usage: greeter.py hello <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-s<span class="o">]</span> NAME
+<div class="codehilite"><pre><span></span><code>usage: greeter.py hello <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-s<span class="o">]</span> NAME
 
 Say hello.
 
@@ -786,52 +771,47 @@ positional arguments:
 optional arguments:
   -h, --help   show this <span class="nb">help</span> message and <span class="nb">exit</span>
   -s, --shout  Set to shout the greeting
-</pre></div>
-
+</code></pre></div>
 
 <h2 id="type-casting">Type Casting<a class="headerlink" href="#type-casting" title="Permanent link">&para;</a></h2>
 <p>Cliar casts arg types of args on the fly. To use type casting, add type hints or default values to params.</p>
 <p>Let's add <code>-n</code> flag that will tell how many times to repeat the greeting:</p>
-<div class="codehilite"><pre><span></span>    <span class="nd">@set_metavars</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;NAME&#39;</span><span class="p">})</span>
+<div class="codehilite"><pre><span></span><code>    <span class="nd">@set_metavars</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;NAME&#39;</span><span class="p">})</span>
     <span class="nd">@set_help</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Who to greet&#39;</span><span class="p">,</span> <span class="s1">&#39;shout&#39;</span><span class="p">:</span> <span class="s1">&#39;Shout the greeting&#39;</span><span class="p">})</span>
     <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Say hello.&#39;&#39;&#39;</span>
 
-        <span class="n">greeting</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{name}</span><span class="s1">!&#39;</span>
+        <span class="n">greeting</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&#39;</span>
 
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">if</span> <span class="n">shout</span> <span class="k">else</span> <span class="n">greeting</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Let's call <code>hello</code> with the new flag:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py hello John -n <span class="m">2</span>
+<div class="codehilite"><pre><span></span><code>$ python greeter.py hello John -n <span class="m">2</span>
 Hello John!
 Hello John!
-</pre></div>
-
+</code></pre></div>
 
 <p>If we pass a non-integer value to <code>-n</code>, an error occurs:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py hello John -n foo
+<div class="codehilite"><pre><span></span><code>$ python greeter.py hello John -n foo
 usage: greeter.py hello <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-n N<span class="o">]</span> <span class="o">[</span>-s<span class="o">]</span> NAME
 greeter.py hello: error: argument -n/--n: invalid int value: <span class="s1">&#39;foo&#39;</span>
-</pre></div>
-
+</code></pre></div>
 
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>You can use any callable as a param type, and it will be called to cast the param type during parsing. One useful example is using <code>open</code> as the param type:</p>
-<div class="codehilite"><pre><span></span><span class="err">def read_from_file(input_file: open):</span>
-<span class="err">    lines = input_file.readlines()</span>
-</pre></div>
-
+<div class="codehilite"><pre><span></span><code>def read_from_file(input_file: open):
+    lines = input_file.readlines()
+</code></pre></div>
 
 <p>If you pass a path to such a param, Cliar will open it and pass the resulting file-like object to the handler body. And when the handler returns, Cliar will make sure the file gets closed.</p>
 </div>
 <h2 id="argument-names">Argument Names<a class="headerlink" href="#argument-names" title="Permanent link">&para;</a></h2>
 <p>By default, Cliar takes the param name, replaces underscores with dashes, and uses that as the corresponding arg name: <code>name</code> is turned into <code>--name</code>, and <code>upper_limit</code> into <code>--upper-limit</code>; the first letter is used as a short option: <code>-n</code> for <code>--name</code>, <code>-u</code> for <code>--upper-limit</code>.</p>
 <p>To use different arg names, use <code>set_arg_map</code> decorator:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span>
 
 <span class="o">...</span>
 
@@ -841,30 +821,28 @@ greeter.py hello: error: argument -n/--n: invalid int value: <span class="s1">&#
     <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Say hello.&#39;&#39;&#39;</span>
 
-        <span class="n">greeting</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{name}</span><span class="s1">!&#39;</span>
+        <span class="n">greeting</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&#39;</span>
 
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">if</span> <span class="n">shout</span> <span class="k">else</span> <span class="n">greeting</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Now use <code>--repeat</code> or <code>-r</code> instead of <code>-n</code>:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py hello John --repeat <span class="m">2</span>
+<div class="codehilite"><pre><span></span><code>$ python greeter.py hello John --repeat <span class="m">2</span>
 Hello John!
 Hello John!
 
 $ python greeter.py hello John -r <span class="m">2</span>
 Hello John!
 Hello John!
-</pre></div>
-
+</code></pre></div>
 
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>This decorator lets you use Python's reserved words like <code>--for</code> and <code>--with</code> as arg names.</p>
 </div>
 <p>You can also override argument short names specifically, with <code>set_sharg_map</code> decorator:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span><span class="p">,</span> <span class="n">set_sharg_map</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span><span class="p">,</span> <span class="n">set_sharg_map</span>
 
 <span class="o">...</span>
 
@@ -876,52 +854,48 @@ Hello John!
     <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shout</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Say hello.&#39;&#39;&#39;</span>
 
-        <span class="n">greeting</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{name}</span><span class="s1">!&#39;</span>
+        <span class="n">greeting</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&#39;</span>
 
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">if</span> <span class="n">shout</span> <span class="k">else</span> <span class="n">greeting</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Now you can use <code>-n</code> instead of <code>-r</code>:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py hello John --repeat <span class="m">2</span>
+<div class="codehilite"><pre><span></span><code>$ python greeter.py hello John --repeat <span class="m">2</span>
 Hello John!
 Hello John!
 
 $ python greeter.py hello John -n <span class="m">2</span>
 Hello John!
 Hello John!
-</pre></div>
-
+</code></pre></div>
 
 <p>This is useful when you have several arguments that start with the same letter, which creates a conflict between short arg names.</p>
 <p>To disable short argument variant entirely, set the short arg name to <code>None</code>: <code>@set_sharg_map({'argname': None})</code>.</p>
 <h2 id="multiple-commands">Multiple Commands<a class="headerlink" href="#multiple-commands" title="Permanent link">&para;</a></h2>
 <p>Adding more commands to the CLI simply means adding more methods to the CLI class:</p>
-<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">goodbye</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Say goodbye&#39;&#39;&#39;</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Goodbye </span><span class="si">{name}</span><span class="s1">!&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Goodbye </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&#39;</span><span class="p">)</span>
 
     <span class="nd">@set_arg_map</span><span class="p">({</span><span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="s1">&#39;repeat&#39;</span><span class="p">})</span>
     <span class="o">...</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>With this code addition, you can call <code>goodbye</code> command:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py goodbye Mary
+<div class="codehilite"><pre><span></span><code>$ python greeter.py goodbye Mary
 Goodbye Mary!
-</pre></div>
-
+</code></pre></div>
 
 <h2 id="nested-commands">Nested Commands<a class="headerlink" href="#nested-commands" title="Permanent link">&para;</a></h2>
 <p>You can have any level of nested commands by adding Cliar CLIs as class attributes.</p>
 <p>For example, let's add a <code>utils</code> subcommand with its own <code>time</code> subcommand that has <code>now</code> command:</p>
-<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Time</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Time</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">now</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="n">now_ctime</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">ctime</span><span class="p">()</span> <span class="k">if</span> <span class="n">utc</span> <span class="k">else</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">ctime</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;UTC time is </span><span class="si">{now_ctime}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;UTC time is </span><span class="si">{</span><span class="n">now_ctime</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">Utils</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
     <span class="n">time</span> <span class="o">=</span> <span class="n">Time</span>
@@ -933,21 +907,19 @@ Goodbye Mary!
 
     <span class="k">def</span> <span class="nf">_root</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="o">...</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>You can now call <code>now</code> command through <code>utils</code>:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py utils <span class="nb">time</span> now
+<div class="codehilite"><pre><span></span><code>$ python greeter.py utils <span class="nb">time</span> now
 Local <span class="nb">time</span> is Sun Jul <span class="m">21</span> <span class="m">15</span>:25:52 <span class="m">2019</span>
 
 $ python greeter.py utils <span class="nb">time</span> now --utc
 UTC <span class="nb">time</span> is Sun Jul <span class="m">21</span> <span class="m">11</span>:25:57 <span class="m">2019</span>
-</pre></div>
-
+</code></pre></div>
 
 <h2 id="command-aliases">Command Aliases<a class="headerlink" href="#command-aliases" title="Permanent link">&para;</a></h2>
 <p>To add aliases to a command, use <code>add_aliases</code> decorator:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span><span class="p">,</span> <span class="n">add_aliases</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span><span class="p">,</span> <span class="n">add_aliases</span>
 
 <span class="o">...</span>
 
@@ -955,22 +927,20 @@ UTC <span class="nb">time</span> is Sun Jul <span class="m">21</span> <span clas
     <span class="k">def</span> <span class="nf">goodbye</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Say goodbye&#39;&#39;&#39;</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Goodbye </span><span class="si">{name}</span><span class="s1">!&#39;</span><span class="p">)</span>
-</pre></div>
-
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Goodbye </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Now you can call <code>goodbye</code> command by its aliases:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py mientras Maria
+<div class="codehilite"><pre><span></span><code>$ python greeter.py mientras Maria
 Goodbye Maria!
 
 $ python greeter.py пока Маша
 Goodbye Маша!
-</pre></div>
-
+</code></pre></div>
 
 <h2 id="command-names">Command Names<a class="headerlink" href="#command-names" title="Permanent link">&para;</a></h2>
 <p>By default, CLI commands are named after the corresponding methods. To override this behavior and set a custom command name, use <code>set_name</code> decorator:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span><span class="p">,</span> <span class="n">add_aliases</span><span class="p">,</span> <span class="n">set_name</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span><span class="p">,</span> <span class="n">add_aliases</span><span class="p">,</span> <span class="n">set_name</span>
 
 
 <span class="k">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
@@ -980,24 +950,22 @@ Goodbye Маша!
     <span class="k">def</span> <span class="nf">calculate_factorial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>  <span class="c1"># because `calculate_factorial`</span>
         <span class="sd">&#39;&#39;&#39;Calculate factorial&#39;&#39;&#39;</span>           <span class="c1"># is too long for CLI.</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;n! = {factorial(n)}&#39;</span><span class="p">)</span>
-</pre></div>
-
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;n! = </span><span class="si">{</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Now <code>calculate_factorial</code> is called with <code>factorial</code> command:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py factorial <span class="m">4</span>
+<div class="codehilite"><pre><span></span><code>$ python greeter.py factorial <span class="m">4</span>
 n! <span class="o">=</span> <span class="m">24</span>
 
 $ python greeter.py calculate_factorial <span class="m">4</span>
 usage: greeter.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">{</span>factorial,goodbye,mientras,пока,hello<span class="o">}</span> ...
 greeter.py: error: argument command: invalid choice: <span class="s1">&#39;calculate_factorial&#39;</span> <span class="o">(</span>choose from <span class="s1">&#39;factorial&#39;</span>, <span class="s1">&#39;goodbye&#39;</span>, <span class="s1">&#39;mientras&#39;</span>, <span class="s1">&#39;пока&#39;</span>, <span class="s1">&#39;hello&#39;</span><span class="o">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <h2 id="ignore-methods">Ignore Methods<a class="headerlink" href="#ignore-methods" title="Permanent link">&para;</a></h2>
 <p>By default, Cliar converts all non-static and non-class methods of the <code>Cliar</code> subclass into CLI commands.</p>
 <p>There are two ways to tell Cliar <em>not</em> to convert a method into a command: start its name with an underscore or use <code>ignore</code> decorator:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">pi</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">pi</span>
 
 <span class="kn">from</span> <span class="nn">cliar</span> <span class="kn">import</span> <span class="n">Cliar</span><span class="p">,</span> <span class="n">set_help</span><span class="p">,</span> <span class="n">set_metavars</span><span class="p">,</span> <span class="n">set_arg_map</span><span class="p">,</span> <span class="n">add_aliases</span><span class="p">,</span> <span class="n">set_name</span><span class="p">,</span> <span class="n">ignore</span>
 
@@ -1013,70 +981,65 @@ greeter.py: error: argument command: invalid choice: <span class="s1">&#39;calcu
         <span class="k">return</span> <span class="n">pi</span>
 
     <span class="k">def</span> <span class="nf">constants</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;τ = {self._get_tau_value()}&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;π = {self.get_pi_value()}&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;τ = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_tau_value</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;π = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_pi_value</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
     <span class="o">...</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Only <code>constants</code> method will be exposed as a CLI command:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py constants
+<div class="codehilite"><pre><span></span><code>$ python greeter.py constants
 <span class="nv">τ</span> <span class="o">=</span> <span class="m">6</span>.283185307179586
 <span class="nv">π</span> <span class="o">=</span> <span class="m">3</span>.141592653589793
 
 $ python greeter.py get-pi-value
 usage: greeter.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">{</span>factorial,constants,goodbye,mientras,пока,hello<span class="o">}</span> ...
 greeter.py: error: argument command: invalid choice: <span class="s1">&#39;get-pi-value&#39;</span> <span class="o">(</span>choose from <span class="s1">&#39;factorial&#39;</span>, <span class="s1">&#39;constants&#39;</span>, <span class="s1">&#39;goodbye&#39;</span>, <span class="s1">&#39;mientras&#39;</span>, <span class="s1">&#39;пока&#39;</span>, <span class="s1">&#39;hello&#39;</span><span class="o">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <h2 id="root-command">Root Command<a class="headerlink" href="#root-command" title="Permanent link">&para;</a></h2>
 <p>To assign action to the root command, i.e. the script itself, define <code>_root</code> method:</p>
-<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="n">Cliar</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Greeter app created with in Cliar.&#39;&#39;&#39;</span>
 
     <span class="k">def</span> <span class="nf">_root</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Greeter 1.0.0.&#39;</span> <span class="k">if</span> <span class="n">version</span> <span class="k">else</span> <span class="s1">&#39;Welcome to Greeter!&#39;</span><span class="p">)</span>
     <span class="o">...</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>If you run <code>greeter.py</code> with <code>--version</code> or <code>-v</code> flag, you'll see its version. If you call <code>greeter.py</code> without any flags or commands, you'll see a welcome message:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py
+<div class="codehilite"><pre><span></span><code>$ python greeter.py
 Welcome to Greeter!
 
 $ python greeter.py --version
 Greeter <span class="m">1</span>.0.0.
-</pre></div>
-
+</code></pre></div>
 
 <h2 id="global-arguments">Global Arguments<a class="headerlink" href="#global-arguments" title="Permanent link">&para;</a></h2>
 <p>Global arguments defined in <code>_root</code> can be accessed in commands via <code>self.global_args</code>:</p>
-<div class="codehilite"><pre><span></span>    <span class="o">...</span>
+<div class="codehilite"><pre><span></span><code>    <span class="o">...</span>
 
     <span class="k">def</span> <span class="nf">constants</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Greeter 1.0.0.&#39;</span><span class="p">)</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;τ = {self._get_tau_value()}&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;π = {self.get_pi_value()}&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;τ = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_tau_value</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;π = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_pi_value</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
     <span class="o">...</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Run <code>constants</code> with <code>--version</code>:</p>
-<div class="codehilite"><pre><span></span>$ python greeter.py --version constants
+<div class="codehilite"><pre><span></span><code>$ python greeter.py --version constants
 Greeter <span class="m">1</span>.0.0.
 <span class="nv">τ</span> <span class="o">=</span> <span class="m">6</span>.283185307179586
 <span class="nv">π</span> <span class="o">=</span> <span class="m">3</span>.141592653589793
-</pre></div>
-
+</code></pre></div>
 
 <p>This works with <a href="#nested-commands">nested commands</a>, too. Global arguments of nested commands override global arguments of their parents.</p>
                 
                   
+                
                 
               
               
@@ -1095,7 +1058,7 @@ Greeter <span class="m">1</span>.0.0.
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href=".." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href=".." title="Cliar" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1104,7 +1067,7 @@ Greeter <span class="m">1</span>.0.0.
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Home
+                Cliar
               </span>
             </div>
           </a>
@@ -1138,16 +1101,16 @@ Greeter <span class="m">1</span>.0.0.
           </div>
         
         powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs</a>
       </div>
       
   <div class="md-footer-social">
     <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
     
-      <a href="https://github.com/moigagoo/cliar" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/moigagoo/cliar" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
     
   </div>
 
@@ -1157,9 +1120,9 @@ Greeter <span class="m">1</span>.0.0.
       
     </div>
     
-      <script src="../assets/javascripts/application.a8b5e56f.js"></script>
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      <script>app.initialize({version:"1.2.3",url:{base:".."}})</script>
       
     
   </body>
