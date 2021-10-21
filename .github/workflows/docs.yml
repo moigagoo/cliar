@@ -5,6 +5,15 @@ on:
     branches:
       - develop
 
+on:
+  workflow_run:
+    workflows:
+      - "Run Tests"
+    branches:
+      - develop
+    types: 
+      - completed
+
 jobs:
   Docs:
     runs-on: ubuntu-latest

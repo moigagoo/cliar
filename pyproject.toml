@@ -14,7 +14,7 @@ keywords = ["cli", "commandline"]
 python = "^3.6"
 
 [tool.poetry.dev-dependencies]
-pytest = "^3.5"
+pytest = "^6.2"
 pylint = "^2.1"
 pytest-cov = "^2.5"
 codecov = "^2.0"
