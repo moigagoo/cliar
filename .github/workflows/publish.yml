@@ -3,7 +3,6 @@ name: Publish Package
 on:
   workflow_run:
     workflows:
-      - "Run Tests"
       - "Deploy Docs"
     tags:
       - '*'
