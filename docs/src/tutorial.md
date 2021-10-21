@@ -20,7 +20,7 @@ if __name__ == '__main__':
     Greeter().parse()
 ```
 
-In Cliar, CLI is a subclass of `Cliar`, with its methods are turned into commands and their params into args.
+In Cliar, CLI is a subclass of `Cliar`, with its methods turned into commands and their params into args.
 
 Save this code into `greeter.py` and run it:
 
@@ -345,7 +345,7 @@ Hello John!
 
 !!! hint
 
-    This decorator lets you use Python's reserved words as arg names like `--for` and `--with` as arg names.
+    This decorator lets you use Python's reserved words like `--for` and `--with` as arg names.
 
 You can also override argument short names specifically, with `set_sharg_map` decorator:
 

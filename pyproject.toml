@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cliar"
-version = "1.3.4"
+version = "1.3.5"
 description = "Create CLIs with classes and type hints."
 license = "MIT"
 authors = ["Constantine Molchanov <moigagoo@live.com>"]
@@ -14,7 +14,7 @@ keywords = ["cli", "commandline"]
 python = "^3.6"
 
 [tool.poetry.dev-dependencies]
-pytest = "^3.5"
+pytest = "^6.2"
 pylint = "^2.1"
 pytest-cov = "^2.5"
 codecov = "^2.0"
