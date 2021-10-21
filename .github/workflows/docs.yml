@@ -1,11 +1,6 @@
 name: Deploy Docs
 
 on:
-  push:
-    branches:
-      - develop
-
-on:
   workflow_run:
     workflows:
       - "Run Tests"
