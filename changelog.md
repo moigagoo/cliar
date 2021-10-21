@@ -1,3 +1,8 @@
+# 1.3.5 (October 21, 2021)
+
+-   Switch from Travis to GitHub Actions.
+
+
 # 1.3.4 (December 11, 2019)
 
 -   Add support for async handlers (per [#13](https://github.com/moigagoo/cliar/pull/13)).
